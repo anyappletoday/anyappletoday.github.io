@@ -1,3 +1,88 @@
-<h1>welcome to my website</h1>
-<p>test</p>
-<a href="https://www.youtube.com/c/RugbugRedfern">subscribe? :)</a>
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Redmatch 2 Notice</title>
+		<script src="script.js"></script>
+		<style>
+			@font-face { 
+				font-family: 'Bahnschrift';
+				src: url('bahnschrift.ttf') format('ttf');
+			}
+
+			body {
+				background-color: rgb(14, 14, 14);
+				font-family: Bahnschrift;
+				font-weight: normal;
+				font-style: normal;
+				color:white;
+			}
+
+			h1 {
+				color:rgb(255, 187, 0);
+				text-shadow: 3px 3px 2px #020202;
+			}
+
+			a {
+				color: red;
+				padding: 5px;
+				background-color: rgba(0, 0, 0, 0);
+				border-radius: 5px;
+				transition: background-color 0.1s linear;
+			}
+
+			a:hover {
+				color: red;
+				background-color: rgba(0, 0, 0, 0.3);
+				border-radius: 5px;
+				padding: 5px;
+			}
+
+			.shadow {
+				padding: 1px 15px 1px 15px;
+				border-radius: 10px;
+				box-shadow: 5px 5px 3px #030303;
+			}
+
+			.wrapper {
+				display:table;
+				width:100%;
+			}
+			.left {
+				display:table-cell;
+				width:30%;
+			}
+			.right {
+				display:table-cell;
+				width:30%;
+			}
+			.center {
+				display:table-cell;
+			}
+		</style>
+	</head>
+	<body style="margin: 25px 25px 25px 25px;">
+		<div class="wrapper">
+			<div class="left"></div>
+			<div class="center">
+				<div style="background: linear-gradient(90deg, #222222, #161616);" class="shadow">
+					<h1>Hello everyone!</h1>
+					<h3>I am Rugbug Redfern, the creator of Redmatch 2 and Adrift. I run a <a href="https://rugbugredfern.itch.io/redmatch2" target="_top">YouTube channel</a> where I teach others how to program, as well as logging progress on my games.</h4>
+				</div>
+				<br>
+				<div style="background: linear-gradient(90deg, #350000, #492100);" class="shadow">
+					<h2>Play <a href="https://rugbugredfern.itch.io/redmatch2" target="_top">Redmatch 2</a>, A multiplayer FPS where kills let you upgrade your stats for the match.</h2>
+				</div>
+				<br>
+				<div style="background: linear-gradient(90deg, #093500, #274900);" class="shadow">
+					<h2>Play <a href="https://rugbugredfern.itch.io/adrift" target="_top" style="color: #88ff00;">Adrift</a>, A survival game where you have to automate resource production on a floating island.</h2>
+				</div>
+				<br>
+				<div style="background: linear-gradient(90deg, #7289da, #5870c4);" class="shadow">
+					<img src="discord.png" style="width: 50px; float: left; margin-top: 10px; margin-right: 10px;">
+					<h2> Join the <a href="https://discord.gg/RdHyPc4" target="_top" style="color: rgb(255, 255, 255)">official Redlabs discord server</a> to chat with me and other Redlabs fans!</h2>
+				</div>
+			</div>
+			<div class="right"></div>
+		</div>
+	</body>
+</html>
