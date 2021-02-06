@@ -2,6 +2,18 @@
 <html>
 	<head>
 		<title>Redlabs - Multiplayer FPS Tutorial</title>
+		<script>
+		function httpGet()
+		{
+			var xmlHttp = new XMLHttpRequest();
+			xmlHttp.open( "GET", "https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=15&playlistId=PLhsVv9Uw1WzjI8fEBjBQpTyXNZ6Yp1ZLw&key=AIzaSyDQAKk8oyVcxCs_Zo0F_Ru0RAln0U_OKSY", false ); // false for synchronous request
+			xmlHttp.send( null );
+			return xmlHttp.responseText;
+		}
+		</script>
 	</head>
-	<p>Test</p>
+	<body>
+		<button onclick="loadClient()">authorize and load</button>
+		<button onclick="execute()">execute</button>
+	</body>
 </html>
