@@ -1,8 +1,25 @@
-<head>
-	<title>Redmatch 2</title>
-	<meta http-equiv="refresh" content="0; url=https://rugbugredfern.itch.io/redmatch2/">
-</head>
-<body>
-	<h1>After update 1.1.2, online user accounts have been added which means you can play on itch.io without losing your progress again.</h1>
-	<p>If you are not redirected immediately, <a href="https://rugbugredfern.itch.io/redmatch2">click here</a></p>
-</body>
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | Redmatch 2</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.js"></script>
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+      var unityInstance = UnityLoader.instantiate("unityContainer", "Build/WebGL 1.1.2.1.json", {onProgress: UnityProgress});
+    </script>
+  </head>
+  <body>
+    <div class="webgl-content">
+      <div id="unityContainer" style="width: 960px; height: 600px"></div>
+      <div class="footer">
+        <div class="webgl-logo"></div>
+        <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
+        <div class="title">Redmatch 2</div>
+      </div>
+    </div>
+  </body>
+</html>
