@@ -3,8 +3,8 @@
 const table = document.getElementById('table');
 const color = document.getElementById('colorPicker');
 
-//const url = 'https://stark-ridge-60794.herokuapp.com/';
-const url = 'http://127.0.0.1:3000/';
+const url = 'https://stark-ridge-60794.herokuapp.com/';
+//const url = 'http://127.0.0.1:3000/';
 
 color.addEventListener("click", function(){});
 
