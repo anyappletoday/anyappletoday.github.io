@@ -54,6 +54,7 @@ function fillSquare(cell, r, c) {
 	http.setRequestHeader('Content-type', 'application/json');
 	http.onload = function() {
 		console.log(`Recieved: ${this.responseText}`);
+		cell.setAttribute('style', `background-color: ${color.value}`);
 	}
 
 	let send = JSON.stringify({color: color.value});
