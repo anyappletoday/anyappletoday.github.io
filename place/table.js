@@ -29,13 +29,12 @@ function makeGrid(pixels) {
 		const row = table.insertRow(r);
         for (let c = 0; c < width; c++){
             const cell = row.insertCell(c);
-			cell.setAttribute('style', `background-color: ${pixels[i]}`);
+			cell.setAttribute('style', `background-color: ${pixels[c + r * width]}`);
             cell.addEventListener("click", function() {
 				fillSquare(cell, r, c);
 			});
 			cell.addEventListener("mouseover", mouseoverSquare);
 			cell.addEventListener("mouseleave", mouseleaveSquare);
-			i++;
 		}
     }
 }
@@ -48,8 +47,8 @@ function clearGrid() {
 
 function fillSquare(cell, r, c) {
 	var http = new XMLHttpRequest();
-	http.open('POST', url + 'api/pixels/' + r + '/' + c, true);
-	//http.setRequestHeader('Content-type', 'application/json');
+	http.open('POST', url + 'api/pixels/' + c + '/' + r, true);
+	http.setRequestHeader('Content-type', 'application/json');
 	http.onload = function() {
 		cell.setAttribute('style', `background-color: ${color.value}`);
 		console.log(`Recieved: ${this.responseText}`);
