@@ -1,17 +1,23 @@
 // modified from https://github.com/susanschen/Pixel-Art-Maker
 
 const table = document.getElementById('table');
-const color = document.getElementById("colorPicker");
+const color = document.getElementById('colorPicker');
 
-const url = 'https://stark-ridge-60794.herokuapp.com/';
-//const url = 'http://127.0.0.1:3000/';
+//const url = 'https://stark-ridge-60794.herokuapp.com/';
+const url = 'http://127.0.0.1:3000/';
 
 color.addEventListener("click", function(){});
 
-const height = 16;
-const width = 16;
+const height = 32;
+const width = 32;
+const interactInterval = 0.5;
+
+var lastInteractTime = 0;
 
 downloadGrid();
+
+window.setInterval(() => { downloadGrid(); }, 1000);
+window.setInterval(() => { renderProgress(); }, 10);
 
 function downloadGrid() {
 	var request = new XMLHttpRequest();
@@ -47,15 +53,18 @@ function clearGrid() {
 }
 
 function fillSquare(cell, r, c) {
+	if(!canInteract()) return;
+
+	lastInteractTime = getTotalSeconds();
 	cell.setAttribute('style', `background-color: ${color.value}`);
 
 	var http = new XMLHttpRequest();
 	http.open('POST', url + 'api/pixels/' + c + '/' + r, true);
 	http.setRequestHeader('Content-type', 'application/json');
-	http.onload = function() {
+	/*http.onload = function() {
 		console.log(`Recieved: ${this.responseText}`);
 		cell.setAttribute('style', `background-color: ${color.value}`);
-	}
+	}*/
 
 	let send = JSON.stringify({color: color.value});
 	console.log(`Sending: ${send}`);
@@ -70,6 +79,15 @@ function mouseleaveSquare() {
 	this.id = 'normal-square';
 }
 
-var intervalId = window.setInterval(function() {
-	downloadGrid();
-}, 1000);
+function canInteract() {
+	return lastInteractTime < getTotalSeconds() - interactInterval;
+}
+
+function getTotalSeconds() {
+	return new Date().getTime() / 1000;
+}
+
+function renderProgress() {
+	var progressBar = document.getElementById('progressBar')
+	progressBar.style.width = (Math.min((getTotalSeconds() - lastInteractTime) * 100 / interactInterval, 100)) + "%";
+}

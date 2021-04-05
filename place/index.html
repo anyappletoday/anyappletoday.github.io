@@ -4,13 +4,33 @@
 	<meta charset="UTF-8">
 	<title>Rug/Place</title>
 	<style type="text/css">
+		@font-face {
+			font-family: myFirstFont;
+			src: url(fonts/VarelaRound-Regular.ttf);
+			font-weight: bold;
+		}
+
+		.progress {
+			width: 300px;
+			background-color: rgb(255, 255, 255);
+			border-radius: 15px;
+			margin: auto;
+			box-shadow: 0px 5px 15px black;
+		}
+
+		#progressBar {
+			width: 100%;
+			height: 30px;
+			border-radius: 15px;
+			background-color: rgb(0, 0, 0);
+		}
 
 		#table-container {
 			border: 3px solid black;
 			box-shadow: 0px 5px 15px black;
 			height: 700px;
 			width: 700px;
-			margin: 40px auto;
+			margin: 10px auto;
 		}
 
 		#normal-square {
@@ -29,19 +49,45 @@
 		table {
 			width: 100%;
 			height: 100%;
+			background-color: white ;
 		}
 
 		body {
 			text-align: center;
+			align-content: center;
+			font-family: 'myFirstFont', sans-serif;
+			background: linear-gradient(#fd6969, #ffd35b);
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+		}
+
+		a {
+			color: black;
+			transition: all 0.1s;
+		}
+
+		a:hover {
+			background-color: black;
+			color: white;
+			border-radius: 5px;
+			padding: 5px;
+		}
+
+		#colorPicker {
+			box-shadow: 0px 5px 15px black;
 		}
 	</style>
 </head>
 <body>
-	<input type="color" id="colorPicker">
+	<input type="color" id="colorPicker" style="width: 80px; height: 40px">
 	<div id="table-container">
 		<table id="table"></table>
 	</div>
 	<script src="table.js"></script>
-	<h1><a href="https://rugbug.net">Home page</a></h1>
+	<div class="progress">
+		<div id="progressBar"></div>
+	</div>
+	<h3>Rugbug/Place is a recreation of the reddit april fools event r/place, where everyone can change a pixel every few seconds on a communal canvas.</h3>
+	<h1><a href="https://rugbug.net">More by Rugbug Redfern</a></h1>
 </body>
 </html>
