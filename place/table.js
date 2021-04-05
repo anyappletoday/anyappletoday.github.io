@@ -16,7 +16,7 @@ var lastInteractTime = 0;
 
 downloadGrid();
 
-window.setInterval(() => { downloadGrid(); }, 1000);
+window.setInterval(() => { downloadGrid(); }, 250);
 window.setInterval(() => { renderProgress(); }, 10);
 
 function downloadGrid() {
