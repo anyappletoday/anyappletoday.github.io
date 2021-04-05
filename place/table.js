@@ -23,7 +23,7 @@ getPlayerCount();
 
 window.setInterval(() => { getGrid(); }, 500);
 window.setInterval(() => { renderProgress(); }, 10);
-window.setInterval(() => { getPlayerCount(); }, 25000);
+window.setInterval(() => { getPlayerCount(); }, 1000);
 
 function getGrid() {
 	var request = new XMLHttpRequest();
