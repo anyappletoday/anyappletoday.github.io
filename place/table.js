@@ -10,14 +10,13 @@ color.addEventListener("click", function(){});
 
 const height = 32;
 const width = 32;
+const interactInterval = 0.5;
 
-var interactInterval = 0.5;
 var lastInteractTime = 0;
 
 var ignoreCell = { c: -1, r: -1, color: null }
 var hoverCell = { c: -1, r: -1, cell: null };
 var pixels = [];
-var playerCount = 0;
 
 getGrid();
 getPlayerCount();
@@ -128,8 +127,7 @@ function getPlayerCount() {
 	var request = new XMLHttpRequest();
 	request.open('GET', url + 'api/playercount/');
 	request.addEventListener('load', function() {
-		playerCount = JSON.parse(this.responseText);
-		interactInterval = playerCount / 6;
+		var playerCount = JSON.parse(this.responseText);
 		document.getElementById('playerCount').innerHTML = `${playerCount} active now`;
 	});
 	request.send();
