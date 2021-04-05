@@ -68,11 +68,11 @@ function clearGrid() {
 }
 
 function fillSquare(cell, r, c) {
+	if(picking) return stopPicking();
 	if(!canInteract()) return;
 
 	lastInteractTime = getTotalSeconds();
 	cell.setAttribute('style', `background-color: ${color.value}`);
-
 	var http = new XMLHttpRequest();
 	http.open('POST', url + 'api/pixels/' + c + '/' + r, true);
 	http.setRequestHeader('Content-type', 'application/json');
@@ -91,6 +91,9 @@ function fillSquare(cell, r, c) {
 
 function mouseoverSquare(cell, r, c) {
 	hoverCell = {c: c, r: r, cell: cell};
+	if(picking) {
+		setPickColor(r, c);
+	}
 
 	if(!canInteract()) return;
 	cell.id = 'mouseover-square';
@@ -131,4 +134,50 @@ function getPlayerCount() {
 		document.getElementById('playerCount').innerHTML = `${playerCount} active now`;
 	});
 	request.send();
+}
+
+var picking = true
+var pickColor = '#FFFFFF'
+
+function togglePicking() {
+	picking = !picking
+}
+
+function stopPicking() {
+	picking = false
+}
+
+function setPickColor(r, c) {
+	pickColor = pixels[c + r * width]
+	color.value = pickColor;
+	console.log(pickColor);
+	//document.getElementById('colorPreview').setAttribute('style', `background-color: ${pickColor}`)
+}
+
+if (document.addEventListener) {
+	document.addEventListener('contextmenu', function(e) {
+		onRightClick();
+		e.preventDefault();
+	}, false);
+} else {
+	document.attachEvent('oncontextmenu', function() {
+		onRightClick();
+		window.event.returnValue = false;
+	});
+}
+
+function onRightClick() {
+	if(hoverCell.cell == null) return;
+	setPickColor(hoverCell.r, hoverCell.c)
+	stopPicking()
+}
+
+// https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+function componentToHex(c) {
+	var hex = c.toString(16);
+	return hex.length == 1 ? "0" + hex : hex;
+}
+  
+function rgbToHex(r, g, b) {
+	return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }

@@ -26,12 +26,27 @@
 			background-color: rgb(0, 0, 0);
 		}
 
-		#table-container {
+		/*.progress {
+			width: 100%;
+			background-color: rgb(255, 255, 255);
+			margin: auto;
+		}
+
+		#progressBar {
+			width: 100%;
+			height: 10px;
+			background-color: rgb(0, 0, 0);
+		}*/
+
+		#bottomBar, #table-container {
 			border: 3px solid black;
 			box-shadow: 0px 5px 15px black;
-			height: 700px;
 			width: 700px;
 			margin: 10px auto;
+		}
+
+		#table-container {
+			height: 700px;
 		}
 
 		#normal-square {
@@ -78,6 +93,38 @@
 		#colorPicker {
 			box-shadow: 0px 5px 15px black;
 		}
+
+		#colorPreview {
+			width: 100%;
+			height: 100%;
+		}
+
+		#menu ul {
+			list-style: none;
+		}
+
+		#menu li {
+			display: inline;
+		}
+
+		#menu div {
+			display: inline-block;
+		}
+
+		/* Create three equal columns that floats next to each other */
+		.column {
+			float: left;
+			width: 50%;
+			height: 50px; /* Should be removed. Only for demonstration */
+			box-sizing: border-box;
+		}
+
+		/* Clear floats after the columns */
+		.row:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
 	</style>
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-KK0MDFGG0S"></script>
@@ -90,15 +137,30 @@
 	</script>
 </head>
 <body>
-	<input type="color" id="colorPicker" style="width: 80px; height: 40px">
+	<input type="color" id="colorPicker" style="width: 100px; height: 50px;">
 	<div id="table-container">
 		<table id="table"></table>
 	</div>
-	<script src="download.js"></script>
-	<script src="table.js"></script>
 	<div class="progress">
 		<div id="progressBar"></div>
 	</div>
+	<!--<div id="bottomBar">
+		<div class="row">
+			<div class="column">
+				<div id="colorPreview" onclick="togglePicking()" style="background-color: #FFFFFF">
+					<img src="images/color_picker.png" style="height: 100%">
+				</div>
+			</div>
+			<div class="column">
+				<input type="color" id="colorPicker" style="width: 100%; height: 100%; box-shadow: 0px 0px; margin: 0px; padding: 0px;">
+			</div>
+		</div>
+		<div class="progress">
+			<div id="progressBar"></div>
+		</div>
+	</div>-->
+	<script src="download.js"></script>
+	<script src="table.js"></script>
 	<h3 id="playerCount">1 active now</h3>
 	<h3>Rugbug/Place is a recreation of the reddit april fools event r/place, where everyone can change a pixel every few seconds on a communal canvas.</h3>
 	<h1><a href="https://rugbug.net">Made by Rugbug Redfern</a></h1>
