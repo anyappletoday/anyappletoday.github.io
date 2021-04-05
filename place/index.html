@@ -39,6 +39,7 @@
 
 		#mouseover-square {
 			box-shadow: 0px 0px 10px 5px;
+			cursor: pointer;
 		}
 
 		table, tr, td {
@@ -83,11 +84,14 @@
 	<div id="table-container">
 		<table id="table"></table>
 	</div>
+	<script src="download.js"></script>
 	<script src="table.js"></script>
 	<div class="progress">
 		<div id="progressBar"></div>
 	</div>
+	<h3 id="playerCount">1 active now</h3>
 	<h3>Rugbug/Place is a recreation of the reddit april fools event r/place, where everyone can change a pixel every few seconds on a communal canvas.</h3>
-	<h1><a href="https://rugbug.net">More by Rugbug Redfern</a></h1>
+	<h1><a href="https://rugbug.net">Made by Rugbug Redfern</a></h1>
+	<button onclick="downloadPixels()">Download JSON Snapshot</button>
 </body>
 </html>
