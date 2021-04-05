@@ -24,6 +24,7 @@ function downloadGrid() {
 }
 
 function makeGrid(pixels) {
+	clearGrid();
 	let i = 0;
 	for (let r = 0; r < height; r++){
 		const row = table.insertRow(r);
@@ -66,3 +67,7 @@ function mouseoverSquare() {
 function mouseleaveSquare() {
 	this.id = 'normal-square';
 }
+
+var intervalId = window.setInterval(function() {
+	downloadGrid();
+}, 2000);
