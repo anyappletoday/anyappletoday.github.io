@@ -70,4 +70,4 @@ function mouseleaveSquare() {
 
 var intervalId = window.setInterval(function() {
 	downloadGrid();
-}, 2000);
+}, 1000);
