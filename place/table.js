@@ -47,11 +47,12 @@ function clearGrid() {
 }
 
 function fillSquare(cell, r, c) {
+	cell.setAttribute('style', `background-color: ${color.value}`);
+
 	var http = new XMLHttpRequest();
 	http.open('POST', url + 'api/pixels/' + c + '/' + r, true);
 	http.setRequestHeader('Content-type', 'application/json');
 	http.onload = function() {
-		cell.setAttribute('style', `background-color: ${color.value}`);
 		console.log(`Recieved: ${this.responseText}`);
 	}
 
