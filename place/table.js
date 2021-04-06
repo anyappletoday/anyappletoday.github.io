@@ -136,7 +136,7 @@ function getPlayerCount() {
 	request.send();
 }
 
-var picking = true
+var picking = false
 var pickColor = '#FFFFFF'
 
 function togglePicking() {
