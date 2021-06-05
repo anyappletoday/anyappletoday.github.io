@@ -11,7 +11,7 @@
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">  
 	<style type="text/css">
 		@font-face {
-			font-family: myFirstFont;
+			font-family: mainFont;
 			src: url(fonts/VarelaRound-Regular.ttf);
 			font-weight: bold;
 		}
@@ -21,14 +21,15 @@
 			background-color: rgb(255, 255, 255);
 			border-radius: 15px;
 			margin: auto;
-			box-shadow: 0px 5px 15px black;
+			box-shadow: 0px 5px 15px black, inset 0 0 5px rgb(182, 182, 182);
 		}
 
 		#progressBar {
-			width: 100%;
+			width: 50%;
 			height: 30px;
 			border-radius: 15px;
-			background-color: rgb(0, 0, 0);
+			background: rgb(32, 32, 32);
+			background: linear-gradient(0deg, rgb(8, 8, 8) 0%, rgb(24, 24, 24) 100%);
 		}
 
 		/*.progress {
@@ -77,7 +78,7 @@
 		body {
 			text-align: center;
 			align-content: center;
-			font-family: 'myFirstFont', sans-serif;
+			font-family: 'mainFont', sans-serif;
 			background: linear-gradient(#fd6969, #ffd35b);
 			background-repeat: no-repeat;
 			background-attachment: fixed;
@@ -171,5 +172,6 @@
 	<h1><a href="https://rugbug.net">Made by Rugbug Redfern</a></h1>
 	<center><iframe width="640" height="360" src="https://www.youtube.com/embed/WgfE25hnhQY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
 	<button onclick="downloadPixels()">Download JSON Snapshot</button>
+	<!-- <button onclick="downloadPng()">Download PNG Snapshot</button> -->
 </body>
 </html>
