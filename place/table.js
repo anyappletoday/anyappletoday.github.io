@@ -4,6 +4,7 @@ const table = document.getElementById('table');
 const color = document.getElementById('colorPicker');
 
 const url = 'https://stark-ridge-60794.herokuapp.com/';
+//const url = 'http://127.0.0.1:3000/';
 
 color.addEventListener("click", function(){});
 
@@ -41,12 +42,12 @@ function makeGrid(pixels) {
 	let i = 0;
 	for (let r = 0; r < height; r++){
 		const row = table.insertRow(r);
-		if(drawGrid) {
+		if(!drawGrid) {
 			row.classList.add('borderless-cell');
 		}
         for (let c = 0; c < width; c++){
 			const cell = row.insertCell(c);
-			if(drawGrid) {
+			if(!drawGrid) {
 				cell.classList.add('borderless-cell');
 			}
 			if(ignoreCell.c === c && ignoreCell.r === r) {
@@ -189,6 +190,32 @@ function rgbToHex(r, g, b) {
 	return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
+function download(filename, text) {
+	var element = document.createElement('a');
+	element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+	element.setAttribute('download', filename);
+
+	element.style.display = 'none';
+	document.body.appendChild(element);
+
+	element.click();
+
+	document.body.removeChild(element);
+}
+
+function downloadJson() {
+	download('snapshot.json', JSON.stringify(pixels));
+}
+
+function downloadPng() {
+	var request = new XMLHttpRequest();
+	request.open('GET', url + 'api/image');
+	//request.addEventListener('load', function() {
+		//download('snapshot.png', this.responseText);
+	//});
+	request.send();
+}
+
 function validateDrawGrid() {
-	drawGrid = document.getElementByName("draw_grid").checked;
+	drawGrid = document.getElementsByName("draw_grid")[0].checked;
 }

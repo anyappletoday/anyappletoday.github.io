@@ -1,38 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta content="Rugbug/Place" property="og:title">
-	<meta content="A multiplayer pixel art editor inspired by r/place." property="og:description">
+    <meta content="A multiplayer pixel art editor inspired by r/place." property="og:description">
     <meta content="https://rugbug.net/place/" property="og:url">
     <meta content="https://rugbug.net/place/images/embed.png" property="og:image">
     <meta content="#FC4BE1" data-react-helmet="true" name="theme-color">
-	<title>Rugbug/Place</title>
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">  
-	<style type="text/css">
-		@font-face {
-			font-family: mainFont;
-			src: url(fonts/VarelaRound-Regular.ttf);
-			font-weight: bold;
-		}
-
-		.progress {
-			width: 300px;
-			background-color: rgb(255, 255, 255);
-			border-radius: 15px;
-			margin: auto;
-			box-shadow: 0px 5px 15px black, inset 0 0 5px rgb(182, 182, 182);
-		}
-
-		#progressBar {
-			width: 50%;
-			height: 30px;
-			border-radius: 15px;
-			background: rgb(32, 32, 32);
-			background: linear-gradient(0deg, rgb(8, 8, 8) 0%, rgb(24, 24, 24) 100%);
-		}
-
-		/*.progress {
+    <title>Rugbug/Place</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="checkbox.css">
+    <style type="text/css">
+        @font-face {
+            font-family: mainFont;
+            src: url(fonts/VarelaRound-Regular.ttf);
+            font-weight: bold;
+        }
+        
+        .progress {
+            width: 300px;
+            background-color: rgb(255, 255, 255);
+            border-radius: 15px;
+            margin: auto;
+            box-shadow: 0px 5px 15px black, inset 0 0 5px rgb(182, 182, 182);
+        }
+        
+        #progressBar {
+            width: 50%;
+            height: 30px;
+            border-radius: 15px;
+            background: rgb(32, 32, 32);
+            background: linear-gradient(0deg, rgb(8, 8, 8) 0%, rgb(24, 24, 24) 100%);
+        }
+        /*.progress {
 			width: 100%;
 			background-color: rgb(255, 255, 255);
 			margin: auto;
@@ -43,127 +44,141 @@
 			height: 10px;
 			background-color: rgb(0, 0, 0);
 		}*/
+        
+        #bottomBar,
+        #table-container {
+            border: 3px solid black;
+            box-shadow: 0px 5px 15px black;
+            width: 700px;
+            margin: 10px auto;
+        }
+        
+        #table-container {
+            height: 700px;
+        }
+        
+        #normal-square {
+            box-shadow: 0px 0px;
+        }
+        
+        #mouseover-square {
+            box-shadow: 0px 0px 10px 5px;
+            cursor: pointer;
+        }
+        
+        table,
+        tr,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        
+        table {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+        }
+        
+        .gallery-table {
+            width: 200px;
+            height: 200px;
+        }
+        
+        .borderless-cell {
+            border: none;
+        }
+        
+        body {
+            text-align: center;
+            align-content: center;
+            font-family: 'mainFont', sans-serif;
+            background: linear-gradient(#fd6969, #ffd35b);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        
+        a {
+            color: black;
+            transition: all 0.1s;
+        }
+        
+        a:hover {
+            background-color: black;
+            color: white;
+            border-radius: 5px;
+            padding: 5px;
+        }
+        
+        #colorPicker {
+            box-shadow: 0px 5px 15px black;
+        }
+        
+        #colorPreview {
+            width: 100%;
+            height: 100%;
+        }
+        
+        #menu ul {
+            list-style: none;
+        }
+        
+        #menu li {
+            display: inline;
+        }
+        
+        #menu div {
+            display: inline-block;
+        }
+        /* Create three equal columns that floats next to each other */
+        
+        .column {
+            float: left;
+            width: 50%;
+            height: 50px;
+            /* Should be removed. Only for demonstration */
+            box-sizing: border-box;
+        }
+        /* Clear floats after the columns */
+        
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KK0MDFGG0S"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-		#bottomBar, #table-container {
-			border: 3px solid black;
-			box-shadow: 0px 5px 15px black;
-			width: 700px;
-			margin: 10px auto;
-		}
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
 
-		#table-container {
-			height: 700px;
-		}
-
-		#normal-square {
-			box-shadow: 0px 0px;
-		}
-
-		#mouseover-square {
-			box-shadow: 0px 0px 10px 5px;
-			cursor: pointer;
-		}
-
-		table, tr, td {
-			border: 1px solid black;
-			border-collapse: collapse;
-		}
-
-		table {
-			width: 100%;
-			height: 100%;
-			background-color: white ;
-		}
-
-		.gallery-table {
-			width: 200px;
-			height: 200px;
-		}
-
-		.borderless-cell {
-			border: none;
-		}
-
-		body {
-			text-align: center;
-			align-content: center;
-			font-family: 'mainFont', sans-serif;
-			background: linear-gradient(#fd6969, #ffd35b);
-			background-repeat: no-repeat;
-			background-attachment: fixed;
-		}
-
-		a {
-			color: black;
-			transition: all 0.1s;
-		}
-
-		a:hover {
-			background-color: black;
-			color: white;
-			border-radius: 5px;
-			padding: 5px;
-		}
-
-		#colorPicker {
-			box-shadow: 0px 5px 15px black;
-		}
-
-		#colorPreview {
-			width: 100%;
-			height: 100%;
-		}
-
-		#menu ul {
-			list-style: none;
-		}
-
-		#menu li {
-			display: inline;
-		}
-
-		#menu div {
-			display: inline-block;
-		}
-
-		/* Create three equal columns that floats next to each other */
-		.column {
-			float: left;
-			width: 50%;
-			height: 50px; /* Should be removed. Only for demonstration */
-			box-sizing: border-box;
-		}
-
-		/* Clear floats after the columns */
-		.row:after {
-			content: "";
-			display: table;
-			clear: both;
-		}
-	</style>
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-KK0MDFGG0S"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-
-		gtag('config', 'G-KK0MDFGG0S');
-	</script>
+        gtag('config', 'G-KK0MDFGG0S');
+    </script>
 </head>
+
 <body>
-	<input type="color" id="colorPicker" style="width: 100px; height: 50px;">
-	<div style="float: left; position: absolute;" id="gallery-container">
-		
-	</div>
-	<div id="table-container">
-		<table id="table"></table>
-	</div>
-	<div class="progress">
-		<div id="progressBar"></div>
-	</div>
-	<input type="checkbox" name="draw_grid" value="Draw Grid" onclick="return validateDrawGrid();">
-	<!--<div id="bottomBar">
+    <input type="color" id="colorPicker" style="width: 100px; height: 50px;">
+    <div style="float: left; position: absolute;" id="gallery-container">
+
+    </div>
+    <div id="table-container">
+        <table id="table"></table>
+    </div>
+    <div class="progress">
+        <div id="progressBar"></div>
+    </div>
+    <br>
+    <center>
+        <label class="container">Grid
+			<input type="checkbox" name="draw_grid" value="Draw Grid" onclick="return validateDrawGrid();" checked>
+			<span class="checkmark"></span>
+		</label>
+    </center>
+    <!--<div id="bottomBar">
 		<div class="row">
 			<div class="column">
 				<div id="colorPreview" onclick="togglePicking()" style="background-color: #FFFFFF">
@@ -178,12 +193,13 @@
 			<div id="progressBar"></div>
 		</div>
 	</div>-->
-	<script src="table.js"></script>
-	<script src="download.js"></script>
-	<h3 id="playerCount">1 active now</h3>
-	<h3>Rugbug/Place is a recreation of the reddit april fools event r/place, where everyone can change a pixel every few seconds on a communal canvas.</h3>
-	<h1><a href="https://rugbug.net">Made by Rugbug Redfern</a></h1>
-	<center><iframe width="640" height="360" src="https://www.youtube.com/embed/WgfE25hnhQY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
-	<button onclick="downloadPixels()">Download JSON Snapshot</button>
+    <script src="table.js"></script>
+    <script src="gallery.js"></script>
+    <h3 id="playerCount">1 active now</h3>
+    <h3>Rugbug/Place is a recreation of the reddit april fools event r/place, where everyone can change a pixel every few seconds on a communal canvas.</h3>
+    <h1><a href="https://rugbug.net">Made by Rugbug Redfern</a></h1>
+    <center><iframe width="640" height="360" src="https://www.youtube.com/embed/WgfE25hnhQY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+    <button onclick="downloadPixels()">Download JSON Snapshot</button>
 </body>
+
 </html>
