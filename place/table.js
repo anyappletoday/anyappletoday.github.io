@@ -4,7 +4,6 @@ const table = document.getElementById('table');
 const color = document.getElementById('colorPicker');
 
 const url = 'https://stark-ridge-60794.herokuapp.com/';
-//const url = 'http://127.0.0.1:3000/';
 
 color.addEventListener("click", function(){});
 
@@ -17,6 +16,8 @@ var lastInteractTime = 0;
 var ignoreCell = { c: -1, r: -1, color: null }
 var hoverCell = { c: -1, r: -1, cell: null };
 var pixels = [];
+
+var drawGrid = true;
 
 getGrid();
 getPlayerCount();
@@ -40,8 +41,14 @@ function makeGrid(pixels) {
 	let i = 0;
 	for (let r = 0; r < height; r++){
 		const row = table.insertRow(r);
+		if(drawGrid) {
+			row.classList.add('borderless-cell');
+		}
         for (let c = 0; c < width; c++){
 			const cell = row.insertCell(c);
+			if(drawGrid) {
+				cell.classList.add('borderless-cell');
+			}
 			if(ignoreCell.c === c && ignoreCell.r === r) {
 				cell.setAttribute('style', `background-color: ${ignoreCell.color}`);
 				ignoreCell = { c: -1, r: -1, color: null };
@@ -180,4 +187,8 @@ function componentToHex(c) {
   
 function rgbToHex(r, g, b) {
 	return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
+function validateDrawGrid() {
+	drawGrid = document.getElementByName("draw_grid").checked;
 }

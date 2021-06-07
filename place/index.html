@@ -75,6 +75,15 @@
 			background-color: white ;
 		}
 
+		.gallery-table {
+			width: 200px;
+			height: 200px;
+		}
+
+		.borderless-cell {
+			border: none;
+		}
+
 		body {
 			text-align: center;
 			align-content: center;
@@ -144,12 +153,16 @@
 </head>
 <body>
 	<input type="color" id="colorPicker" style="width: 100px; height: 50px;">
+	<div style="float: left; position: absolute;" id="gallery-container">
+		
+	</div>
 	<div id="table-container">
 		<table id="table"></table>
 	</div>
 	<div class="progress">
 		<div id="progressBar"></div>
 	</div>
+	<input type="checkbox" name="draw_grid" value="Draw Grid" onclick="return validateDrawGrid();">
 	<!--<div id="bottomBar">
 		<div class="row">
 			<div class="column">
@@ -165,13 +178,12 @@
 			<div id="progressBar"></div>
 		</div>
 	</div>-->
-	<script src="download.js"></script>
 	<script src="table.js"></script>
+	<script src="download.js"></script>
 	<h3 id="playerCount">1 active now</h3>
 	<h3>Rugbug/Place is a recreation of the reddit april fools event r/place, where everyone can change a pixel every few seconds on a communal canvas.</h3>
 	<h1><a href="https://rugbug.net">Made by Rugbug Redfern</a></h1>
 	<center><iframe width="640" height="360" src="https://www.youtube.com/embed/WgfE25hnhQY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
 	<button onclick="downloadPixels()">Download JSON Snapshot</button>
-	<!-- <button onclick="downloadPng()">Download PNG Snapshot</button> -->
 </body>
 </html>
