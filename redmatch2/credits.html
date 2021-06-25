@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Redmatch 2 Credits</title>
+		<style>
+			@font-face { 
+				font-family: 'Bahnschrift';
+				src: url('../bahnschrift.ttf') format('ttf');
+			}
+
+			html {
+				height: 100%;
+				margin: 0px;
+			}
+
+			body {
+				background-image: url("../images/skyway.png");
+				background-attachment: fixed;
+				background-size: cover;
+				height: 100%;
+				margin: 0px;
+				font-family: Bahnschrift;
+				font-weight: normal;
+				font-style: normal;
+			}
+
+			.center {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100%;
+			}
+
+			table {
+				border-radius: 20px;
+				background: rgb(6,6,6);
+				background: linear-gradient(90deg, rgba(6,6,6,1) 0%, rgba(25,25,25,1) 100%);
+				border: none;
+				box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
+			}
+
+			a {
+				color: red;
+				padding: 5px;
+				background-color: rgba(0, 0, 0, 0);
+				border-radius: 5px;
+				transition: background-color 0.1s linear;
+			}
+
+			a:hover {
+				color: red;
+				background-color: rgba(0, 0, 0, 0.3);
+				padding: 5px;
+			}
+
+			td {
+				font-size: 30px;
+				padding: 25px;
+				color: white;
+			}
+
+			tr:hover {
+				background-color: rgb(41, 41, 41);
+				cursor: pointer;
+			}
+
+			tr:first-of-type td:first-of-type {
+				border-top-left-radius: 20px;
+			}
+
+			tr:first-of-type td:nth-of-type(2) {
+				border-top-right-radius: 20px;
+			}
+
+			tr:last-of-type td:first-of-type {
+				border-bottom-left-radius: 20px;
+			}
+
+			tr:last-of-type td:nth-of-type(2) {
+				border-bottom-right-radius: 20px;
+			}
+
+			td:last-of-type {
+				color: red;
+				text-decoration: underline;
+			}
+
+			h1 {
+				cursor: pointer;
+				color: white;
+				text-align: center;
+				border-radius: 20px;
+				background: rgb(6,6,6);
+				background: linear-gradient(90deg, rgba(6,6,6,1) 0%, rgba(25,25,25,1) 100%);
+				padding: 10px;
+				box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
+			}
+		</style>
+	</head>
+	<body>
+		<div class="center">
+			<div>
+				<h1 onclick="location.href='https://store.steampowered.com/app/1280770/Redmatch_2/'">Redmatch 2 Team</h1>
+				<table cellspacing="0" cellpadding="0">
+					<tr onclick="location.href='https://www.youtube.com/RugbugRedfern';">
+						<td>💻 Developer</td>
+						<td>Rugbug Redfern</td>
+					</tr>
+					<tr onclick="location.href='https://tastybiscuit.itch.io/';">
+						<td>🔨 Map Designer for Outskirts and Metro</td>
+						<td>Tasty Biscuit Dev</td>
+					</tr>
+					<tr onclick="location.href='https://soundcloud.com/helixcl/redmatch-2-main-theme';">
+						<td>🎵 Menu Music</td>
+						<td>Helix</td>
+					</tr>
+					<tr onclick="location.href='https://twitter.com/lixlovemail';">
+						<td>🖌️ Achievement art for Good Sport</td>
+						<td>lixlovemail</td>
+					</tr>
+					<tr onclick="location.href='https://www.youtube.com/PigGG';">
+						<td>🎨 All other illustrated achievement art</td>
+						<td>Pig</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</body>
+</html>
