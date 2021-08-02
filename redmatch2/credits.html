@@ -29,10 +29,9 @@
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				height: 100%;
 			}
 
-			table {
+			.link-table {
 				border-radius: 20px;
 				background: rgb(6,6,6);
 				background: linear-gradient(90deg, rgba(6,6,6,1) 0%, rgba(25,25,25,1) 100%);
@@ -54,13 +53,27 @@
 				padding: 5px;
 			}
 
-			td {
+			.link-table td {
 				font-size: 30px;
 				padding: 25px;
 				color: white;
 			}
 
-			tr:hover {
+			.translation-table td {
+				font-size: 25px;
+				padding: 25px;
+				color: white;
+			}
+
+			.translation-table {
+				border-radius: 20px;
+				background: rgb(6,6,6);
+				background: linear-gradient(90deg, rgba(6,6,6,1) 0%, rgba(25,25,25,1) 100%);
+				border: none;
+				box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
+			}
+
+			.link-table tr:hover {
 				background-color: rgb(41, 41, 41);
 				cursor: pointer;
 			}
@@ -81,7 +94,7 @@
 				border-bottom-right-radius: 20px;
 			}
 
-			td:last-of-type {
+			.link-table td:last-of-type {
 				color: red;
 				text-decoration: underline;
 			}
@@ -96,13 +109,23 @@
 				padding: 10px;
 				box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
 			}
+
+			h2 {
+				color: white;
+				text-align: center;
+				border-radius: 20px;
+				background: rgb(6,6,6);
+				background: linear-gradient(90deg, rgba(6,6,6,1) 0%, rgba(25,25,25,1) 100%);
+				padding: 10px;
+				box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
+			}
 		</style>
 	</head>
 	<body>
 		<div class="center">
 			<div>
 				<h1 onclick="location.href='https://store.steampowered.com/app/1280770/Redmatch_2/'">Redmatch 2 Team</h1>
-				<table cellspacing="0" cellpadding="0">
+				<table cellspacing="0" cellpadding="0" class="link-table">
 					<tr onclick="location.href='https://www.youtube.com/RugbugRedfern';">
 						<td>💻 Developer</td>
 						<td>Rugbug Redfern</td>
@@ -124,6 +147,90 @@
 						<td>Pig</td>
 					</tr>
 				</table>
+				<h2>Translators</h1>
+			</div>
+		</div>
+		<div class="center">
+			<div>
+				<table cellspacing="0" cellpadding="0" class ="translation-table">
+					<tr>
+						<td>Spanish</td>
+						<td>Helix</td>
+					</tr>
+					<tr>
+						<td>German</td>
+						<td>StayWithMeSenpai</td>
+					</tr>
+					<tr>
+						<td>Russian</td>
+						<td>SPYKYT & NikART</td>
+					</tr>
+					<tr>
+						<td>Dutch</td>
+						<td>Trig & Kas</td>
+					</tr>
+					<tr>
+						<td>Polish</td>
+						<td>probowsniper & Novipelle</td>
+					</tr>
+					<tr>
+						<td>Romanian</td>
+						<td>Alberto Goea</td>
+					</tr>
+					<tr>
+						<td>Portuguese</td>
+						<td>LethalArms</td>
+					</tr>
+					<tr>
+						<td>Swedish</td>
+						<td>Emiols</td>
+					</tr>
+					<tr>
+						<td>Danish</td>
+						<td>Mikkels</td>
+					</tr>
+					<tr>
+						<td>French</td>
+						<td>VipereSolide & Arik</td>
+					</tr>
+					<tr>
+						<td>Italian</td>
+						<td>Mike Fabbri</td>
+					</tr>
+					<tr>
+						<td>Hungarian</td>
+						<td>lastround</td>
+					</tr>
+					<tr>
+						<td>Chinese</td>
+						<td>u6guiyg_RBLX & Sefs</td>
+					</tr>
+					<tr>
+						<td>Turkish</td>
+						<td>CH4R</td>
+					</tr>
+					<tr>
+						<td>Bulgarian</td>
+						<td>skullleep & YellRageMastering</td>
+					</tr>
+					<tr>
+						<td>Greek</td>
+						<td>skullleep</td>
+					</tr>
+					<tr>
+						<td>Norwegian</td>
+						<td>MBR</td>
+					</tr>
+					<tr>
+						<td>Ukrainian</td>
+						<td>NikART & Dextruxion</td>
+					</tr>
+					<tr>
+						<td>Japanese</td>
+						<td>Sneezium, bluntmeh, & kanji</td>
+					</tr>
+				</table>
+				<br>
 			</div>
 		</div>
 	</body>
