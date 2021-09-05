@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			@font-face { 
+				font-family: 'Bahnschrift';
+				src: url('.../bahnschrift.ttf') format('ttf');
+			}
+			
+			h1, h2, li {
+				font-family: Bahnschrift;
+			}
+
+			a {
+				color: #62b0ff;
+			}
+
+			h2 {
+				font-weight: normal;
+			}
+
+			h1:after, h2:after {
+				content: ' ';
+				display: block;
+				border: 1px solid #45474D;
+			}
+
+			p, table {
+				font-size: 16px;
+				font-family: Helvetica;
+				color: #ACB5BE;
+			}
+
+			body {
+				max-width: 50%;
+				min-width: 400px;
+				margin-left: auto;
+				margin-right: auto;
+				background-color: #161920;
+				color: #E6E6E6;
+			}
+
+			pre code {
+				margin-left: 40px;
+				background-color: #1E1F22;
+				border: 1px solid #535354;
+				border-radius: 5px;
+				padding: 20px;
+				display: block;
+				white-space: pre-wrap;
+			}
+
+			tr, td, th {
+				padding: 5px;
+			}
+
+			th {
+				background: #4E5155;
+				color: #E6E6E6;
+				text-align: left;
+			}
+
+			tr:nth-child(even) {
+				background: #1D2027;
+			}
+
+			tr:nth-child(odd) {
+				background: #22252B;
+			}
+		</style>
+	</head>
+	<body>
+<h1 id="redmatch-2-custom-api-endpoints-documentation">Redmatch 2 Custom API Endpoints Documentation</h1>
+<h2 id="about">About</h2>
+<p>Custom API Endpoints is a tool I built into Redmatch 2 to make managing custom tournaments and data processing easier. When a match starts or ends, you can send data to your own server with information about the match and players in it.</p>
+<p>For example, you could create a discord bot to manage the total kills of players in a tournament, or make an analytics bot to track the most popular maps.</p>
+<h2 id="client-setup">Client Setup</h2>
+<p>To enable custom endpoints for a match, the host must have a file named &quot;api_endpoints.txt&quot; in the Data folder of their local game files.</p>
+<p>The api_endpoints.txt file should have 2 lines in it, the first containing the URL to send the data to when the match starts, and the second containing the URL to send the data to when the match ends.</p>
+<pre><code>http<span class="hljs-variable">s:</span>//localhos<span class="hljs-variable">t:3000</span>/<span class="hljs-keyword">match</span>-started
+http<span class="hljs-variable">s:</span>//localhos<span class="hljs-variable">t:3000</span>/<span class="hljs-keyword">match</span>-ended
+</code></pre><h2 id="behaviour">Behaviour</h2>
+<p>When the match starts or ends, the host will send a PUT request to the respective URL with information about the match contained in the JSON format.</p>
+<p>When the match starts, a request like this will be sent:</p>
+<pre><code>{
+    <span class="hljs-attribute">lobbyID</span>: <span class="hljs-string">'109775240971066540'</span>,
+    map: <span class="hljs-number">4</span>,
+    players: [
+        { steamID: <span class="hljs-string">'76561198057087288'</span>, name: <span class="hljs-string">'Rugbug'</span> },
+        { <span class="hljs-attribute">steamID</span>: <span class="hljs-string">'76561198010526830'</span>, name: <span class="hljs-string">'AnotherPlayer'</span> }
+    ]
+}
+</code></pre><p>When the match ends, a request like this will be sent:</p>
+<pre><code>{
+    <span class="hljs-attribute">lobbyID</span>: <span class="hljs-string">'109775240971066540'</span>,
+    <span class="hljs-attribute">map</span>: <span class="hljs-number">4</span>,
+    <span class="hljs-attribute">players</span>: [
+        { <span class="hljs-attribute">steamID</span>: <span class="hljs-string">'76561198057087288'</span>, <span class="hljs-attribute">name</span>: <span class="hljs-string">'Rugbug'</span>, <span class="hljs-attribute">kills</span>: <span class="hljs-number">10</span>, <span class="hljs-attribute">deaths</span>: <span class="hljs-number">6</span> },
+        { <span class="hljs-attribute">steamID</span>: <span class="hljs-string">'76561198010526830'</span>, <span class="hljs-attribute">name</span>: <span class="hljs-string">'AnotherPlayer'</span>, <span class="hljs-attribute">kills</span>: <span class="hljs-number">5</span>, <span class="hljs-attribute">deaths</span>: <span class="hljs-number">12</span> }
+    ]
+}
+</code></pre><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lobbyID</td>
+<td>The SteamID64 of the lobby the match is in, unique to each match</td>
+</tr>
+<tr>
+<td>map</td>
+<td>The index of the map being played</td>
+</tr>
+<tr>
+<td>players</td>
+<td>An array of players with steamIDs and their in-game names, with kills and deaths if it is an end match request</td>
+</tr>
+</tbody>
+</table>
+<h2 id="creating-your-server">Creating your Server</h2>
+<p>As I mentioned before, to use the API you will need to set up your own server. For my example, I used:</p>
+<ul>
+<li><a href="https://nodejs.org/en/">NodeJS v14.16.0</a></li>
+<li><a href="https://www.npmjs.com/package/express">Express v4.17.1</a></li>
+</ul>
+<p>Both are free, and to learn how to use them I would recommend following these tutorials by Programming with Mosh:</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=TlB_eWDSMt4">Node.js Tutorial for Beginners: Learn Node in 1 Hour</a></li>
+<li><a href="https://www.youtube.com/watch?v=pKd0Rpw7O48">How to build a REST API with Node js &amp; Express</a></li>
+</ul>
+<p>If you don&#39;t want to use NodeJS you could use any other language that works to accept HTTP requests, like python, C#, etc. I prefer JavaScript with NodeJS as it&#39;s very easy to learn and write, and has a wide assortment of useful packages (like <a href="https://discord.js.org/#/">discord.js</a>, if you wanted to make this into a discord bot).</p>
+<pre><code><span class="hljs-keyword">const</span> express = <span class="hljs-keyword">require</span>(<span class="hljs-string">'express'</span>);
+<span class="hljs-keyword">const</span> app = express();
+
+<span class="hljs-keyword">const</span> PORT = process.env.PORT || <span class="hljs-number">3000</span>;
+
+<span class="hljs-comment">// Allow Cross-Origin-Resource-Sharing so that we can accept requests from anyone</span>
+app.<span class="hljs-keyword">use</span>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(req, res, next)</span> </span>{
+    res.header(<span class="hljs-string">"Access-Control-Allow-Origin"</span>, <span class="hljs-string">"*"</span>);
+    res.header(<span class="hljs-string">"Access-Control-Allow-Headers"</span>, <span class="hljs-string">"Origin, X-Requested-With, Content-Type, Accept"</span>);
+    next();
+});
+
+<span class="hljs-comment">// Required to view nested objects</span>
+app.<span class="hljs-keyword">use</span>(express.urlencoded({
+    extended: <span class="hljs-keyword">true</span>
+}));
+
+<span class="hljs-comment">// Use JSON formatting for the request body</span>
+app.<span class="hljs-keyword">use</span>(express.json());
+
+app.put(<span class="hljs-string">'/match-started'</span>, (req, res) =&gt; {
+    console.log(<span class="hljs-string">'match started'</span>);
+    res.sendStatus(<span class="hljs-number">200</span>);
+});
+
+app.put(<span class="hljs-string">'/match-ended'</span>, (req, res) =&gt; {
+    console.log(<span class="hljs-string">'match ended'</span>);
+    res.sendStatus(<span class="hljs-number">200</span>);
+});
+
+app.listen(PORT, () =&gt; {
+    console.log(`Server started on port ${PORT}`);
+});
+</code></pre><p>To access the contents of the request with express, just use req.body.</p>
+<pre><code>app.put(<span class="hljs-string">'/match-started'</span>, <span class="hljs-function"><span class="hljs-params">(req, res)</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Lobby ID: '</span> + req.body.lobbyID);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Map: '</span> + req.body.map);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Players: '</span> req.body.players);
+    res.sendStatus(<span class="hljs-number">200</span>);
+});
+</code></pre><p>Once I had finished writing my server, I used Heroku to host it for free.</p>
+<ul>
+<li><a href="https://youtu.be/aUW5GAFhu6s">Heroku Tutorial</a></li>
+</ul>
+<p>Once you&#39;ve hosted it somewhere, create your api_endpoints.txt file and paste in the match started and match ended URLs.</p>
+<pre><code>http<span class="hljs-variable">s:</span>//redmatch-tournament.herokuapp.<span class="hljs-keyword">com</span>/<span class="hljs-keyword">match</span>-started
+http<span class="hljs-variable">s:</span>//redmatch-tournament.herokuapp.<span class="hljs-keyword">com</span>/<span class="hljs-keyword">match</span>-ended
+</code></pre><p>To test the server before releasing it online, you can always run your NodeJS server on localhost.</p>
+	</body>
+</html>
