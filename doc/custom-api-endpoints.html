@@ -75,19 +75,19 @@
             .hljs-number {
                 color: #A8A9EB;
             }
-
+			
             .hljs-built_in, h3 {
                 color: #ADDA78;
             }
-
+			
             .hljs-literal {
                 color: #A8A9EB;
             }
-
+			
             .hljs-function {
                 color: #85DACC;
             }
-
+			
             .hljs-params {
                 color: #F38D68;
             }
@@ -95,6 +95,19 @@
 	</head>
 	<body>
 <h1 id="redmatch-2-custom-api-endpoints-documentation">Redmatch 2 Custom API Endpoints Documentation</h1>
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#client-setup">Client Setup</a></li>
+<li><a href="#requests">Requests</a><ul>
+<li><a href="#match-start-request">Match Start Request</a></li>
+<li><a href="#match-end-request">Match End Request</a></li>
+<li><a href="#player-death-request">Player Death Request</a></li>
+</ul>
+</li>
+<li><a href="#responding-to-requests">Responding to Requests</a></li>
+<li><a href="#creating-your-server">Creating your Server</a></li>
+<li><a href="#advanced-example">Advanced Example</a></li>
+</ul>
 <h2 id="about">About</h2>
 <p>Custom API Endpoints is a tool I built into Redmatch 2 to make managing custom tournaments easier, some simple custom gamemodes and ranked modding possible. When a match starts, ends, and when a player dies, a request will be sent to your server containing information about it. You can respond to these requests to change game state or send messages to players.</p>
 <p>For example, you could create a discord bot to manage the total kills of players in a tournament, or make an analytics bot to track the most popular maps.</p>
@@ -427,7 +440,7 @@ app.listen(PORT, <span class="hljs-function"><span class="hljs-params">()</span>
 http<span class="hljs-variable">s:</span>//redmatch-tournament.herokuapp.<span class="hljs-keyword">com</span>/<span class="hljs-keyword">match</span>-ended
 http<span class="hljs-variable">s:</span>//redmatch-tournament.herokuapp.<span class="hljs-keyword">com</span>/death
 </code></pre><p>To test the server before releasing it online, you can always run your NodeJS server on localhost.</p>
-<h1 id="advanced-example">Advanced Example</h1>
+<h2 id="advanced-example">Advanced Example</h2>
 <p>The previous example was very bare-bones, and didn&#39;t have much functionality. If you want to make more complicated programs, then you can use the following as jumping off point. It has a match list and ranks.</p>
 <pre><code><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>);
 <span class="hljs-keyword">const</span> app = express();
