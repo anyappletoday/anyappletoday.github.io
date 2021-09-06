@@ -68,35 +68,15 @@
 				background: #22252B;
 			}
 			
-			.hljs-string {
-				color: #F38D68;
+			hljs-string {
+				color: #FFFFFF;
 			}
-
-            .hljs-number {
-                color: #A8A9EB;
-            }
-
-            .hljs-built_in {
-                color: #ADDA78;
-            }
-
-            .hljs-literal {
-                color: #A8A9EB;
-            }
-
-            .hljs-function {
-                color: #85DACC;
-            }
-
-            .hljs-params {
-                color: #F38D68;
-            }
 		</style>
 	</head>
 	<body>
 <h1 id="redmatch-2-custom-api-endpoints-documentation">Redmatch 2 Custom API Endpoints Documentation</h1>
 <h2 id="about">About</h2>
-<p>Custom API Endpoints is a tool I built into Redmatch 2 to make managing custom tournaments and data processing easier. When a match starts or ends, you can send data to your own server with information about the match and players in it.</p>
+<p>Custom API Endpoints is a tool I built into Redmatch 2 to make managing custom tournaments easier, some simple custom gamemodes and ranked modding possible. When a match starts, ends, and when a player dies, a request will be sent to your server containing information about it. You can respond to these requests to change game state or send messages to players.</p>
 <p>For example, you could create a discord bot to manage the total kills of players in a tournament, or make an analytics bot to track the most popular maps.</p>
 <h2 id="client-setup">Client Setup</h2>
 <p>To enable custom endpoints for a match, the host must have a file named &quot;api_endpoints.txt&quot; in the Data folder of their local game files.</p>
