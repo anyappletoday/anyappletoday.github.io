@@ -7,7 +7,7 @@
 				src: url('.../bahnschrift.ttf') format('ttf');
 			}
 			
-			h1, h2, li {
+			h1, h2, h3, li {
 				font-family: Bahnschrift;
 			}
 
@@ -15,11 +15,11 @@
 				color: #62b0ff;
 			}
 
-			h2 {
+			h2, h3 {
 				font-weight: normal;
 			}
 
-			h1:after, h2:after {
+			h1:after, h2:after, h3:after {
 				content: ' ';
 				display: block;
 				border: 1px solid #45474D;
@@ -68,7 +68,7 @@
 				background: #22252B;
 			}
 			
-			.hljs-string {
+			.hljs-string, h2 {
 				color: #F38D68;
 			}
             
@@ -76,7 +76,7 @@
                 color: #A8A9EB;
             }
 
-            .hljs-built_in {
+            .hljs-built_in, h3 {
                 color: #ADDA78;
             }
 
@@ -104,8 +104,9 @@
 <pre><code>http<span class="hljs-variable">s:</span>//localhos<span class="hljs-variable">t:3000</span>/<span class="hljs-keyword">match</span>-started
 http<span class="hljs-variable">s:</span>//localhos<span class="hljs-variable">t:3000</span>/<span class="hljs-keyword">match</span>-ended
 http<span class="hljs-variable">s:</span>//localhos<span class="hljs-variable">t:3000</span>/death
-</code></pre><h2 id="behaviour">Behaviour</h2>
+</code></pre><h2 id="requests">Requests</h2>
 <p>When the match starts or ends, or any player dies, the host will send a PUT request to the respective URL with information about the match contained in the JSON format.</p>
+<h3 id="match-start-request">Match Start Request</h3>
 <p>When the match starts, a request like this will be sent:</p>
 <pre><code>{
     <span class="hljs-attribute">lobbyId</span>: <span class="hljs-string">'109775240972257934'</span>,
@@ -214,6 +215,7 @@ http<span class="hljs-variable">s:</span>//localhos<span class="hljs-variable">t
 </tr>
 </tbody>
 </table>
+<h3 id="match-end-request">Match End Request</h3>
 <p>When the match ends, a request like this will be sent:</p>
 <pre><code>{
     <span class="hljs-attribute">lobbyId</span>: <span class="hljs-string">'109775240972274609'</span>,
@@ -254,6 +256,7 @@ http<span class="hljs-variable">s:</span>//localhos<span class="hljs-variable">t
 </tr>
 </tbody>
 </table>
+<h3 id="player-death-request">Player Death Request</h3>
 <p>When any player dies, a request like this will be sent:</p>
 <pre><code>{
     <span class="hljs-attribute">lobbyId</span>: <span class="hljs-string">'109775240972274609'</span>,
