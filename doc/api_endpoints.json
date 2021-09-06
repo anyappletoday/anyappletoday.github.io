@@ -1,0 +1,22 @@
+{
+	"matchStarted": "https://localhost:3000/match-started",
+	"matchEnded": "https://localhost:3000/match-ended",
+	"playerJoined": "https://localhost:3000/player-joined",
+	"playerLeft": "https://localhost:3000/player-left",
+	"playerDied": "https://localhost:3000/player-died",
+	"weaponSwitched": "https://localhost:3000/weapon-switched",
+	"playerPosition": {
+		"positions": [
+			{
+				"min": [25, 24, 22],
+				"max": [35, 90, 11]
+			},
+			{
+				"min": [-92, 14, 2],
+				"max": [3, 5, -11.2]
+			}
+		],
+		"endpoint": "https://localhost:3000/player-position"
+	},
+	"command": "https://localhost:3000/command"
+}

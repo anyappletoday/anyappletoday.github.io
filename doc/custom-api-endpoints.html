@@ -69,7 +69,7 @@
 				background: #22252B;
 			}
 			
-			.hljs-string, h2 {
+			.hljs-string, h2, .sidebar a {
 				color: #F38D68;
 			}
             
@@ -77,7 +77,7 @@
                 color: #A8A9EB;
             }
 			
-            .hljs-built_in, h3 {
+            .hljs-built_in, h3, .sidebar li ul a {
                 color: #ADDA78;
             }
 			
@@ -92,36 +92,102 @@
             .hljs-params {
                 color: #F38D68;
             }
+
+            .sidebar {
+                height: 100%;
+                width: 260px;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                background-color: #111;
+                overflow-x: hidden;
+                padding-top: 5px;
+            }
+
+            .sidebar ul {
+                margin-left: -20px;
+                list-style-type: none;
+            }
+
+            .sidebar a {
+                text-decoration: none;
+            }
+
+            .sidebar a:hover {
+                text-decoration: underline;
+            }
 		</style>
 	</head>
 	<body>
+        <div class="sidebar">
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#client-setup">Client Setup</a></li>
+                <li><a href="#requests">Requests</a>
+                    <ul>
+                        <li><a href="#match-started-request">Match Started Request</a></li>
+                        <li><a href="#match-ended-request">Match Ended Request</a></li>
+                        <li><a href="#player-joined-request">Player Joined Request</a></li>
+                        <li><a href="#player-left-request">Player Left Request</a></li>
+                        <li><a href="#player-died-request">Player Died Request</a></li>
+                        <li><a href="#weapon-switched-request">Weapon Switched Request</a></li>
+                        <li><a href="#player-position-request">Player Position Request</a></li>
+                        <li><a href="#command-request">Command Request</a></li>
+                    </ul>
+                </li>
+                <li><a href="#responding-to-requests">Responding to Requests</a></li>
+                <li><a href="#creating-your-server">Creating your Server</a></li>
+                <li><a href="#security">Security</a></li>
+                <li><a href="#advanced-example">Advanced Example</a></li>
+             </ul>
+             <ul style="position: absolute; bottom: 10px">
+                <li><a href="https://rugbug.net/" style="color: #7289DA">Home</a></li>
+                <li><a href="https://rugbug.net/discord" style="color: #7289DA">Discord</a></li>
+                <li><a href="https://store.steampowered.com/app/1280770/Redmatch_2/" style="color: #7289DA">Steam Page</a></li>
+             </ul>
+        </div>
 <h1 id="redmatch-2-custom-api-endpoints-documentation">Redmatch 2 Custom API Endpoints Documentation</h1>
-<ul>
-<li><a href="#about">About</a></li>
-<li><a href="#client-setup">Client Setup</a></li>
-<li><a href="#requests">Requests</a><ul>
-<li><a href="#match-start-request">Match Start Request</a></li>
-<li><a href="#match-end-request">Match End Request</a></li>
-<li><a href="#player-death-request">Player Death Request</a></li>
-</ul>
-</li>
-<li><a href="#responding-to-requests">Responding to Requests</a></li>
-<li><a href="#creating-your-server">Creating your Server</a></li>
-<li><a href="#advanced-example">Advanced Example</a></li>
-</ul>
 <h2 id="about">About</h2>
-<p>Custom API Endpoints is a tool I built into Redmatch 2 to make managing custom tournaments easier, some simple custom gamemodes and ranked modding possible. When a match starts, ends, and when a player dies, a request will be sent to your server containing information about it. You can respond to these requests to change game state or send messages to players.</p>
-<p>For example, you could create a discord bot to manage the total kills of players in a tournament, or make an analytics bot to track the most popular maps.</p>
+<p>Custom API Endpoints is a tool I built into Redmatch 2 to make ranked modding and tournament tracking possible, but it&#39;s expanded to be a tool you can use to create custom gamemodes. You can subscribe to events fired by the host and send data to a URL endpoint on your server. The server can then respond to change game state, send a message to a certain player, or a variety of other things.</p>
+<p>For example, you could create a sniper only mode where using any weapon other than the sniper would instantly kill you. Or a team deathmatch mode, where 2 teams fight each other. Or an Among Us clone, where 2 players are imposters and have to kill everyone else to win.</p>
 <h2 id="client-setup">Client Setup</h2>
-<p>To enable custom endpoints for a match, the host must have a file named &quot;api_endpoints.txt&quot; in the Data folder of their local game files.</p>
-<p>The api_endpoints.txt file should have 3 lines in it, the first containing the URL to send the data to when the match starts, the second containing the URL to send the data to when the match ends, and the third containing the URL to send the data to when a player dies.</p>
-<pre><code>http<span class="hljs-variable">s:</span>//localhos<span class="hljs-variable">t:3000</span>/<span class="hljs-keyword">match</span>-started
-http<span class="hljs-variable">s:</span>//localhos<span class="hljs-variable">t:3000</span>/<span class="hljs-keyword">match</span>-ended
-http<span class="hljs-variable">s:</span>//localhos<span class="hljs-variable">t:3000</span>/death
+<p>To enable custom endpoints for a match, the host must have a file named &quot;api_endpoints.json&quot; in the folder of their local game files, next to Redmatch 2.exe.</p>
+<p>The api_endpoints.json file is formatted like the following. To subscribe to an event, just add its name to the list and set the required data after it. Most events will just require an endpoint, where they will send information about the event to, and allow a response from the server. Some will require more information, like minimum and maximum positions to trigger a player position event, and a specific prefix to listen to for commands.</p>
+<pre><code>{
+    <span class="hljs-attr">"matchStarted"</span>: <span class="hljs-string">"http://localhost:3000/match-started"</span>,
+    <span class="hljs-attr">"matchEnded"</span>: <span class="hljs-string">"http://localhost:3000/match-ended"</span>,
+    <span class="hljs-attr">"playerJoined"</span>: <span class="hljs-string">"http://localhost:3000/player-joined"</span>,
+    <span class="hljs-attr">"playerLeft"</span>: <span class="hljs-string">"http://localhost:3000/player-left"</span>,
+    <span class="hljs-attr">"playerDied"</span>: <span class="hljs-string">"http://localhost:3000/player-died"</span>,
+    <span class="hljs-attr">"weaponSwitched"</span>: <span class="hljs-string">"http://localhost:3000/weapon-switched"</span>,
+    <span class="hljs-attr">"playerPosition"</span>: {
+        <span class="hljs-attr">"positions"</span>: [
+            {
+                <span class="hljs-attr">"min"</span>: [<span class="hljs-number">25</span>, <span class="hljs-number">24</span>, <span class="hljs-number">22</span>],
+                <span class="hljs-attr">"max"</span>: [<span class="hljs-number">35</span>, <span class="hljs-number">90</span>, <span class="hljs-number">11</span>]
+            },
+            {
+                <span class="hljs-attr">"min"</span>: [<span class="hljs-number">-92</span>, <span class="hljs-number">14</span>, <span class="hljs-number">2</span>],
+                <span class="hljs-attr">"max"</span>: [<span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">-11.2</span>]
+            }
+        ],
+        <span class="hljs-attr">"endpoint"</span>: <span class="hljs-string">"http://localhost:3000/player-position"</span>
+    },
+    <span class="hljs-attr">"command"</span>: <span class="hljs-string">"http://localhost:3000/command"</span>
+}
+</code></pre><p>You don&#39;t need to include an event if you don&#39;t want to subscribe to it. For example, if I was just making a simple bot to track kills, all I would need is this:</p>
+<pre><code>{
+    <span class="hljs-attr">"playerDied"</span>: <span class="hljs-string">"http://localhost:3000/player-died"</span>,
+}
 </code></pre><h2 id="requests">Requests</h2>
-<p>When the match starts or ends, or any player dies, the host will send a PUT request to the respective URL with information about the match contained in the JSON format.</p>
-<h3 id="match-start-request">Match Start Request</h3>
-<p>When the match starts, a request like this will be sent:</p>
+<p>When the match starts or ends, or any player dies, the host will send a PUT request to the respective URL with information about the match contained in the JSON format. These are the URLs that you specified in the api_endpoints.json file.</p>
+<p>Every request is sent with a lobbyId, which is the unique SteamID of the lobby the match is in. You can have players join this lobby by launching the game with the command argument</p>
+<pre><code><span class="hljs-addition">+connect_lobby lobbyId</span>
+</code></pre><p>or by going to this URL:</p>
+<pre><code>steam:<span class="hljs-regexp">//</span>joinlobby<span class="hljs-regexp">/1280770/</span>lobbyId
+</code></pre><h3 id="match-started-request">Match Started Request</h3>
+<p>When the matchStarted event is fired, it will send a request like this to the endpoint:</p>
 <pre><code>{
     <span class="hljs-attribute">lobbyId</span>: <span class="hljs-string">'109775240972257934'</span>,
     <span class="hljs-attribute">settings</span>: {
@@ -165,10 +231,6 @@ http<span class="hljs-variable">s:</span>//localhos<span class="hljs-variable">t
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>lobbyId</td>
-<td>The SteamID of the lobby the match is in, unique to each match</td>
-</tr>
 <tr>
 <td>settings</td>
 <td>An array of all the settings for the room and their values, which includes the room settings (prefaced with rs_)</td>
@@ -229,8 +291,8 @@ http<span class="hljs-variable">s:</span>//localhos<span class="hljs-variable">t
 </tr>
 </tbody>
 </table>
-<h3 id="match-end-request">Match End Request</h3>
-<p>When the match ends, a request like this will be sent:</p>
+<h3 id="match-end-request">Match Ended Request</h3>
+<p>When the matchEnded event is fired, it will send a request like this to the endpoint:</p>
 <pre><code>{
     <span class="hljs-attribute">lobbyId</span>: <span class="hljs-string">'109775240972274609'</span>,
     <span class="hljs-attribute">players</span>: [
@@ -261,17 +323,63 @@ http<span class="hljs-variable">s:</span>//localhos<span class="hljs-variable">t
 </thead>
 <tbody>
 <tr>
-<td>lobbyId</td>
-<td>The SteamID of the lobby the match is in, unique to each match</td>
-</tr>
-<tr>
 <td>players</td>
 <td>An array of players with SteamIDs and their in-game names, as well as their statistics</td>
 </tr>
 </tbody>
 </table>
-<h3 id="player-death-request">Player Death Request</h3>
-<p>When any player dies, a request like this will be sent:</p>
+<h3 id="player-joined-request">Player Joined Request</h3>
+<p>When any player joins, and the playerJoined event is fired, it will send a request like this to the endpoint:</p>
+<pre><code>{
+    <span class="hljs-attribute">lobbyId</span>: <span class="hljs-string">'109775240972274609'</span>,
+    id: <span class="hljs-string">'76561198057087288'</span>,
+    name: <span class="hljs-string">'Rugbug'</span>
+}
+</code></pre><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>The unique SteamID of the player who joined</td>
+</tr>
+<tr>
+<td>name</td>
+<td>The name of the player who joined</td>
+</tr>
+</tbody>
+</table>
+<h3 id="player-left-request">Player Left Request</h3>
+<p>When any player leaves, and the playerLeft event is fired, it will send a request like this to the endpoint:</p>
+<pre><code>{
+    <span class="hljs-attribute">lobbyId</span>: <span class="hljs-string">'109775240972274609'</span>,
+    id: <span class="hljs-string">'76561198057087288'</span>,
+    name: <span class="hljs-string">'Rugbug'</span>
+}
+</code></pre><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>The unique SteamID of the player who left</td>
+</tr>
+<tr>
+<td>name</td>
+<td>The name of the player who left</td>
+</tr>
+</tbody>
+</table>
+<h3 id="player-died-request">Player Died Request</h3>
+<p>When any player dies, and the playerDied event is fired, it will send a request like this to the endpoint:</p>
 <pre><code>{
     <span class="hljs-attribute">lobbyId</span>: <span class="hljs-string">'109775240972274609'</span>,
     killer: <span class="hljs-string">'76561198057087288'</span>,
@@ -294,10 +402,6 @@ http<span class="hljs-variable">s:</span>//localhos<span class="hljs-variable">t
 </thead>
 <tbody>
 <tr>
-<td>lobbyID</td>
-<td>The SteamID64 of the lobby the match is in, unique to each match</td>
-</tr>
-<tr>
 <td>killer</td>
 <td>The SteamID of who killed the player</td>
 </tr>
@@ -311,19 +415,104 @@ http<span class="hljs-variable">s:</span>//localhos<span class="hljs-variable">t
 </tr>
 </tbody>
 </table>
+<h3 id="weapon-switched-request">Weapon Switched Request</h3>
+<p>When any player switches their weapon, and the weaponSwitched event is fired, it will send a request like this to the endpoint:</p>
+<pre><code>{
+    <span class="hljs-attribute">lobbyId</span>: <span class="hljs-string">'109775240972274609'</span>,
+    id: <span class="hljs-string">'76561198057087288'</span>,
+    weapon: <span class="hljs-number">1</span>
+}
+</code></pre><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>The unique SteamID of the player who switched their weapon</td>
+</tr>
+<tr>
+<td>weapon</td>
+<td>The weapon that the player switched to. 0 = rifle, 1 = shotgun, 2 = sniper</td>
+</tr>
+</tbody>
+</table>
+<h3 id="player-position-request-not-supported-yet-">Player Position Request (NOT SUPPORTED YET)</h3>
+<p>When any player enters the minimum and maximum specified, and the playerPosition event is fired, it will send a request like this to the endpoint:</p>
+<pre><code>{
+    <span class="hljs-attribute">lobbyId</span>: <span class="hljs-string">'109775240972274609'</span>,
+    id: <span class="hljs-string">'76561198057087288'</span>,
+    position: [<span class="hljs-number">12.31</span>, <span class="hljs-number">54.23</span>, <span class="hljs-number">16.32</span>],
+    index: <span class="hljs-number">2</span>
+}
+</code></pre><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>The unique SteamID of the player who entered the minimum and maximum of that position</td>
+</tr>
+<tr>
+<td>position</td>
+<td>The Vector3 of the player&#39;s new position</td>
+</tr>
+<tr>
+<td>index</td>
+<td>The index of the position in the specified array of positions</td>
+</tr>
+</tbody>
+</table>
+<h3 id="command-request">Command Request</h3>
+<p>When any player sends a chat message starting with the specefied prefix, the chat message not be sent to the chat, but instead to the host which will fire the command event and send a request like this to the endpoint:</p>
+<pre><code>{
+    <span class="hljs-attribute">lobbyId</span>: <span class="hljs-string">'109775240972274609'</span>,
+    id: <span class="hljs-string">'76561198057087288'</span>,
+    command: <span class="hljs-string">'help'</span>
+}
+</code></pre><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>The unique SteamID of the player who sent the command</td>
+</tr>
+<tr>
+<td>command</td>
+<td>The command the player sent, excluding the prefix</td>
+</tr>
+</tbody>
+</table>
 <h2 id="responding-to-requests">Responding to Requests</h2>
 <p>The host&#39;s game client will send a request when a match starts, ends, or when a player dies. The server can respond to these requests to modify game state with this response format:</p>
 <pre><code>{
     <span class="hljs-attribute">message</span>: <span class="hljs-string">''</span>,
+    <span class="hljs-attribute">title</span>: <span class="hljs-string">''</span>,
+    <span class="hljs-attribute">subtitle</span>: <span class="hljs-string">''</span>,
+    <span class="hljs-attribute">endGame</span>: false,
+    <span class="hljs-attribute">endGameMessage</span>: <span class="hljs-string">''</span>,
     <span class="hljs-attribute">actions</span>: [
         {
             <span class="hljs-attribute">id</span>: <span class="hljs-string">'76561198057087288'</span>,
             <span class="hljs-attribute">message</span>: <span class="hljs-string">''</span>,
-            <span class="hljs-attribute">outlineColor</span>: <span class="hljs-string">'FFFFFF'</span>
+            <span class="hljs-attribute">title</span>: <span class="hljs-string">''</span>,
+            <span class="hljs-attribute">subtitle</span>: <span class="hljs-string">''</span>,
+            <span class="hljs-attribute">outlineColor</span>: <span class="hljs-string">'FFFFFF'</span>,
+            <span class="hljs-attribute">kill</span>: false
         }
-    ],
-    <span class="hljs-attribute">endGame</span>: <span class="hljs-string">'false'</span>,
-    <span class="hljs-attribute">endGameMessage</span>: <span class="hljs-string">''</span>
+    ]
 }
 </code></pre><table>
 <thead>
@@ -335,11 +524,15 @@ http<span class="hljs-variable">s:</span>//localhos<span class="hljs-variable">t
 <tbody>
 <tr>
 <td>message</td>
-<td>A message to send to everyone in the match. Could be &quot;MATCH ENDED&quot; and then showing the players&#39; new ranks, or anything else you could think of. You can use rich text formatting tags to enhance it.</td>
+<td>A message to send in chat to everyone in the match. Could be &quot;MATCH ENDED&quot; and then showing the players&#39; new ranks, or anything else you could think of. You can use rich text formatting tags to enhance it.</td>
 </tr>
 <tr>
-<td>actions</td>
-<td>An array of actions to carry out for specific players.</td>
+<td>title</td>
+<td>A message to send to everyone in the match, which is displayed at the top of their screen.</td>
+</tr>
+<tr>
+<td>subtitle</td>
+<td>A message to send to everyone in the match, which is displayed at the bottom of their screen.</td>
 </tr>
 <tr>
 <td>endGame</td>
@@ -348,6 +541,10 @@ http<span class="hljs-variable">s:</span>//localhos<span class="hljs-variable">t
 <tr>
 <td>endGameMessage</td>
 <td>If you choose to end the game, this message is what will be displayed at the top of the scoreboard where &quot;Username Wins&quot; would normally be.</td>
+</tr>
+<tr>
+<td>actions</td>
+<td>An array of actions to carry out for specific players.</td>
 </tr>
 </tbody>
 </table>
@@ -362,15 +559,27 @@ http<span class="hljs-variable">s:</span>//localhos<span class="hljs-variable">t
 <tbody>
 <tr>
 <td>id</td>
-<td>The SteamID of the player you want to execute the action on/</td>
+<td>The SteamID of the player you want to execute the action on</td>
 </tr>
 <tr>
 <td>message</td>
 <td>The message to send in chat to the specified player. You use this to tell a player their team or their updated rank.</td>
 </tr>
 <tr>
+<td>title</td>
+<td>A message to send to the specefied player, which is displayed at the top of their screen.</td>
+</tr>
+<tr>
+<td>subtitle</td>
+<td>A message to send to the specefied player, which is displayed at the bottom of their screen.</td>
+</tr>
+<tr>
 <td>outlineColor</td>
 <td>A hex code for an outline color to set around the player. Set it to empty if you want to remove the outline.</td>
+</tr>
+<tr>
+<td>kill</td>
+<td>Whether or not to kill the player. They will kill themselves.</td>
 </tr>
 </tbody>
 </table>
@@ -417,8 +626,33 @@ app.put(<span class="hljs-string">'/match-ended'</span>, <span class="hljs-funct
     res.sendStatus(<span class="hljs-number">200</span>);
 });
 
-app.put(<span class="hljs-string">'/death'</span>, <span class="hljs-function"><span class="hljs-params">(req, res)</span> =&gt;</span> {
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'someone died'</span>);
+app.put(<span class="hljs-string">'/player-joined'</span>, <span class="hljs-function"><span class="hljs-params">(req, res)</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(`<span class="javascript">${req.body.name} joined</span>`);
+    res.sendStatus(<span class="hljs-number">200</span>);
+});
+
+app.put(<span class="hljs-string">'/player-left'</span>, <span class="hljs-function"><span class="hljs-params">(req, res)</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(`<span class="javascript">${req.body.name} left</span>`);
+    res.sendStatus(<span class="hljs-number">200</span>);
+});
+
+app.put(<span class="hljs-string">'/player-died'</span>, <span class="hljs-function"><span class="hljs-params">(req, res)</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(`<span class="javascript">${req.body.killer} killed ${req.body.victim}</span>`);
+    res.sendStatus(<span class="hljs-number">200</span>);
+});
+
+app.put(<span class="hljs-string">'/weapon-switched'</span>, <span class="hljs-function"><span class="hljs-params">(req, res)</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(`<span class="javascript">${req.body.id} switched weapon to ${req.body.weapon}</span>`);
+    res.sendStatus(<span class="hljs-number">200</span>);
+});
+
+app.put(<span class="hljs-string">'/player-position'</span>, <span class="hljs-function"><span class="hljs-params">(req, res)</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(`<span class="javascript">${req.body.id} entered position ${req.body.index}</span>`);
+    res.sendStatus(<span class="hljs-number">200</span>);
+});
+
+app.put(<span class="hljs-string">'/command'</span>, <span class="hljs-function"><span class="hljs-params">(req, res)</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(`<span class="javascript">${req.body.id} used command ${req.body.command}</span>`);
     res.sendStatus(<span class="hljs-number">200</span>);
 });
 
@@ -436,12 +670,30 @@ app.listen(PORT, <span class="hljs-function"><span class="hljs-params">()</span>
 <ul>
 <li><a href="https://youtu.be/aUW5GAFhu6s">Heroku Tutorial</a></li>
 </ul>
-<p>Once you&#39;ve hosted it somewhere, create your api_endpoints.txt file and paste in the match started and match ended URLs.</p>
-<pre><code>http<span class="hljs-variable">s:</span>//redmatch-tournament.herokuapp.<span class="hljs-keyword">com</span>/<span class="hljs-keyword">match</span>-started
-http<span class="hljs-variable">s:</span>//redmatch-tournament.herokuapp.<span class="hljs-keyword">com</span>/<span class="hljs-keyword">match</span>-ended
-http<span class="hljs-variable">s:</span>//redmatch-tournament.herokuapp.<span class="hljs-keyword">com</span>/death
+<p>Once you&#39;ve hosted it somewhere, create your api_endpoints.json file and paste in the URLs.</p>
+<pre><code>{
+    <span class="hljs-attr">"matchStarted"</span>: <span class="hljs-string">"http://localhost:3000/match-started"</span>,
+    <span class="hljs-attr">"matchEnded"</span>: <span class="hljs-string">"http://localhost:3000/match-ended"</span>,
+    <span class="hljs-attr">"playerDied"</span>: <span class="hljs-string">"http://localhost:3000/player-died"</span>
+}
 </code></pre><p>To test the server before releasing it online, you can always run your NodeJS server on localhost.</p>
-<h2 id="advanced-example">Advanced Example</h2>
+<h2 id="security">Security</h2>
+<p>The endpoint of the server is shared with only the host of the game, who has the endpoint file on their computer. No one else can see it, since all data is relayed through the host.</p>
+<p>As for the data sent to the server though, any player can spoof it if they know the endpoint. For example, they could send a bunch of fake death requests. This is one reason for wanting to be mindful when distributing your api_endpoints.txt file to only trusted players, or maybe you just don&#39;t care and you give it out to everyone. You could also add an &#39;api key&#39; field to your endpoint, like <a href="https://redmatch-tournament.herokuapp.com/apiKey/death">https://redmatch-tournament.herokuapp.com/apiKey/death</a> and give everyone you send the endpoints to a unique api key, like <a href="https://redmatch-tournament.herokuapp.com/5be33717e48a/death">https://redmatch-tournament.herokuapp.com/5be33717e48a/death</a> and then remove an api key if they start sending malicious requests.</p>
+<pre><code>const apiKeys = [
+    <span class="hljs-string">'5be33717e48a'</span>,
+    <span class="hljs-string">'c6a8cdbf2b65'</span>
+]
+
+app.put(<span class="hljs-string">'/:apiKey/match-started'</span>, <span class="hljs-function"><span class="hljs-params">(req, res)</span> =&gt;</span> {
+    <span class="hljs-keyword">if</span>(!(req.params.apiKey <span class="hljs-keyword">in</span> apiKeys)) {
+        <span class="hljs-keyword">return</span> res.sendStatus(<span class="hljs-number">403</span>);
+    }
+
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'match started'</span>);
+    res.sendStatus(<span class="hljs-number">200</span>);
+});
+</code></pre><h2 id="advanced-example">Advanced Example</h2>
 <p>The previous example was very bare-bones, and didn&#39;t have much functionality. If you want to make more complicated programs, then you can use the following as jumping off point. It has a match list and ranks.</p>
 <pre><code><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>);
 <span class="hljs-keyword">const</span> app = express();
@@ -497,7 +749,7 @@ app.put(<span class="hljs-string">'/match-ended'</span>, (req, res) =&gt; {
     res.status(<span class="hljs-number">200</span>).send(response);
 });
 
-app.put(<span class="hljs-string">'/death'</span>, (req, res) =&gt; {
+app.put(<span class="hljs-string">'/player-died'</span>, (req, res) =&gt; {
     <span class="hljs-keyword">let</span> victim = req.body.victim;
     <span class="hljs-keyword">let</span> killer = req.body.killer;
 
