@@ -168,7 +168,7 @@ You can use actions to change game state for specific players.
 
 | Action Variable | Description |
 | --- | --- |
-| id | The SteamID of the player you want to execute the action on/ |
+| id | The SteamID of the player you want to execute the action on |
 | message | The message to send in chat to the specified player. You use this to tell a player their team or their updated rank. |
 | outlineColor | A hex code for an outline color to set around the player. Set it to empty if you want to remove the outline. |
 
@@ -237,7 +237,7 @@ To access the contents of the request with express, just use req.body.
 Once I had finished writing my server, I used Heroku to host it for free.
  - [Heroku Tutorial](https://youtu.be/aUW5GAFhu6s)
 
-Once you've hosted it somewhere, create your api_endpoints.txt file and paste in the match started and match ended URLs.
+Once you've hosted it somewhere, create your api_endpoints.txt file and paste in URLs.
 
 	https://redmatch-tournament.herokuapp.com/match-started
 	https://redmatch-tournament.herokuapp.com/match-ended
