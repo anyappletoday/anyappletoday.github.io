@@ -273,8 +273,8 @@ The host's game client will send a request when a match starts, ends, or when a 
 | Variable | Description |
 | --- | --- |
 | message | A message to send in chat to everyone in the match. Could be "MATCH ENDED" and then showing the players' new ranks, or anything else you could think of. You can use rich text formatting tags to enhance it. |
-| title | A message to send to everyone in the match, which is displayed at the top of their screen. |
-| subtitle | A message to send to everyone in the match, which is displayed at the bottom of their screen. |
+| title | A message to sent to everyone in the match, which is displayed at the top of their screen. |
+| subtitle | A message to sent to everyone in the match, which is displayed at the bottom of their screen. |
 | endGame | A bool of whether or not to end the game. |
 | endGameMessage | If you choose to end the game, this message is what will be displayed at the top of the scoreboard where "Username Wins" would normally be. |
 | actions | An array of actions to carry out for specific players. |
@@ -285,8 +285,8 @@ You can use actions to change game state for specific players.
 | --- | --- |
 | id | The SteamID of the player you want to execute the action on |
 | message | The message to send in chat to the specified player. You use this to tell a player their team or their updated rank. |
-| title | A message to send to the specefied player, which is displayed at the top of their screen. |
-| subtitle | A message to send to the specefied player, which is displayed at the bottom of their screen. |
+| title | A message to sent to the specified player, which is displayed at the top of their screen. |
+| subtitle | A message to sent to the specified player, which is displayed at the bottom of their screen. |
 | outlineColor | A hex code for an outline color to set around the player. Set it to empty if you want to remove the outline. |
 | kill | Whether or not to kill the player. They will kill themselves. |
 
