@@ -67,6 +67,30 @@
 			tr:nth-child(odd) {
 				background: #22252B;
 			}
+			
+			.hljs-string {
+				color: #F38D68;
+			}
+
+            .hljs-number {
+                color: #A8A9EB;
+            }
+
+            .hljs-built_in {
+                color: #ADDA78;
+            }
+
+            .hljs-literal {
+                color: #A8A9EB;
+            }
+
+            .hljs-function {
+                color: #85DACC;
+            }
+
+            .hljs-params {
+                color: #F38D68;
+            }
 		</style>
 	</head>
 	<body>
@@ -76,28 +100,173 @@
 <p>For example, you could create a discord bot to manage the total kills of players in a tournament, or make an analytics bot to track the most popular maps.</p>
 <h2 id="client-setup">Client Setup</h2>
 <p>To enable custom endpoints for a match, the host must have a file named &quot;api_endpoints.txt&quot; in the Data folder of their local game files.</p>
-<p>The api_endpoints.txt file should have 2 lines in it, the first containing the URL to send the data to when the match starts, and the second containing the URL to send the data to when the match ends.</p>
+<p>The api_endpoints.txt file should have 3 lines in it, the first containing the URL to send the data to when the match starts, the second containing the URL to send the data to when the match ends, and the third containing the URL to send the data to when a player dies.</p>
 <pre><code>http<span class="hljs-variable">s:</span>//localhos<span class="hljs-variable">t:3000</span>/<span class="hljs-keyword">match</span>-started
 http<span class="hljs-variable">s:</span>//localhos<span class="hljs-variable">t:3000</span>/<span class="hljs-keyword">match</span>-ended
+http<span class="hljs-variable">s:</span>//localhos<span class="hljs-variable">t:3000</span>/death
 </code></pre><h2 id="behaviour">Behaviour</h2>
-<p>When the match starts or ends, the host will send a PUT request to the respective URL with information about the match contained in the JSON format.</p>
+<p>When the match starts or ends, or any player dies, the host will send a PUT request to the respective URL with information about the match contained in the JSON format.</p>
 <p>When the match starts, a request like this will be sent:</p>
 <pre><code>{
-    <span class="hljs-attribute">lobbyID</span>: <span class="hljs-string">'109775240971066540'</span>,
-    map: <span class="hljs-number">4</span>,
-    players: [
-        { steamID: <span class="hljs-string">'76561198057087288'</span>, name: <span class="hljs-string">'Rugbug'</span> },
-        { <span class="hljs-attribute">steamID</span>: <span class="hljs-string">'76561198010526830'</span>, name: <span class="hljs-string">'AnotherPlayer'</span> }
+    <span class="hljs-attribute">lobbyId</span>: <span class="hljs-string">'109775240972257934'</span>,
+    <span class="hljs-attribute">settings</span>: {
+        <span class="hljs-attribute">creator</span>: <span class="hljs-string">'76561198057087288'</span>,
+        <span class="hljs-attribute">endTime</span>: <span class="hljs-string">'184.036043405533'</span>,
+        <span class="hljs-attribute">map</span>: <span class="hljs-string">'14'</span>,
+        <span class="hljs-attribute">name</span>: <span class="hljs-string">'Super Cool Match'</span>,
+        <span class="hljs-attribute">password</span>: <span class="hljs-string">'whatever'</span>,
+        <span class="hljs-attribute">rs_ammoMultiplier</span>: <span class="hljs-string">'1'</span>,
+        <span class="hljs-attribute">rs_barrelBetweenTime</span>: <span class="hljs-string">'5'</span>,
+        <span class="hljs-attribute">rs_barrelpocalypse</span>: <span class="hljs-string">'False'</span>,
+        <span class="hljs-attribute">rs_damageMultiplier</span>: <span class="hljs-string">'1'</span>,
+        <span class="hljs-attribute">rs_disablePVP</span>: <span class="hljs-string">'False'</span>,
+        <span class="hljs-attribute">rs_gamemode</span>: <span class="hljs-string">'0'</span>,
+        <span class="hljs-attribute">rs_jumpMultiplier</span>: <span class="hljs-string">'1'</span>,
+        <span class="hljs-attribute">rs_night</span>: <span class="hljs-string">'False'</span>,
+        <span class="hljs-attribute">rs_odmGear</span>: <span class="hljs-string">'True'</span>,
+        <span class="hljs-attribute">rs_spawnAmmoPickups</span>: <span class="hljs-string">'False'</span>,
+        <span class="hljs-attribute">rs_speedMultiplier</span>: <span class="hljs-string">'1'</span>,
+        <span class="hljs-attribute">rs_startingAmmoMultiplier</span>: <span class="hljs-string">'2'</span>,
+        <span class="hljs-attribute">rs_stickyGoGoBetweenTime</span>: <span class="hljs-string">'5'</span>,
+        <span class="hljs-attribute">rs_stickyGoGos</span>: <span class="hljs-string">'False'</span>,
+        <span class="hljs-attribute">rs_teamSpawns</span>: <span class="hljs-string">'True'</span>,
+        <span class="hljs-attribute">rs_time</span>: <span class="hljs-string">'3'</span>,
+        <span class="hljs-attribute">rs_wallbangs</span>: <span class="hljs-string">'1'</span>,
+        <span class="hljs-attribute">scene</span>: <span class="hljs-string">'20'</span>,
+        <span class="hljs-attribute">seed</span>: <span class="hljs-string">'8791'</span>,
+        <span class="hljs-attribute">startTime</span>: <span class="hljs-string">'1630902722.60311'</span>,
+        <span class="hljs-attribute">version</span>: <span class="hljs-string">'1.11.0'</span>
+    },
+    <span class="hljs-attribute">players</span>: [
+        { <span class="hljs-attribute">id</span>: <span class="hljs-string">'76561198057087288'</span>, <span class="hljs-attribute">name</span>: <span class="hljs-string">'Rugbug'</span> },
+        { <span class="hljs-attribute">id</span>: <span class="hljs-string">'76561198010526830'</span>, <span class="hljs-attribute">name</span>: <span class="hljs-string">'Alex'</span> }
     ]
 }
-</code></pre><p>When the match ends, a request like this will be sent:</p>
+</code></pre><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lobbyId</td>
+<td>The SteamID of the lobby the match is in, unique to each match</td>
+</tr>
+<tr>
+<td>settings</td>
+<td>An array of all the settings for the room and their values, which includes the room settings (prefaced with rs_)</td>
+</tr>
+<tr>
+<td>players</td>
+<td>An array of players with unique SteamIDs and their in-game names</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>creator</td>
+<td>The SteamID of whoever created the match</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>The time in seconds after the startTime that the match should end</td>
+</tr>
+<tr>
+<td>map</td>
+<td>The index of the map</td>
+</tr>
+<tr>
+<td>name</td>
+<td>The name of the match</td>
+</tr>
+<tr>
+<td>password</td>
+<td>The password of the match</td>
+</tr>
+<tr>
+<td>anything starting with rs_</td>
+<td>A room setting</td>
+</tr>
+<tr>
+<td>scene</td>
+<td>The build index of the current loaded scene</td>
+</tr>
+<tr>
+<td>seed</td>
+<td>The seed for the match, used in-game to generate consistent random events</td>
+</tr>
+<tr>
+<td>startTime</td>
+<td>The unix timestamp that this match was created at (seconds since January 1st 1970)</td>
+</tr>
+<tr>
+<td>version</td>
+<td>The server version of the game the match is running on (this might not match up with the version you see in the main menu, since the server version is only changed when a change is made that would break compatibility between versions)</td>
+</tr>
+</tbody>
+</table>
+<p>When the match ends, a request like this will be sent:</p>
 <pre><code>{
-    <span class="hljs-attribute">lobbyID</span>: <span class="hljs-string">'109775240971066540'</span>,
-    <span class="hljs-attribute">map</span>: <span class="hljs-number">4</span>,
+    <span class="hljs-attribute">lobbyId</span>: <span class="hljs-string">'109775240972274609'</span>,
     <span class="hljs-attribute">players</span>: [
-        { <span class="hljs-attribute">steamID</span>: <span class="hljs-string">'76561198057087288'</span>, <span class="hljs-attribute">name</span>: <span class="hljs-string">'Rugbug'</span>, <span class="hljs-attribute">kills</span>: <span class="hljs-number">10</span>, <span class="hljs-attribute">deaths</span>: <span class="hljs-number">6</span> },
-        { <span class="hljs-attribute">steamID</span>: <span class="hljs-string">'76561198010526830'</span>, <span class="hljs-attribute">name</span>: <span class="hljs-string">'AnotherPlayer'</span>, <span class="hljs-attribute">kills</span>: <span class="hljs-number">5</span>, <span class="hljs-attribute">deaths</span>: <span class="hljs-number">12</span> }
+        {
+            <span class="hljs-attribute">id</span>: <span class="hljs-string">'76561198057087288'</span>,
+            <span class="hljs-attribute">name</span>: <span class="hljs-string">'Rugbug'</span>,
+            <span class="hljs-attribute">stats</span>: {
+                <span class="hljs-attribute">kills</span>: <span class="hljs-string">'12'</span>,
+                <span class="hljs-attribute">deaths</span>: <span class="hljs-string">'3'</span>
+            }
+        },
+        {
+            <span class="hljs-attribute">id</span>: <span class="hljs-string">'76561198010526830'</span>,
+            <span class="hljs-attribute">name</span>: <span class="hljs-string">'Alex'</span>,
+            <span class="hljs-attribute">stats</span>: {
+                <span class="hljs-attribute">kills</span>: <span class="hljs-string">'2'</span>,
+                <span class="hljs-attribute">deaths</span>: <span class="hljs-string">'16'</span>
+            }
+        }
     ]
+}
+</code></pre><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lobbyId</td>
+<td>The SteamID of the lobby the match is in, unique to each match</td>
+</tr>
+<tr>
+<td>players</td>
+<td>An array of players with SteamIDs and their in-game names, as well as their statistics</td>
+</tr>
+</tbody>
+</table>
+<p>When any player dies, a request like this will be sent:</p>
+<pre><code>{
+    <span class="hljs-attribute">lobbyId</span>: <span class="hljs-string">'109775240972274609'</span>,
+    killer: <span class="hljs-string">'76561198057087288'</span>,
+    victim: <span class="hljs-string">'76561198010526830'</span>,
+    data: [ <span class="hljs-string">'sniper'</span>, <span class="hljs-string">'noscope'</span>, <span class="hljs-string">'wallbang'</span> ]
+}
+</code></pre><p>Another example:</p>
+<pre><code>{
+    <span class="hljs-attribute">lobbyId</span>: <span class="hljs-string">'109775240972274609'</span>,
+    killer: <span class="hljs-string">'76561198057087288'</span>,
+    victim: <span class="hljs-string">'76561198057087288'</span>,
+    data: [ <span class="hljs-string">'fall'</span> ]
 }
 </code></pre><table>
 <thead>
@@ -112,15 +281,83 @@ http<span class="hljs-variable">s:</span>//localhos<span class="hljs-variable">t
 <td>The SteamID64 of the lobby the match is in, unique to each match</td>
 </tr>
 <tr>
-<td>map</td>
-<td>The index of the map being played</td>
+<td>killer</td>
+<td>The SteamID of who killed the player</td>
 </tr>
 <tr>
-<td>players</td>
-<td>An array of players with steamIDs and their in-game names, with kills and deaths if it is an end match request</td>
+<td>victim</td>
+<td>The SteamID of who died</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Any other information about the kill. The options are: unknown, rifle, shotgun, sniper, wallbang, noscope, explosive, fall, circle, four_in_a_row</td>
 </tr>
 </tbody>
 </table>
+<h2 id="responding-to-requests">Responding to Requests</h2>
+<p>The host&#39;s game client will send a request when a match starts, ends, or when a player dies. The server can respond to these requests to modify game state with this response format:</p>
+<pre><code>{
+    <span class="hljs-attribute">message</span>: <span class="hljs-string">''</span>,
+    <span class="hljs-attribute">actions</span>: [
+        {
+            <span class="hljs-attribute">id</span>: <span class="hljs-string">'76561198057087288'</span>,
+            <span class="hljs-attribute">message</span>: <span class="hljs-string">''</span>,
+            <span class="hljs-attribute">outlineColor</span>: <span class="hljs-string">'FFFFFF'</span>
+        }
+    ],
+    <span class="hljs-attribute">endGame</span>: <span class="hljs-string">'false'</span>,
+    <span class="hljs-attribute">endGameMessage</span>: <span class="hljs-string">''</span>
+}
+</code></pre><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>message</td>
+<td>A message to send to everyone in the match. Could be &quot;MATCH ENDED&quot; and then showing the players&#39; new ranks, or anything else you could think of. You can use rich text formatting tags to enhance it.</td>
+</tr>
+<tr>
+<td>actions</td>
+<td>An array of actions to carry out for specific players.</td>
+</tr>
+<tr>
+<td>endGame</td>
+<td>A bool of whether or not to end the game.</td>
+</tr>
+<tr>
+<td>endGameMessage</td>
+<td>If you choose to end the game, this message is what will be displayed at the top of the scoreboard where &quot;Username Wins&quot; would normally be.</td>
+</tr>
+</tbody>
+</table>
+<p>You can use actions to change game state for specific players.</p>
+<table>
+<thead>
+<tr>
+<th>Action Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>The SteamID of the player you want to execute the action on/</td>
+</tr>
+<tr>
+<td>message</td>
+<td>The message to send in chat to the specified player. You use this to tell a player their team or their updated rank.</td>
+</tr>
+<tr>
+<td>outlineColor</td>
+<td>A hex code for an outline color to set around the player. Set it to empty if you want to remove the outline.</td>
+</tr>
+</tbody>
+</table>
+<p>The server can either respond in this response format or with just a status code of 200 (OK). If the server only responds with 200, then nothing will be executed on the client.</p>
 <h2 id="creating-your-server">Creating your Server</h2>
 <p>As I mentioned before, to use the API you will need to set up your own server. For my example, I used:</p>
 <ul>
@@ -133,44 +370,49 @@ http<span class="hljs-variable">s:</span>//localhos<span class="hljs-variable">t
 <li><a href="https://www.youtube.com/watch?v=pKd0Rpw7O48">How to build a REST API with Node js &amp; Express</a></li>
 </ul>
 <p>If you don&#39;t want to use NodeJS you could use any other language that works to accept HTTP requests, like python, C#, etc. I prefer JavaScript with NodeJS as it&#39;s very easy to learn and write, and has a wide assortment of useful packages (like <a href="https://discord.js.org/#/">discord.js</a>, if you wanted to make this into a discord bot).</p>
-<pre><code><span class="hljs-keyword">const</span> express = <span class="hljs-keyword">require</span>(<span class="hljs-string">'express'</span>);
-<span class="hljs-keyword">const</span> app = express();
+<pre><code>const express = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>);
+const app = express();
 
-<span class="hljs-keyword">const</span> PORT = process.env.PORT || <span class="hljs-number">3000</span>;
+const PORT = process.env.PORT || <span class="hljs-number">3000</span>;
 
-<span class="hljs-comment">// Allow Cross-Origin-Resource-Sharing so that we can accept requests from anyone</span>
-app.<span class="hljs-keyword">use</span>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(req, res, next)</span> </span>{
+<span class="hljs-regexp">//</span> Allow Cross-Origin-Resource-Sharing so that we can accept requests from anyone
+app.use(function(req, res, next) {
     res.header(<span class="hljs-string">"Access-Control-Allow-Origin"</span>, <span class="hljs-string">"*"</span>);
     res.header(<span class="hljs-string">"Access-Control-Allow-Headers"</span>, <span class="hljs-string">"Origin, X-Requested-With, Content-Type, Accept"</span>);
     next();
 });
 
-<span class="hljs-comment">// Required to view nested objects</span>
-app.<span class="hljs-keyword">use</span>(express.urlencoded({
-    extended: <span class="hljs-keyword">true</span>
+<span class="hljs-regexp">//</span> Required to view nested objects
+app.use(express.urlencoded({
+    extended: <span class="hljs-literal">true</span>
 }));
 
-<span class="hljs-comment">// Use JSON formatting for the request body</span>
-app.<span class="hljs-keyword">use</span>(express.json());
+<span class="hljs-regexp">//</span> Use JSON formatting <span class="hljs-keyword">for</span> the request body
+app.use(express.json());
 
-app.put(<span class="hljs-string">'/match-started'</span>, (req, res) =&gt; {
-    console.log(<span class="hljs-string">'match started'</span>);
+app.put(<span class="hljs-string">'/match-started'</span>, <span class="hljs-function"><span class="hljs-params">(req, res)</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'match started'</span>);
     res.sendStatus(<span class="hljs-number">200</span>);
 });
 
-app.put(<span class="hljs-string">'/match-ended'</span>, (req, res) =&gt; {
-    console.log(<span class="hljs-string">'match ended'</span>);
+app.put(<span class="hljs-string">'/match-ended'</span>, <span class="hljs-function"><span class="hljs-params">(req, res)</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'match ended'</span>);
     res.sendStatus(<span class="hljs-number">200</span>);
 });
 
-app.listen(PORT, () =&gt; {
-    console.log(`Server started on port ${PORT}`);
+app.put(<span class="hljs-string">'/death'</span>, <span class="hljs-function"><span class="hljs-params">(req, res)</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'someone died'</span>);
+    res.sendStatus(<span class="hljs-number">200</span>);
+});
+
+app.listen(PORT, <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(`<span class="javascript">Server started on port ${PORT}</span>`);
 });
 </code></pre><p>To access the contents of the request with express, just use req.body.</p>
 <pre><code>app.put(<span class="hljs-string">'/match-started'</span>, <span class="hljs-function"><span class="hljs-params">(req, res)</span> =&gt;</span> {
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Lobby ID: '</span> + req.body.lobbyID);
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Map: '</span> + req.body.map);
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Players: '</span> req.body.players);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Lobby ID: '</span>, req.body.lobbyID);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Map: '</span>, req.body.settings.Map);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Players: '</span>, req.body.players);
     res.sendStatus(<span class="hljs-number">200</span>);
 });
 </code></pre><p>Once I had finished writing my server, I used Heroku to host it for free.</p>
@@ -180,6 +422,116 @@ app.listen(PORT, () =&gt; {
 <p>Once you&#39;ve hosted it somewhere, create your api_endpoints.txt file and paste in the match started and match ended URLs.</p>
 <pre><code>http<span class="hljs-variable">s:</span>//redmatch-tournament.herokuapp.<span class="hljs-keyword">com</span>/<span class="hljs-keyword">match</span>-started
 http<span class="hljs-variable">s:</span>//redmatch-tournament.herokuapp.<span class="hljs-keyword">com</span>/<span class="hljs-keyword">match</span>-ended
+http<span class="hljs-variable">s:</span>//redmatch-tournament.herokuapp.<span class="hljs-keyword">com</span>/death
 </code></pre><p>To test the server before releasing it online, you can always run your NodeJS server on localhost.</p>
+<h1 id="advanced-example">Advanced Example</h1>
+<p>The previous example was very bare-bones, and didn&#39;t have much functionality. If you want to make more complicated programs, then you can use the following as jumping off point. It has a match list and ranks.</p>
+<pre><code><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>);
+<span class="hljs-keyword">const</span> app = express();
+
+<span class="hljs-keyword">const</span> PORT = process.env.PORT || <span class="hljs-number">3000</span>;
+
+app.use(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res, next</span>) </span>{
+    res.header(<span class="hljs-string">"Access-Control-Allow-Origin"</span>, <span class="hljs-string">"*"</span>);
+    res.header(<span class="hljs-string">"Access-Control-Allow-Headers"</span>, <span class="hljs-string">"Origin, X-Requested-With, Content-Type, Accept"</span>);
+    next();
+});
+app.use(express.urlencoded({<span class="hljs-attr">extended</span>: <span class="hljs-literal">true</span>}));
+app.use(express.json());
+
+<span class="hljs-keyword">let</span> matches = {}; <span class="hljs-comment">// A dictionary of all active matches, with the key being the lobbyID</span>
+
+<span class="hljs-keyword">let</span> playerRanks = {}; <span class="hljs-comment">// A dictionary of the ranks of players, with the key being their steamID</span>
+                    <span class="hljs-comment">// If you wanted these ranks to persist after the server stops, you'd have to set up a database</span>
+
+app.put(<span class="hljs-string">'/match-started'</span>, (req, res) =&gt; {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Match started: <span class="hljs-subst">${req.body.settings.endGame}</span>`</span>);
+
+    <span class="hljs-comment">// Create a new match object and add it to our matches dictionary</span>
+    <span class="hljs-comment">// I'm not using it in this example, but you could use this to do different things based</span>
+    <span class="hljs-comment">// on stuff like the gamemode or map</span>
+    <span class="hljs-keyword">let</span> match = <span class="hljs-keyword">new</span> Match(req.body.settings, req.body.players);
+    matches[req.body.lobbyId] = match;
+
+    <span class="hljs-keyword">let</span> response = <span class="hljs-keyword">new</span> Response(<span class="hljs-string">'&lt;b&gt;[RANKED MATCH STARTED]&lt;/b&gt;'</span>);
+
+    res.status(<span class="hljs-number">200</span>).send(response);
+});
+
+app.put(<span class="hljs-string">'/match-ended'</span>, (req, res) =&gt; {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Match ended: <span class="hljs-subst">${matches[req.lobbyId].settings.name}</span>`</span>);
+
+    <span class="hljs-keyword">let</span> actions = [];
+
+    <span class="hljs-comment">// Get an array of all the SteamIDs of this match's players</span>
+    <span class="hljs-keyword">let</span> steamIds = req.body.players.map(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x.id);
+
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; steamIds.length; i++) {
+        <span class="hljs-keyword">if</span>(steamIds[i] <span class="hljs-keyword">in</span> playerRanks) {
+            <span class="hljs-keyword">let</span> action = <span class="hljs-keyword">new</span> ResponseAction(steamIds[i], <span class="hljs-string">`New Rank: <span class="hljs-subst">${playerRanks[steamIds[i]]}</span>`</span>);
+            actions.push(action);
+        }
+    }
+
+    <span class="hljs-keyword">delete</span> matches[req.body.lobbyId];
+
+    <span class="hljs-keyword">let</span> response = <span class="hljs-keyword">new</span> Response(<span class="hljs-string">'&lt;b&gt;[RANKED MATCH ENDED]&lt;/b&gt;'</span>, actions);
+
+    res.status(<span class="hljs-number">200</span>).send(response);
+});
+
+app.put(<span class="hljs-string">'/death'</span>, (req, res) =&gt; {
+    <span class="hljs-keyword">let</span> victim = req.body.victim;
+    <span class="hljs-keyword">let</span> killer = req.body.killer;
+
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${victim}</span> was killed by <span class="hljs-subst">${killer}</span>`</span>);
+
+    <span class="hljs-comment">// Set up their ranks if they don't have them yet</span>
+    <span class="hljs-keyword">if</span>(!(victim <span class="hljs-keyword">in</span> playerRanks))
+    playerRanks[victim] = <span class="hljs-number">0</span>;
+
+    <span class="hljs-keyword">if</span>(!(killer <span class="hljs-keyword">in</span> playerRanks))
+    playerRanks[killer] = <span class="hljs-number">0</span>;
+
+    <span class="hljs-keyword">let</span> actions = [];
+
+    <span class="hljs-keyword">if</span>(killer === victim) { <span class="hljs-comment">// Killed themself</span>
+        playerRanks[killer] -= <span class="hljs-number">2</span>;
+        actions.push(<span class="hljs-keyword">new</span> ResponseAction(killer, <span class="hljs-string">`Rank -2 &lt;color=#e3e3e3&gt;(<span class="hljs-subst">${playerRanks[killer]}</span>)&lt;/color&gt;`</span>));
+    } <span class="hljs-keyword">else</span> {
+        playerRanks[victim] -= <span class="hljs-number">1</span>;
+        playerRanks[killer] += <span class="hljs-number">1</span>;
+
+        actions.push(<span class="hljs-keyword">new</span> ResponseAction(victim, <span class="hljs-string">`Rank -1 &lt;color=#e3e3e3&gt;(<span class="hljs-subst">${playerRanks[victim]}</span>)&lt;/color&gt;`</span>));
+        actions.push(<span class="hljs-keyword">new</span> ResponseAction(killer, <span class="hljs-string">`Rank +1 &lt;color=#e3e3e3&gt;(<span class="hljs-subst">${playerRanks[killer]}</span>)&lt;/color&gt;`</span>));
+    }
+
+    <span class="hljs-keyword">let</span> response = <span class="hljs-keyword">new</span> Response(<span class="hljs-string">''</span>, actions);
+
+    res.status(<span class="hljs-number">200</span>).send(response);
+});
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Match</span>(<span class="hljs-params">settings, players</span>) </span>{
+    <span class="hljs-keyword">this</span>.settings = settings;
+    <span class="hljs-keyword">this</span>.players = players;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ResponseAction</span>(<span class="hljs-params">id, message, outlineColor</span>) </span>{
+    <span class="hljs-keyword">this</span>.id = id;
+    <span class="hljs-keyword">this</span>.message = message;
+    <span class="hljs-keyword">this</span>.outlineColor = outlineColor;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Response</span>(<span class="hljs-params">message, actions, endGame, endGameMessage</span>) </span>{
+    <span class="hljs-keyword">this</span>.message = message;
+    <span class="hljs-keyword">this</span>.actions = actions;
+    <span class="hljs-keyword">this</span>.endGame = endGame;
+    <span class="hljs-keyword">this</span>.endGameMessage = endGameMessage;
+}
+
+app.listen(PORT, () =&gt; {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Server started on port <span class="hljs-subst">${PORT}</span>`</span>);
+});
+</code></pre>
 	</body>
 </html>
