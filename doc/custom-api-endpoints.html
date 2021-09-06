@@ -427,7 +427,7 @@ app.listen(PORT, <span class="hljs-function"><span class="hljs-params">()</span>
 </code></pre><p>To access the contents of the request with express, just use req.body.</p>
 <pre><code>app.put(<span class="hljs-string">'/match-started'</span>, <span class="hljs-function"><span class="hljs-params">(req, res)</span> =&gt;</span> {
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Lobby ID: '</span>, req.body.lobbyID);
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Map: '</span>, req.body.settings.Map);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Map: '</span>, req.body.settings.map);
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Players: '</span>, req.body.players);
     res.sendStatus(<span class="hljs-number">200</span>);
 });

@@ -229,7 +229,7 @@ To access the contents of the request with express, just use req.body.
 
 	app.put('/match-started', (req, res) => {
 		console.log('Lobby ID: ', req.body.lobbyID);
-		console.log('Map: ', req.body.settings.Map);
+		console.log('Map: ', req.body.settings.map);
 		console.log('Players: ', req.body.players);
 		res.sendStatus(200);
 	});
