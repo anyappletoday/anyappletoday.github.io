@@ -1,4 +1,4 @@
-# Redmatch 2 Custom API Endpoints Documentation
+# Redmatch 2 Modding Documentation
 
 - [About](#about)
 - [Client Setup](#client-setup)
@@ -17,9 +17,21 @@
 - [Advanced Example](#advanced-example)
 
 ## About
-Custom API Endpoints is a tool I built into Redmatch 2 to make ranked modding and tournament tracking possible, but it's expanded to be a tool you can use to create custom gamemodes. You can subscribe to events fired by the host and send data to a URL endpoint on your server. The server can then respond to change game state, send a message to a certain player, or a variety of other things.
+OK, so the way modding works in Redmatch 2 is not the same as most other games. Most games have mods as programs that embed themselves into the game on a player's computer. I wanted to create a safer approach for Redmatch 2 that moves mod logic off of the user's computer, and prevents malicious intent and viruses.
 
-For example, you could create a sniper only mode where using any weapon other than the sniper would instantly kill you. Or a team deathmatch mode, where 2 teams fight each other. Or an Among Us clone, where 2 players are imposters and have to kill everyone else to win.
+As a result of this, modding in Redmatch 2 is much safer than conventional modding, and it's impossible to get a virus from it. The only caveat is that modders can see your IP address, but this would have also been possible with conventional modding. Players can use VPNs or a proxy to protect themselves from that, though.
+
+## How Does it Work?
+Instead of running code on the player's computer, all logic is run on a remote server. You as a mod creator are responsible for hosting and maintaining the server. You can use a service like [Heroku](https://www.heroku.com/) to host your server for free.
+
+The host of the game will communicate with your server during gameplay. You can subscribe to events fired by the host and send data to a URL endpoint on your server. The server can then respond to change game state, send a message to a certain player, or a variety of other things.
+
+For example:
+- someone in game gets a kill
+- the host recognizes this and triggers a "player died" event
+- if you chose to subscribe to this event, the host will send a "player died" request to the server containing information about the death
+- the server can send a response
+- the host will carry out instructions in the response
 
 ## Client Setup
 To enable custom endpoints for a match, the host must have a file named "api_endpoints.json" in the folder of their local game files, next to Redmatch 2.exe.
@@ -264,10 +276,78 @@ The host's game client will send a request when a match starts, ends, or when a 
 				message: '',
 				title: '',
 				subtitle: '',
+				nameColor: 'FFFFFF',
 				outlineColor: 'FFFFFF',
-				kill: false
+				kill: false,
+				setPos: { x: 0, y: 100, z: 0 },
+				movePos: { x: 0, y: 0.5, z: 0 },
+				tags: {
+					add: [
+						'red'
+					],
+					remove: [
+						'blue'
+					]
+				}
+				weaponActions: [
+					{
+						weapon: 1,
+						changeAmmo: -5
+					},
+					{
+						weapon: 2,
+						equip: true,
+						setTotal: 999,
+						setAmmo: 1
+					}
+				]
+			}
+		],
+		geometry: {
+			add: [
+				{
+					id: 0,
+					model: 'cube',
+					pos: { x: 0, y: 50, z: 0 },
+					size: { x: 1, y: 1, z: 2 },
+					rot: { x: 360, y: 180, z: 90 },
+					collision: false,
+					color: '66000000'
+				}
+			],
+			remove: [
+				27
+			]
+		},
+		tags: [
+			{
+				name: 'blue',
+				immune: [
+					'blue'
+				]
+			},
+			{
+				name: 'red',
+				immune: [
+					'red'
+				]
+			},
+			{
+				name: 'traitor',
+				visibleOutlines: [
+					'traitor'
+				]
+			},
+			{
+				name: 'innocent'
 			}
 		]
+	}
+
+Note that you should not include variables unless you are using them. For example if you only wanted to display a title, just respond with this to save bandwidth:
+
+	{
+		title: 'Hello World!',
 	}
 
 | Variable | Description |
@@ -289,6 +369,16 @@ You can use actions to change game state for specific players.
 | subtitle | A message to sent to the specified player, which is displayed at the bottom of their screen. |
 | outlineColor | A hex code for an outline color to set around the player. Set it to empty if you want to remove the outline. |
 | kill | Whether or not to kill the player. They will kill themselves. |
+
+You can use weapon actions to change weapon data for the specified player.
+| Action Variable | Description |
+| --- | --- |
+| weapon | The index of the weapon to affect |
+| equip | Set this to true if you want the player to equip that weapon |
+| changeAmmo | The amount to change the ammo in the magazine (will always cap the ammo between 0 and the magazine size) |
+| changeTotal | Change the total amount of ammo in the gun |
+| setAmmo | Sets the amount of ammo in the magazine |
+| setTotal | Sets the total amount of ammo in the gun |
 
 The server can either respond in this response format or with just a status code of 200 (OK). If the server only responds with 200, then nothing will be executed on the client.
 
