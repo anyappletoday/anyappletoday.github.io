@@ -17,14 +17,16 @@
 - [Advanced Example](#advanced-example)
 
 ## About
-OK, so the way modding works in Redmatch 2 is not the same as most other games. Most games have mods as programs that embed themselves into the game on a player's computer. I wanted to create a safer approach for Redmatch 2 that moves mod logic off of the user's computer, and prevents malicious intent and viruses.
+If you're here I assume you know a bit about what modding is. It allows you, the player, to create logic to modify the way the game normally works. Like adding a custom gamemode.
+
+The way modding works in Redmatch 2 is not the same as most other games. Most games have mods as programs that embed themselves into the game on a player's computer. I wanted to create a safer approach for Redmatch 2 that moves mod logic off of the user's computer, and prevents malicious intent and viruses.
 
 As a result of this, modding in Redmatch 2 is much safer than conventional modding, and it's impossible to get a virus from it. The only caveat is that modders can see your IP address, but this would have also been possible with conventional modding. Players can use VPNs or a proxy to protect themselves from that, though.
 
 ## How Does it Work?
 Instead of running code on the player's computer, all logic is run on a remote server. You as a mod creator are responsible for hosting and maintaining the server. You can use a service like [Heroku](https://www.heroku.com/) to host your server for free.
 
-The host of the game will communicate with your server during gameplay. You can subscribe to events fired by the host and send data to a URL endpoint on your server. The server can then respond to change game state, send a message to a certain player, or a variety of other things.
+The host of the game will communicate with your server during gameplay. You can subscribe to events fired by the host which send data to a URL endpoint on your server. The server can then respond to change game state, send a message to a certain player, or a variety of other things.
 
 For example:
 - someone in game gets a kill
@@ -36,7 +38,9 @@ For example:
 ## Client Setup
 To enable custom endpoints for a match, the host must have a file named "api_endpoints.json" in the folder of their local game files, next to Redmatch 2.exe.
 
-The api_endpoints.json file is formatted like the following. To subscribe to an event, just add its name to the list and set the required data after it. Most events will just require an endpoint, where they will send information about the event to, and allow a response from the server. Some will require more information, like minimum and maximum positions to trigger a player position event, and a specific prefix to listen to for commands.
+(Eventually this will change to a mod browser or something)
+
+The api_endpoints.json file is formatted like the following. To subscribe to an event, just add its name to the list and set the required data after it. Most events will just require an endpoint, where they will send information about the event to, and allow a response from the server.
 
 	{
 		"matchStarted": "http://localhost:3000/match-started",
@@ -45,38 +49,27 @@ The api_endpoints.json file is formatted like the following. To subscribe to an 
 		"playerLeft": "http://localhost:3000/player-left",
 		"playerDied": "http://localhost:3000/player-died",
 		"weaponSwitched": "http://localhost:3000/weapon-switched",
-		"playerPosition": {
-			"positions": [
-				{
-					"min": [25, 24, 22],
-					"max": [35, 90, 11]
-				},
-				{
-					"min": [-92, 14, 2],
-					"max": [3, 5, -11.2]
-				}
-			],
-			"endpoint": "http://localhost:3000/player-position"
-		},
 		"command": "http://localhost:3000/command"
 	}
 
-You don't need to include an event if you don't want to subscribe to it. For example, if I was just making a simple bot to track kills, all I would need is this:
+You don't need to include an event if you don't want to subscribe to it. For example, if I was just making a simple mod to track kills, all I would need is this:
 
 	{
-		"playerDied": "http://localhost:3000/player-died",
+		"playerDied": "http://localhost:3000/player-died"
 	}
 
 ## Requests
-When the match starts or ends, or any player dies, the host will send a PUT request to the respective URL with information about the match contained in the JSON format. These are the URLs that you specified in the api_endpoints.json file.
+For any event you subscribe to the host will send a PUT request to the provided URL with information data contained in the JSON format.
 
-Every request is sent with a lobbyId, which is the unique SteamID of the lobby the match is in. You can have players join this lobby by launching the game with the command argument
-	
-	+connect_lobby lobbyId
-
-or by going to this URL:
+Every request is sent with a lobbyId, which is the unique SteamID of the lobby the match is in. You can have players join this lobby by going to this URL:
 
 	steam://joinlobby/1280770/lobbyId
+
+For example, if I made a discord bot and wanted players to be able to join the active lobby, I could have it send a message like this:
+
+	steam://joinlobby/1280770/109775240972257934
+
+If a player clicks it then Redmatch 2 will automatically connect to that lobby.
 
 ### Match Started Request
 When the matchStarted event is fired, it will send a request like this to the endpoint:
