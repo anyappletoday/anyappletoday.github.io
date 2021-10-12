@@ -2,15 +2,15 @@
 
 - [About](#about)
 - [Client Setup](#client-setup)
-- [Requests](#requests)
- * [Match Started Request](#match-started-request)
- * [Match Ended Request](#match-ended-request)
- * [Player Joined Request](#player-joined-request)
- * [Player Left Request](#player-left-request)
- * [Player Died Request](#player-died-request)
- * [Weapon Switched Request](#weapon-switched-request)
- * [Player Position Request](#player-position-request)
- * [Command Request](#command-request)
+- [Events](#events)
+ * [Match Started Event](#match-started-event)
+ * [Match Ended Event](#match-ended-event)
+ * [Player Joined Event](#player-joined-event)
+ * [Player Left Event](#player-left-event)
+ * [Player Died Event](#player-died-event)
+ * [Weapon Switched Event](#weapon-switched-event)
+ * [Player Position Event](#player-position-event)
+ * [Command Event](#command-event)
 - [Responding to Requests](#responding-to-requests)
 - [Creating your Server](#creating-your-server)
 - [Security](#security)
@@ -40,7 +40,7 @@ To enable custom endpoints for a match, the host must have a file named "api_end
 
 (Eventually this will change to a mod browser or something)
 
-The api_endpoints.json file is formatted like the following. To subscribe to an event, just add its name to the list and set the required data after it. Most events will just require an endpoint, where they will send information about the event to, and allow a response from the server.
+The api_endpoints.json file is formatted like the following. To subscribe to an event, just add its name to the list and set the endpoint after it.
 
 	{
 		"matchStarted": "http://localhost:3000/match-started",
@@ -58,7 +58,7 @@ You don't need to include an event if you don't want to subscribe to it. For exa
 		"playerDied": "http://localhost:3000/player-died"
 	}
 
-## Requests
+## Events
 For any event you subscribe to the host will send a PUT request to the provided URL with information data contained in the JSON format.
 
 Every request is sent with a lobbyId, which is the unique SteamID of the lobby the match is in. You can have players join this lobby by going to this URL:
@@ -71,7 +71,7 @@ For example, if I made a discord bot and wanted players to be able to join the a
 
 If a player clicks it then Redmatch 2 will automatically connect to that lobby.
 
-### Match Started Request
+### Match Started Event
 When the matchStarted event is fired, it will send a request like this to the endpoint:
 
 	{
@@ -128,7 +128,7 @@ When the matchStarted event is fired, it will send a request like this to the en
 | startTime | The unix timestamp that this match was created at (seconds since January 1st 1970) |
 | version | The server version of the game the match is running on (this might not match up with the version you see in the main menu, since the server version is only changed when a change is made that would break compatibility between versions) |
 
-### Match Ended Request
+### Match Ended Event
 When the matchEnded event is fired, it will send a request like this to the endpoint:
 
 	{
@@ -157,7 +157,7 @@ When the matchEnded event is fired, it will send a request like this to the endp
 | --- | --- |
 | players | An array of players with SteamIDs and their in-game names, as well as their statistics |
 
-### Player Joined Request
+### Player Joined Event
 When any player joins, and the playerJoined event is fired, it will send a request like this to the endpoint:
 
 	{
@@ -171,7 +171,7 @@ When any player joins, and the playerJoined event is fired, it will send a reque
 | id | The unique SteamID of the player who joined |
 | name | The name of the player who joined |
 
-### Player Left Request
+### Player Left Event
 When any player leaves, and the playerLeft event is fired, it will send a request like this to the endpoint:
 
 	{
@@ -185,7 +185,7 @@ When any player leaves, and the playerLeft event is fired, it will send a reques
 | id | The unique SteamID of the player who left |
 | name | The name of the player who left |
 
-### Player Died Request
+### Player Died Event
 When any player dies, and the playerDied event is fired, it will send a request like this to the endpoint:
 
 	{
@@ -210,7 +210,7 @@ Another example:
 | victim | The SteamID of who died |
 | data | Any other information about the kill. The options are: unknown, rifle, shotgun, sniper, wallbang, noscope, explosive, fall, circle, four_in_a_row |
 
-### Weapon Switched Request
+### Weapon Switched Event
 When any player switches their weapon, and the weaponSwitched event is fired, it will send a request like this to the endpoint:
 
 	{
@@ -224,7 +224,7 @@ When any player switches their weapon, and the weaponSwitched event is fired, it
 | id | The unique SteamID of the player who switched their weapon |
 | weapon | The weapon that the player switched to. 0 = rifle, 1 = shotgun, 2 = sniper |
 
-### Player Position Request (NOT SUPPORTED YET)
+### Player Position Event (NOT SUPPORTED YET)
 When any player enters the minimum and maximum specified, and the playerPosition event is fired, it will send a request like this to the endpoint:
 
 	{
@@ -240,7 +240,7 @@ When any player enters the minimum and maximum specified, and the playerPosition
 | position | The Vector3 of the player's new position |
 | index | The index of the position in the specified array of positions |
 
-### Command Request
+### Command Event
 When any player sends a chat message starting with the specefied prefix, the chat message not be sent to the chat, but instead to the host which will fire the command event and send a request like this to the endpoint:
 
 	{
@@ -280,8 +280,11 @@ The host's game client will send a request when a match starts, ends, or when a 
 					],
 					remove: [
 						'blue'
+					],
+					set: [
+						'red'
 					]
-				}
+				},
 				weaponActions: [
 					{
 						weapon: 1,
@@ -337,43 +340,120 @@ The host's game client will send a request when a match starts, ends, or when a 
 		]
 	}
 
-Note that you should not include variables unless you are using them. For example if you only wanted to display a title, just respond with this to save bandwidth:
+Note that you should not include variables unless you are using them. For example if you only wanted to display a title to all players, just respond with this to save bandwidth:
 
 	{
-		title: 'Hello World!',
+		title: 'Hello World!'
+	}
+
+The server can either respond in this response format or with just a status code of 200 (OK). If the server only responds with 200, then nothing will be executed on the client.
+
+For all text-based fields, rich text tags are supported:
+	
+	<color=red>This text will be red!</color>
+	<size=5>This text will be small!</size>
+
+| Variable | Description |
+| --- | --- |
+| message | A chat message sent to everyone in the match. |
+| title | Text sent to everyone in the match which is displayed at the top of their screen. |
+| subtitle | Text sent to everyone in the match which is displayed at the bottom of their screen. |
+| endGame | Set this to true to end the game. |
+| endGameMessage | If you choose to end the game, this text is what will be displayed at the top of the scoreboard where "<Username> Wins" would normally be. |
+| actions | An array of actions to carry out for specific players. [more info](#actions) |
+| geometry | Add or remove physical objects. [more info](#geometry) |
+| tags | Define tags. [more info](#tags) |
+
+### Actions
+You can use actions to change game state for specific players. For example, only giving one player the role of "traitor" or assigning specific players to separate teams.
+
+| Variable | Description |
+| --- | --- |
+| id | The SteamID of the player you want to execute the action on. |
+| message | A chat message sent to the specified player. |
+| title | Text sent to the specified player which is displayed at the top of their screen. |
+| subtitle | Text sent to the specified player which is displayed at the bottom of their screen. |
+| outlineColor | A six-digit hex code for an outline color to set around the player. Set it to empty if you want to remove the outline. Format is RRBBGG |
+| kill | Set this to true to kill the player. |
+
+You can use weapon actions to change weapon data for the specified player.
+
+| Variable | Description |
+| --- | --- |
+| weapon | The index of the weapon to affect. |
+| equip | Set this to true if you want the player to equip that weapon. |
+| changeAmmo | The amount to change the ammo in the magazine (will always cap the ammo between 0 and the magazine size). |
+| changeTotal | Change the total amount of ammo in the gun. |
+| setAmmo | Sets the amount of ammo in the magazine. |
+| setTotal | Sets the total amount of ammo in the gun. |
+
+### Geometry
+The geometry section has two arrays, `add` and `remove`. To add geometry, add a new geometry object.
+
+	{
+		id: 0,
+		model: 'sphere',
+		pos: { x: 10, y: 20, z: 50 },
+		size: { x: 1, y: 1, z: 2 },
+		rot: { x: 360, y: 180, z: 90 },
+		color: '66000000',
+		collision: false,
+		animation: {
+			keyframes: [
+				'0': {
+					pos: { x: 20, y: 20, z: 50 }
+				},
+				'80': {
+					pos: { x: 80, y: 20, z: 50 }
+				}
+			],
+			time: 1.2
+		}
 	}
 
 | Variable | Description |
 | --- | --- |
-| message | A message to send in chat to everyone in the match. Could be "MATCH ENDED" and then showing the players' new ranks, or anything else you could think of. You can use rich text formatting tags to enhance it. |
-| title | A message to sent to everyone in the match, which is displayed at the top of their screen. |
-| subtitle | A message to sent to everyone in the match, which is displayed at the bottom of their screen. |
-| endGame | A bool of whether or not to end the game. |
-| endGameMessage | If you choose to end the game, this message is what will be displayed at the top of the scoreboard where "Username Wins" would normally be. |
-| actions | An array of actions to carry out for specific players. |
+| id | A numerical id that you assign to your geometry, which can be used to remove it in the future. |
+| model | The primitive model to use for the geometry. The options are: cube, sphere, cylinder, prism. |
+| pos | The position to spawn the object at. You can use /position in-game to view the position at the feet of your player in order to find out where to spawn it. |
+| size | The size of the object. |
+| rot | The rotation of the object. |
+| color | a 8-digit hex code for the color of the object. Format is RRBBGGAA |
+| collision | A boolean of whether players, bullets, and other physics objects should collide with the geometry. |
+| animation | Animation data. [more info](#geometry-animation) |
 
-You can use actions to change game state for specific players.
+### Geometry Animation
 
-| Action Variable | Description |
+Geometry can be animated! That is, move around, scale, rotate, and change color.
+To do so, you fill out the animation section when creating geometry.
+
+	{
+		id: 0,
+		model: 'cube',
+		animation: {
+			keyframes: [
+				'0': {
+					pos: { x: 0, y: 0, z: 0 },
+					size: { x: 1, y: 1, z: 1 },
+					rot: { x: 360, y: 180, z: 90 },
+					color: '66000000'
+				},
+				'50': {
+					pos: { x: 80, y: 20, z: 50 }
+				}
+			],
+			time: 2.0,
+			ease: linear
+		}
+	}
+
+| Variable | Description |
 | --- | --- |
-| id | The SteamID of the player you want to execute the action on |
-| message | The message to send in chat to the specified player. You use this to tell a player their team or their updated rank. |
-| title | A message to sent to the specified player, which is displayed at the top of their screen. |
-| subtitle | A message to sent to the specified player, which is displayed at the bottom of their screen. |
-| outlineColor | A hex code for an outline color to set around the player. Set it to empty if you want to remove the outline. |
-| kill | Whether or not to kill the player. They will kill themselves. |
+| keyframes | A dictionary with a key of percentage and a value of a keyframe object. Inside the keyframe object you can add pos, size, rot, and color. |
+| time | How long the animation should take in seconds |
+| ease | The type of ease to use. Default is linear. The options are: https://easings.net/ |
 
-You can use weapon actions to change weapon data for the specified player.
-| Action Variable | Description |
-| --- | --- |
-| weapon | The index of the weapon to affect |
-| equip | Set this to true if you want the player to equip that weapon |
-| changeAmmo | The amount to change the ammo in the magazine (will always cap the ammo between 0 and the magazine size) |
-| changeTotal | Change the total amount of ammo in the gun |
-| setAmmo | Sets the amount of ammo in the magazine |
-| setTotal | Sets the total amount of ammo in the gun |
-
-The server can either respond in this response format or with just a status code of 200 (OK). If the server only responds with 200, then nothing will be executed on the client.
+### Tags
 
 ## Creating your Server
 
