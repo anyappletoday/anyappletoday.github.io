@@ -1,21 +1,5 @@
 # Redmatch 2 Modding Documentation
 
-- [About](#about)
-- [Client Setup](#client-setup)
-- [Events](#events)
- * [Match Started Event](#match-started-event)
- * [Match Ended Event](#match-ended-event)
- * [Player Joined Event](#player-joined-event)
- * [Player Left Event](#player-left-event)
- * [Player Died Event](#player-died-event)
- * [Weapon Switched Event](#weapon-switched-event)
- * [Player Position Event](#player-position-event)
- * [Command Event](#command-event)
-- [Responding to Requests](#responding-to-requests)
-- [Creating your Server](#creating-your-server)
-- [Security](#security)
-- [Advanced Example](#advanced-example)
-
 ## About
 If you're here I assume you know a bit about what modding is. It allows you, the player, to create logic to modify the way the game normally works. Like adding a custom gamemode.
 
@@ -224,22 +208,6 @@ When any player switches their weapon, and the weaponSwitched event is fired, it
 | id | The unique SteamID of the player who switched their weapon |
 | weapon | The weapon that the player switched to. 0 = rifle, 1 = shotgun, 2 = sniper |
 
-### Player Position Event (NOT SUPPORTED YET)
-When any player enters the minimum and maximum specified, and the playerPosition event is fired, it will send a request like this to the endpoint:
-
-	{
-		lobbyId: '109775240972274609',
-		id: '76561198057087288',
-		position: [12.31, 54.23, 16.32],
-		index: 2
-	}
-
-| Variable | Description |
-| --- | --- |
-| id | The unique SteamID of the player who entered the minimum and maximum of that position |
-| position | The Vector3 of the player's new position |
-| index | The index of the position in the specified array of positions |
-
 ### Command Event
 When any player sends a chat message starting with the specefied prefix, the chat message not be sent to the chat, but instead to the host which will fire the command event and send a request like this to the endpoint:
 
@@ -407,7 +375,8 @@ The geometry section has two arrays, `add` and `remove`. To add geometry, add a 
 					pos: { x: 80, y: 20, z: 50 }
 				}
 			],
-			time: 1.2
+			time: 1.2,
+			ease: linear
 		}
 	}
 
@@ -450,10 +419,31 @@ To do so, you fill out the animation section when creating geometry.
 | Variable | Description |
 | --- | --- |
 | keyframes | A dictionary with a key of percentage and a value of a keyframe object. Inside the keyframe object you can add pos, size, rot, and color. |
-| time | How long the animation should take in seconds |
+| time | How long the animation should take in seconds. |
 | ease | The type of ease to use. Default is linear. The options are: https://easings.net/ |
 
 ### Tags
+
+	tags: [
+		{
+			name: 'traitor',
+			visibleOutlines: [
+				'traitor'
+			],
+			immune: [
+				'traitor'
+			]
+		},
+		{
+			name: 'innocent'
+		}
+	]
+
+| Variable | Description |
+| --- | --- |
+| name | The name of the tag. |
+| visibleOutlines | An array of tags that any player with this tag will be able to see the outlines of. Defaults to all tags. |
+| immune | An array of tags that the player cannot take damage from. |
 
 ## Creating your Server
 

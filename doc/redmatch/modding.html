@@ -26,7 +26,7 @@
 				border: 1px solid #45474D;
 			}
 
-			p, table {
+			p, ul, table {
 				font-size: 16px;
 				font-family: Helvetica;
 				color: #ACB5BE;
@@ -130,38 +130,60 @@
 	<body>
         <div class="sidebar">
             <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#client-setup">Client Setup</a></li>
-                <li><a href="#requests">Requests</a>
-                    <ul>
-                        <li><a href="#match-started-request">Match Started Request</a></li>
-                        <li><a href="#match-ended-request">Match Ended Request</a></li>
-                        <li><a href="#player-joined-request">Player Joined Request</a></li>
-                        <li><a href="#player-left-request">Player Left Request</a></li>
-                        <li><a href="#player-died-request">Player Died Request</a></li>
-                        <li><a href="#weapon-switched-request">Weapon Switched Request</a></li>
-                        <li><a href="#player-position-request">Player Position Request</a></li>
-                        <li><a href="#command-request">Command Request</a></li>
-                    </ul>
-                </li>
-                <li><a href="#responding-to-requests">Responding to Requests</a></li>
-                <li><a href="#creating-your-server">Creating your Server</a></li>
-                <li><a href="#security">Security</a></li>
-                <li><a href="#advanced-example">Advanced Example</a></li>
-             </ul>
-             <ul style="position: absolute; bottom: 10px">
-                <li><a href="https://rugbug.net/" style="color: #7289DA">Home</a></li>
-                <li><a href="https://rugbug.net/discord" style="color: #7289DA">Discord</a></li>
-                <li><a href="https://store.steampowered.com/app/1280770/Redmatch_2/" style="color: #7289DA">Steam Page</a></li>
-             </ul>
+				<li><a href="#about">About</a></li>
+				<li><a href="#how-does-it-work-">How Does it Work?</a></li>
+				<li><a href="#client-setup">Client Setup</a></li>
+				<li><a href="#events">Events</a>
+					<ul>
+						<li><a href="#match-started-event">Match Started Event</a></li>
+						<li><a href="#match-ended-event">Match Ended Event</a></li>
+						<li><a href="#player-joined-event">Player Joined Event</a></li>
+						<li><a href="#player-left-event">Player Left Event</a></li>
+						<li><a href="#player-died-event">Player Died Event</a></li>
+						<li><a href="#weapon-switched-event">Weapon Switched Event</a></li>
+						<li><a href="#command-event">Command Event</a></li>
+					</ul>
+				</li>
+				<li><a href="#responding-to-requests">Responding to Requests</a>
+					<ul>
+						<li><a href="#actions">Actions</a></li>
+						<li><a href="#geometry">Geometry</a></li>
+						<li><a href="#geometry-animation">Geometry Animation</a></li>
+						<li><a href="#tags">Tags</a></li>
+					</ul>
+				</li>
+				<li><a href="#creating-your-server">Creating your Server</a></li>
+				<li><a href="#security">Security</a></li>
+				<li><a href="#advanced-example">Advanced Example</a></li>
+			</ul>
+			
+			<ul style="position: absolute; bottom: 10px">
+				<li><a href="https://rugbug.net/" style="color: #7289DA">Home</a></li>
+				<li><a href="https://rugbug.net/discord" style="color: #7289DA">Discord</a></li>
+				<li><a href="https://store.steampowered.com/app/1280770/Redmatch_2/" style="color: #7289DA">Steam Page</a></li>
+			</ul>
         </div>
-<h1 id="redmatch-2-custom-api-endpoints-documentation">Redmatch 2 Custom API Endpoints Documentation</h1>
+		<div class="content">
+<h1 id="redmatch-2-modding-documentation">Redmatch 2 Modding Documentation</h1>
 <h2 id="about">About</h2>
-<p>Custom API Endpoints is a tool I built into Redmatch 2 to make ranked modding and tournament tracking possible, but it&#39;s expanded to be a tool you can use to create custom gamemodes. You can subscribe to events fired by the host and send data to a URL endpoint on your server. The server can then respond to change game state, send a message to a certain player, or a variety of other things.</p>
-<p>For example, you could create a sniper only mode where using any weapon other than the sniper would instantly kill you. Or a team deathmatch mode, where 2 teams fight each other. Or an Among Us clone, where 2 players are imposters and have to kill everyone else to win.</p>
+<p>If you&#39;re here I assume you know a bit about what modding is. It allows you, the player, to create logic to modify the way the game normally works. Like adding a custom gamemode.</p>
+<p>The way modding works in Redmatch 2 is not the same as most other games. Most games have mods as programs that embed themselves into the game on a player&#39;s computer. I wanted to create a safer approach for Redmatch 2 that moves mod logic off of the user&#39;s computer, and prevents malicious intent and viruses.</p>
+<p>As a result of this, modding in Redmatch 2 is much safer than conventional modding, and it&#39;s impossible to get a virus from it. The only caveat is that modders can see your IP address, but this would have also been possible with conventional modding. Players can use VPNs or a proxy to protect themselves from that, though.</p>
+<h2 id="how-does-it-work-">How Does it Work?</h2>
+<p>Instead of running code on the player&#39;s computer, all logic is run on a remote server. You as a mod creator are responsible for hosting and maintaining the server. You can use a service like <a href="https://www.heroku.com/">Heroku</a> to host your server for free.</p>
+<p>The host of the game will communicate with your server during gameplay. You can subscribe to events fired by the host which send data to a URL endpoint on your server. The server can then respond to change game state, send a message to a certain player, or a variety of other things.</p>
+<p>For example:</p>
+<ul>
+<li>someone in game gets a kill</li>
+<li>the host recognizes this and triggers a &quot;player died&quot; event</li>
+<li>if you chose to subscribe to this event, the host will send a &quot;player died&quot; request to the server containing information about the death</li>
+<li>the server can send a response</li>
+<li>the host will carry out instructions in the response</li>
+</ul>
 <h2 id="client-setup">Client Setup</h2>
 <p>To enable custom endpoints for a match, the host must have a file named &quot;api_endpoints.json&quot; in the folder of their local game files, next to Redmatch 2.exe.</p>
-<p>The api_endpoints.json file is formatted like the following. To subscribe to an event, just add its name to the list and set the required data after it. Most events will just require an endpoint, where they will send information about the event to, and allow a response from the server. Some will require more information, like minimum and maximum positions to trigger a player position event, and a specific prefix to listen to for commands.</p>
+<p>(Eventually this will change to a mod browser or something)</p>
+<p>The api_endpoints.json file is formatted like the following. To subscribe to an event, just add its name to the list and set the endpoint after it.</p>
 <pre><code>{
     <span class="hljs-attr">"matchStarted"</span>: <span class="hljs-string">"http://localhost:3000/match-started"</span>,
     <span class="hljs-attr">"matchEnded"</span>: <span class="hljs-string">"http://localhost:3000/match-ended"</span>,
@@ -169,32 +191,20 @@
     <span class="hljs-attr">"playerLeft"</span>: <span class="hljs-string">"http://localhost:3000/player-left"</span>,
     <span class="hljs-attr">"playerDied"</span>: <span class="hljs-string">"http://localhost:3000/player-died"</span>,
     <span class="hljs-attr">"weaponSwitched"</span>: <span class="hljs-string">"http://localhost:3000/weapon-switched"</span>,
-    <span class="hljs-attr">"playerPosition"</span>: {
-        <span class="hljs-attr">"positions"</span>: [
-            {
-                <span class="hljs-attr">"min"</span>: [<span class="hljs-number">25</span>, <span class="hljs-number">24</span>, <span class="hljs-number">22</span>],
-                <span class="hljs-attr">"max"</span>: [<span class="hljs-number">35</span>, <span class="hljs-number">90</span>, <span class="hljs-number">11</span>]
-            },
-            {
-                <span class="hljs-attr">"min"</span>: [<span class="hljs-number">-92</span>, <span class="hljs-number">14</span>, <span class="hljs-number">2</span>],
-                <span class="hljs-attr">"max"</span>: [<span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">-11.2</span>]
-            }
-        ],
-        <span class="hljs-attr">"endpoint"</span>: <span class="hljs-string">"http://localhost:3000/player-position"</span>
-    },
     <span class="hljs-attr">"command"</span>: <span class="hljs-string">"http://localhost:3000/command"</span>
 }
-</code></pre><p>You don&#39;t need to include an event if you don&#39;t want to subscribe to it. For example, if I was just making a simple bot to track kills, all I would need is this:</p>
+</code></pre><p>You don&#39;t need to include an event if you don&#39;t want to subscribe to it. For example, if I was just making a simple mod to track kills, all I would need is this:</p>
 <pre><code>{
-    <span class="hljs-attr">"playerDied"</span>: <span class="hljs-string">"http://localhost:3000/player-died"</span>,
+    <span class="hljs-attr">"playerDied"</span>: <span class="hljs-string">"http://localhost:3000/player-died"</span>
 }
-</code></pre><h2 id="requests">Requests</h2>
-<p>When the match starts or ends, or any player dies, the host will send a PUT request to the respective URL with information about the match contained in the JSON format. These are the URLs that you specified in the api_endpoints.json file.</p>
-<p>Every request is sent with a lobbyId, which is the unique SteamID of the lobby the match is in. You can have players join this lobby by launching the game with the command argument</p>
-<pre><code><span class="hljs-addition">+connect_lobby lobbyId</span>
-</code></pre><p>or by going to this URL:</p>
+</code></pre><h2 id="events">Events</h2>
+<p>For any event you subscribe to the host will send a PUT request to the provided URL with information data contained in the JSON format.</p>
+<p>Every request is sent with a lobbyId, which is the unique SteamID of the lobby the match is in. You can have players join this lobby by going to this URL:</p>
 <pre><code>steam:<span class="hljs-regexp">//</span>joinlobby<span class="hljs-regexp">/1280770/</span>lobbyId
-</code></pre><h3 id="match-started-request">Match Started Request</h3>
+</code></pre><p>For example, if I made a discord bot and wanted players to be able to join the active lobby, I could have it send a message like this:</p>
+<pre><code>steam:<span class="hljs-regexp">//</span>joinlobby<span class="hljs-regexp">/1280770/</span><span class="hljs-number">109775240972257934</span>
+</code></pre><p>If a player clicks it then Redmatch 2 will automatically connect to that lobby.</p>
+<h3 id="match-started-event">Match Started Event</h3>
 <p>When the matchStarted event is fired, it will send a request like this to the endpoint:</p>
 <pre><code>{
     <span class="hljs-attribute">lobbyId</span>: <span class="hljs-string">'109775240972257934'</span>,
@@ -299,7 +309,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="match-end-request">Match Ended Request</h3>
+<h3 id="match-ended-event">Match Ended Event</h3>
 <p>When the matchEnded event is fired, it will send a request like this to the endpoint:</p>
 <pre><code>{
     <span class="hljs-attribute">lobbyId</span>: <span class="hljs-string">'109775240972274609'</span>,
@@ -336,7 +346,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="player-joined-request">Player Joined Request</h3>
+<h3 id="player-joined-event">Player Joined Event</h3>
 <p>When any player joins, and the playerJoined event is fired, it will send a request like this to the endpoint:</p>
 <pre><code>{
     <span class="hljs-attribute">lobbyId</span>: <span class="hljs-string">'109775240972274609'</span>,
@@ -361,7 +371,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="player-left-request">Player Left Request</h3>
+<h3 id="player-left-event">Player Left Event</h3>
 <p>When any player leaves, and the playerLeft event is fired, it will send a request like this to the endpoint:</p>
 <pre><code>{
     <span class="hljs-attribute">lobbyId</span>: <span class="hljs-string">'109775240972274609'</span>,
@@ -386,7 +396,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="player-died-request">Player Died Request</h3>
+<h3 id="player-died-event">Player Died Event</h3>
 <p>When any player dies, and the playerDied event is fired, it will send a request like this to the endpoint:</p>
 <pre><code>{
     <span class="hljs-attribute">lobbyId</span>: <span class="hljs-string">'109775240972274609'</span>,
@@ -423,7 +433,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="weapon-switched-request">Weapon Switched Request</h3>
+<h3 id="weapon-switched-event">Weapon Switched Event</h3>
 <p>When any player switches their weapon, and the weaponSwitched event is fired, it will send a request like this to the endpoint:</p>
 <pre><code>{
     <span class="hljs-attribute">lobbyId</span>: <span class="hljs-string">'109775240972274609'</span>,
@@ -448,37 +458,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="player-position-request-not-supported-yet-">Player Position Request (NOT SUPPORTED YET)</h3>
-<p>When any player enters the minimum and maximum specified, and the playerPosition event is fired, it will send a request like this to the endpoint:</p>
-<pre><code>{
-    <span class="hljs-attribute">lobbyId</span>: <span class="hljs-string">'109775240972274609'</span>,
-    id: <span class="hljs-string">'76561198057087288'</span>,
-    position: [<span class="hljs-number">12.31</span>, <span class="hljs-number">54.23</span>, <span class="hljs-number">16.32</span>],
-    index: <span class="hljs-number">2</span>
-}
-</code></pre><table>
-<thead>
-<tr>
-<th>Variable</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>id</td>
-<td>The unique SteamID of the player who entered the minimum and maximum of that position</td>
-</tr>
-<tr>
-<td>position</td>
-<td>The Vector3 of the player&#39;s new position</td>
-</tr>
-<tr>
-<td>index</td>
-<td>The index of the position in the specified array of positions</td>
-</tr>
-</tbody>
-</table>
-<h3 id="command-request">Command Request</h3>
+<h3 id="command-event">Command Event</h3>
 <p>When any player sends a chat message starting with the specefied prefix, the chat message not be sent to the chat, but instead to the host which will fire the command event and send a request like this to the endpoint:</p>
 <pre><code>{
     <span class="hljs-attribute">lobbyId</span>: <span class="hljs-string">'109775240972274609'</span>,
@@ -517,11 +497,84 @@
             <span class="hljs-attribute">message</span>: <span class="hljs-string">''</span>,
             <span class="hljs-attribute">title</span>: <span class="hljs-string">''</span>,
             <span class="hljs-attribute">subtitle</span>: <span class="hljs-string">''</span>,
+            <span class="hljs-attribute">nameColor</span>: <span class="hljs-string">'FFFFFF'</span>,
             <span class="hljs-attribute">outlineColor</span>: <span class="hljs-string">'FFFFFF'</span>,
-            <span class="hljs-attribute">kill</span>: false
+            <span class="hljs-attribute">kill</span>: false,
+            <span class="hljs-attribute">setPos</span>: { <span class="hljs-attribute">x</span>: <span class="hljs-number">0</span>, <span class="hljs-attribute">y</span>: <span class="hljs-number">100</span>, <span class="hljs-attribute">z</span>: <span class="hljs-number">0</span> },
+            <span class="hljs-attribute">movePos</span>: { <span class="hljs-attribute">x</span>: <span class="hljs-number">0</span>, <span class="hljs-attribute">y</span>: <span class="hljs-number">0.5</span>, <span class="hljs-attribute">z</span>: <span class="hljs-number">0</span> },
+            <span class="hljs-attribute">tags</span>: {
+                <span class="hljs-attribute">add</span>: [
+                    <span class="hljs-string">'red'</span>
+                ],
+                <span class="hljs-attribute">remove</span>: [
+                    <span class="hljs-string">'blue'</span>
+                ],
+                <span class="hljs-attribute">set</span>: [
+                    <span class="hljs-string">'red'</span>
+                ]
+            },
+            <span class="hljs-attribute">weaponActions</span>: [
+                {
+                    <span class="hljs-attribute">weapon</span>: <span class="hljs-number">1</span>,
+                    <span class="hljs-attribute">changeAmmo</span>: -<span class="hljs-number">5</span>
+                },
+                {
+                    <span class="hljs-attribute">weapon</span>: <span class="hljs-number">2</span>,
+                    <span class="hljs-attribute">equip</span>: true,
+                    <span class="hljs-attribute">setTotal</span>: <span class="hljs-number">999</span>,
+                    <span class="hljs-attribute">setAmmo</span>: <span class="hljs-number">1</span>
+                }
+            ]
+        }
+    ],
+    <span class="hljs-attribute">geometry</span>: {
+        <span class="hljs-attribute">add</span>: [
+            {
+                <span class="hljs-attribute">id</span>: <span class="hljs-number">0</span>,
+                <span class="hljs-attribute">model</span>: <span class="hljs-string">'cube'</span>,
+                <span class="hljs-attribute">pos</span>: { <span class="hljs-attribute">x</span>: <span class="hljs-number">0</span>, <span class="hljs-attribute">y</span>: <span class="hljs-number">50</span>, <span class="hljs-attribute">z</span>: <span class="hljs-number">0</span> },
+                <span class="hljs-attribute">size</span>: { <span class="hljs-attribute">x</span>: <span class="hljs-number">1</span>, <span class="hljs-attribute">y</span>: <span class="hljs-number">1</span>, <span class="hljs-attribute">z</span>: <span class="hljs-number">2</span> },
+                <span class="hljs-attribute">rot</span>: { <span class="hljs-attribute">x</span>: <span class="hljs-number">360</span>, <span class="hljs-attribute">y</span>: <span class="hljs-number">180</span>, <span class="hljs-attribute">z</span>: <span class="hljs-number">90</span> },
+                <span class="hljs-attribute">collision</span>: false,
+                <span class="hljs-attribute">color</span>: <span class="hljs-string">'66000000'</span>
+            }
+        ],
+        <span class="hljs-attribute">remove</span>: [
+            <span class="hljs-number">27</span>
+        ]
+    },
+    <span class="hljs-attribute">tags</span>: [
+        {
+            <span class="hljs-attribute">name</span>: <span class="hljs-string">'blue'</span>,
+            <span class="hljs-attribute">immune</span>: [
+                <span class="hljs-string">'blue'</span>
+            ]
+        },
+        {
+            <span class="hljs-attribute">name</span>: <span class="hljs-string">'red'</span>,
+            <span class="hljs-attribute">immune</span>: [
+                <span class="hljs-string">'red'</span>
+            ]
+        },
+        {
+            <span class="hljs-attribute">name</span>: <span class="hljs-string">'traitor'</span>,
+            <span class="hljs-attribute">visibleOutlines</span>: [
+                <span class="hljs-string">'traitor'</span>
+            ]
+        },
+        {
+            <span class="hljs-attribute">name</span>: <span class="hljs-string">'innocent'</span>
         }
     ]
 }
+</code></pre><p>Note that you should not include variables unless you are using them. For example if you only wanted to display a title to all players, just respond with this to save bandwidth:</p>
+<pre><code>{
+    <span class="hljs-attribute">title</span>: <span class="hljs-string">'Hello World!'</span>
+}
+</code></pre><p>The server can either respond in this response format or with just a status code of 200 (OK). If the server only responds with 200, then nothing will be executed on the client.</p>
+<p>For all text-based fields, rich text tags are supported:</p>
+<pre><code>&lt;<span class="hljs-built_in">color</span>=<span class="hljs-built_in">red</span>&gt;This <span class="hljs-built_in">text</span> will be <span class="hljs-built_in">red</span>!&lt;/<span class="hljs-built_in">color</span>&gt;
+&lt;<span class="hljs-built_in">size</span>=<span class="hljs-number">5</span>&gt;This <span class="hljs-built_in">text</span> will be small!&lt;/<span class="hljs-built_in">size</span>&gt;
 </code></pre><table>
 <thead>
 <tr>
@@ -532,66 +585,255 @@
 <tbody>
 <tr>
 <td>message</td>
-<td>A message to send in chat to everyone in the match. Could be &quot;MATCH ENDED&quot; and then showing the players&#39; new ranks, or anything else you could think of. You can use rich text formatting tags to enhance it.</td>
+<td>A chat message sent to everyone in the match.</td>
 </tr>
 <tr>
 <td>title</td>
-<td>A message to send to everyone in the match, which is displayed at the top of their screen.</td>
+<td>Text sent to everyone in the match which is displayed at the top of their screen.</td>
 </tr>
 <tr>
 <td>subtitle</td>
-<td>A message to send to everyone in the match, which is displayed at the bottom of their screen.</td>
+<td>Text sent to everyone in the match which is displayed at the bottom of their screen.</td>
 </tr>
 <tr>
 <td>endGame</td>
-<td>A bool of whether or not to end the game.</td>
+<td>Set this to true to end the game.</td>
 </tr>
 <tr>
 <td>endGameMessage</td>
-<td>If you choose to end the game, this message is what will be displayed at the top of the scoreboard where &quot;Username Wins&quot; would normally be.</td>
+<td>If you choose to end the game, this text is what will be displayed at the top of the scoreboard where &quot;<Username> Wins&quot; would normally be.</td>
 </tr>
 <tr>
 <td>actions</td>
-<td>An array of actions to carry out for specific players.</td>
+<td>An array of actions to carry out for specific players. <a href="#actions">more info</a></td>
+</tr>
+<tr>
+<td>geometry</td>
+<td>Add or remove physical objects. <a href="#geometry">more info</a></td>
+</tr>
+<tr>
+<td>tags</td>
+<td>Define tags. <a href="#tags">more info</a></td>
 </tr>
 </tbody>
 </table>
-<p>You can use actions to change game state for specific players.</p>
+<h3 id="actions">Actions</h3>
+<p>You can use actions to change game state for specific players. For example, only giving one player the role of &quot;traitor&quot; or assigning specific players to separate teams.</p>
 <table>
 <thead>
 <tr>
-<th>Action Variable</th>
+<th>Variable</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>id</td>
-<td>The SteamID of the player you want to execute the action on</td>
+<td>The SteamID of the player you want to execute the action on.</td>
 </tr>
 <tr>
 <td>message</td>
-<td>The message to send in chat to the specified player. You use this to tell a player their team or their updated rank.</td>
+<td>A chat message sent to the specified player.</td>
 </tr>
 <tr>
 <td>title</td>
-<td>A message to send to the specefied player, which is displayed at the top of their screen.</td>
+<td>Text sent to the specified player which is displayed at the top of their screen.</td>
 </tr>
 <tr>
 <td>subtitle</td>
-<td>A message to send to the specefied player, which is displayed at the bottom of their screen.</td>
+<td>Text sent to the specified player which is displayed at the bottom of their screen.</td>
 </tr>
 <tr>
 <td>outlineColor</td>
-<td>A hex code for an outline color to set around the player. Set it to empty if you want to remove the outline.</td>
+<td>A six-digit hex code for an outline color to set around the player. Set it to empty if you want to remove the outline. Format is RRBBGG</td>
 </tr>
 <tr>
 <td>kill</td>
-<td>Whether or not to kill the player. They will kill themselves.</td>
+<td>Set this to true to kill the player.</td>
 </tr>
 </tbody>
 </table>
-<p>The server can either respond in this response format or with just a status code of 200 (OK). If the server only responds with 200, then nothing will be executed on the client.</p>
+<p>You can use weapon actions to change weapon data for the specified player.</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>weapon</td>
+<td>The index of the weapon to affect.</td>
+</tr>
+<tr>
+<td>equip</td>
+<td>Set this to true if you want the player to equip that weapon.</td>
+</tr>
+<tr>
+<td>changeAmmo</td>
+<td>The amount to change the ammo in the magazine (will always cap the ammo between 0 and the magazine size).</td>
+</tr>
+<tr>
+<td>changeTotal</td>
+<td>Change the total amount of ammo in the gun.</td>
+</tr>
+<tr>
+<td>setAmmo</td>
+<td>Sets the amount of ammo in the magazine.</td>
+</tr>
+<tr>
+<td>setTotal</td>
+<td>Sets the total amount of ammo in the gun.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="geometry">Geometry</h3>
+<p>The geometry section has two arrays, <code>add</code> and <code>remove</code>. To add geometry, add a new geometry object.</p>
+<pre><code>{
+<span class="hljs-symbol">    id:</span> <span class="hljs-number">0</span>,
+<span class="hljs-symbol">    model:</span> <span class="hljs-string">'sphere'</span>,
+<span class="hljs-symbol">    pos:</span> { <span class="hljs-string">x:</span> <span class="hljs-number">10</span>, <span class="hljs-string">y:</span> <span class="hljs-number">20</span>, <span class="hljs-string">z:</span> <span class="hljs-number">50</span> },
+<span class="hljs-symbol">    size:</span> { <span class="hljs-string">x:</span> <span class="hljs-number">1</span>, <span class="hljs-string">y:</span> <span class="hljs-number">1</span>, <span class="hljs-string">z:</span> <span class="hljs-number">2</span> },
+<span class="hljs-symbol">    rot:</span> { <span class="hljs-string">x:</span> <span class="hljs-number">360</span>, <span class="hljs-string">y:</span> <span class="hljs-number">180</span>, <span class="hljs-string">z:</span> <span class="hljs-number">90</span> },
+<span class="hljs-symbol">    color:</span> <span class="hljs-string">'66000000'</span>,
+<span class="hljs-symbol">    collision:</span> <span class="hljs-literal">false</span>,
+<span class="hljs-symbol">    animation:</span> {
+<span class="hljs-symbol">        keyframes:</span> [
+            <span class="hljs-string">'0'</span>: {
+<span class="hljs-symbol">                pos:</span> { <span class="hljs-string">x:</span> <span class="hljs-number">20</span>, <span class="hljs-string">y:</span> <span class="hljs-number">20</span>, <span class="hljs-string">z:</span> <span class="hljs-number">50</span> }
+            },
+            <span class="hljs-string">'80'</span>: {
+<span class="hljs-symbol">                pos:</span> { <span class="hljs-string">x:</span> <span class="hljs-number">80</span>, <span class="hljs-string">y:</span> <span class="hljs-number">20</span>, <span class="hljs-string">z:</span> <span class="hljs-number">50</span> }
+            }
+        ],
+<span class="hljs-symbol">        time:</span> <span class="hljs-number">1.2</span>,
+<span class="hljs-symbol">        ease:</span> linear
+    }
+}
+</code></pre><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>A numerical id that you assign to your geometry, which can be used to remove it in the future.</td>
+</tr>
+<tr>
+<td>model</td>
+<td>The primitive model to use for the geometry. The options are: cube, sphere, cylinder, prism.</td>
+</tr>
+<tr>
+<td>pos</td>
+<td>The position to spawn the object at. You can use /position in-game to view the position at the feet of your player in order to find out where to spawn it.</td>
+</tr>
+<tr>
+<td>size</td>
+<td>The size of the object.</td>
+</tr>
+<tr>
+<td>rot</td>
+<td>The rotation of the object.</td>
+</tr>
+<tr>
+<td>color</td>
+<td>a 8-digit hex code for the color of the object. Format is RRBBGGAA</td>
+</tr>
+<tr>
+<td>collision</td>
+<td>A boolean of whether players, bullets, and other physics objects should collide with the geometry.</td>
+</tr>
+<tr>
+<td>animation</td>
+<td>Animation data. <a href="#geometry-animation">more info</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="geometry-animation">Geometry Animation</h3>
+<p>Geometry can be animated! That is, move around, scale, rotate, and change color.
+To do so, you fill out the animation section when creating geometry.</p>
+<pre><code>{
+<span class="hljs-symbol">    id:</span> <span class="hljs-number">0</span>,
+<span class="hljs-symbol">    model:</span> <span class="hljs-string">'cube'</span>,
+<span class="hljs-symbol">    animation:</span> {
+<span class="hljs-symbol">        keyframes:</span> [
+            <span class="hljs-string">'0'</span>: {
+<span class="hljs-symbol">                pos:</span> { <span class="hljs-string">x:</span> <span class="hljs-number">0</span>, <span class="hljs-string">y:</span> <span class="hljs-number">0</span>, <span class="hljs-string">z:</span> <span class="hljs-number">0</span> },
+<span class="hljs-symbol">                size:</span> { <span class="hljs-string">x:</span> <span class="hljs-number">1</span>, <span class="hljs-string">y:</span> <span class="hljs-number">1</span>, <span class="hljs-string">z:</span> <span class="hljs-number">1</span> },
+<span class="hljs-symbol">                rot:</span> { <span class="hljs-string">x:</span> <span class="hljs-number">360</span>, <span class="hljs-string">y:</span> <span class="hljs-number">180</span>, <span class="hljs-string">z:</span> <span class="hljs-number">90</span> },
+<span class="hljs-symbol">                color:</span> <span class="hljs-string">'66000000'</span>
+            },
+            <span class="hljs-string">'50'</span>: {
+<span class="hljs-symbol">                pos:</span> { <span class="hljs-string">x:</span> <span class="hljs-number">80</span>, <span class="hljs-string">y:</span> <span class="hljs-number">20</span>, <span class="hljs-string">z:</span> <span class="hljs-number">50</span> }
+            }
+        ],
+<span class="hljs-symbol">        time:</span> <span class="hljs-number">2.0</span>,
+<span class="hljs-symbol">        ease:</span> linear
+    }
+}
+</code></pre><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>keyframes</td>
+<td>A dictionary with a key of percentage and a value of a keyframe object. Inside the keyframe object you can add pos, size, rot, and color.</td>
+</tr>
+<tr>
+<td>time</td>
+<td>How long the animation should take in seconds.</td>
+</tr>
+<tr>
+<td>ease</td>
+<td>The type of ease to use. Default is linear. The options are: <a href="https://easings.net/">https://easings.net/</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="tags">Tags</h3>
+<pre><code><span class="hljs-keyword">tags:</span> <span class="hljs-string">[
+    {
+        name: 'traitor',
+        visibleOutlines: [
+            'traitor'
+        ],
+        immune: [
+            'traitor'
+        ]
+</span>    },
+    {
+        name: 'innocent'
+    }
+]
+</code></pre><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>The name of the tag.</td>
+</tr>
+<tr>
+<td>visibleOutlines</td>
+<td>An array of tags that any player with this tag will be able to see the outlines of. Defaults to all tags.</td>
+</tr>
+<tr>
+<td>immune</td>
+<td>An array of tags that the player cannot take damage from.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="creating-your-server">Creating your Server</h2>
 <p>As I mentioned before, to use the API you will need to set up your own server. For my example, I used:</p>
 <ul>
@@ -810,5 +1052,6 @@ app.listen(PORT, () =&gt; {
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Server started on port <span class="hljs-subst">${PORT}</span>`</span>);
 });
 </code></pre>
+		</div>
 	</body>
 </html>
