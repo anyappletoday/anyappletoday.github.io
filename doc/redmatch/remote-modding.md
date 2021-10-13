@@ -1,4 +1,4 @@
-# Redmatch 2 Modding Documentation
+# Redmatch 2 Remote Modding Documentation
 
 - [About](#about)
 - [Client Setup](#client-setup)
