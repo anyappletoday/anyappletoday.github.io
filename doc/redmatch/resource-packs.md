@@ -106,9 +106,11 @@ filterMode can be Point, Bilinear, or Trilinear
 ### background_scroll.json
 
 	{
-		"amount": 200,
+		"height": 200,
 		"time": 2
 	}
+
+To test your resource pack before releasing it on the workshop, go to the ResourcePack folder (not ResourcePacks) in %appdata%\..\LocalLow\Redlabs\Redmatch 2
 
 When you've finished replacing all the files you want, you can upload your folder using the Upload button in-game on the Resource Pack menu.
 
