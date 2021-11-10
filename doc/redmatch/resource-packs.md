@@ -110,7 +110,7 @@ filterMode can be Point, Bilinear, or Trilinear
 		"time": 2
 	}
 
-To test your resource pack before releasing it on the workshop, go to the ResourcePack folder (not ResourcePacks) in %appdata%\..\LocalLow\Redlabs\Redmatch 2
+To test your resource pack before releasing it on the workshop, put all your files in a folder named ResourcePack (not ResourcePacks) in %appdata%..\LocalLow\Redlabs\Redmatch 2
 
 When you've finished replacing all the files you want, you can upload your folder using the Upload button in-game on the Resource Pack menu.
 
