@@ -1,0 +1,90 @@
+<link rel='stylesheet' href="style.css">
+<h1 id="redmatch-2-resource-pack-documentation">Redmatch 2 Resource Pack Documentation</h1>
+<p><img src="./images/demo.png" alt="demo"></p>
+<h2 id="what-s-a-resource-pack-">What&#39;s a resource pack?</h2>
+<p>A resource pack is a collection of files which replace things already in the game. In Redmatch 2, resource packs can replace textures and sounds.</p>
+<h2 id="where-can-i-get-resource-packs-">Where can I get resource packs?</h2>
+<p>You can get resource packs on the <a href="https://steamcommunity.com/app/1280770/workshop/">Steam Workshop</a>. Click the green plus button or the green subscribe on anything you like to automatically download it (it could take a bit to download so be patient).</p>
+<h2 id="how-do-i-make-a-resource-pack-">How do I make a resource pack?</h2>
+<p>You can make your own resource pack by creating a folder and filling it with various files.</p>
+<p><img src="./images/files.png" alt="files"></p>
+<p>Any files in your resource pack folder will replace the ones with the corresponding name in-game. For example, logo.png replaces the Redmatch 2 logo in-game.</p>
+<p>The texture files (end in .png) you can replace are:</p>
+<pre><code><span class="hljs-keyword">background
+</span><span class="hljs-keyword">bullet_hole
+</span><span class="hljs-symbol">kill_points_icon</span>
+<span class="hljs-symbol">level_blue</span>
+<span class="hljs-symbol">level_blue_cracked</span>
+<span class="hljs-symbol">level_glass</span>
+<span class="hljs-symbol">level_gray</span>
+<span class="hljs-symbol">level_gray_cracked</span>
+<span class="hljs-symbol">level_green</span>
+<span class="hljs-symbol">level_light</span>
+<span class="hljs-symbol">level_red</span>
+<span class="hljs-symbol">level_white</span>
+<span class="hljs-symbol">level_white_cracked</span>
+<span class="hljs-symbol">level_yellow</span>
+<span class="hljs-symbol">logo</span>
+<span class="hljs-symbol">relax_poster</span>
+<span class="hljs-symbol">rope</span>
+<span class="hljs-symbol">skybox_back</span>
+<span class="hljs-symbol">skybox_down</span>
+<span class="hljs-symbol">skybox_front</span>
+<span class="hljs-symbol">skybox_left</span>
+<span class="hljs-symbol">skybox_right</span>
+<span class="hljs-symbol">skybox_up</span>
+<span class="hljs-symbol">square_select</span>
+<span class="hljs-symbol">terrain</span>
+<span class="hljs-symbol">thumb</span>
+<span class="hljs-symbol">ui</span>
+<span class="hljs-symbol">win_or_die_poster</span>
+<span class="hljs-symbol">work_is_family_poster</span>
+<span class="hljs-symbol">your_job_poster</span>
+</code></pre><p>The audio files (end in .ogg or .wav) you can replace are:</p>
+<pre><code><span class="hljs-keyword">bullet_flyby
+</span>cabinet_buy
+cabinet_change_option
+cabinet_not_enough
+cabinet_startup
+explosion
+footstep
+hurt
+kill
+mag_in
+mag_out
+menu_music
+reload
+rifle_prime
+rifle_shot
+<span class="hljs-keyword">shotgun_prime
+</span><span class="hljs-keyword">shotgun_shot
+</span>sniper_shot
+ui_exp_tick
+ui_hover
+ui_level_up
+unsuccessful_hit
+</code></pre><p>You can also use a folder of audio files with the same name, and the game will choose a random audio file to play out of the folder (ui_ sounds do not support this).</p>
+<p>JSON files can optionally be used to customize various aspects of the files you provide.</p>
+<p>These are the optional JSON parameters:</p>
+<h3 id="general-textures-level_glass-json-level_green-json-etc-">General Textures (level_glass.json, level_green.json, etc)</h3>
+<p>filterMode can be Point, Bilinear, or Trilinear</p>
+<pre><code>{
+    <span class="hljs-attr">"filterMode"</span>: <span class="hljs-string">"Point"</span>,
+    <span class="hljs-attr">"metallic"</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">"smoothness"</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">"tiling"</span>: { <span class="hljs-attr">"x"</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">"y"</span>: <span class="hljs-number">1</span> }
+}
+</code></pre><h3 id="ui-json">ui.json</h3>
+<p>filterMode can be Point, Bilinear, or Trilinear</p>
+<pre><code>{
+    <span class="hljs-attr">"filterMode"</span>: <span class="hljs-string">"Point"</span>,
+    <span class="hljs-attr">"border"</span>: [<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>],
+    <span class="hljs-attr">"borderWidth"</span>: <span class="hljs-number">3</span>
+}
+</code></pre><h3 id="background_scroll-json">background_scroll.json</h3>
+<pre><code>{
+    <span class="hljs-attr">"amount"</span>: <span class="hljs-number">200</span>,
+    <span class="hljs-attr">"time"</span>: <span class="hljs-number">2</span>
+}
+</code></pre><p>When you&#39;ve finished replacing all the files you want, you can upload your folder using the Upload button in-game on the Resource Pack menu.</p>
+<h1 id="this-documentation-is-still-under-construction-join-the-discord-server-https-rugbug-net-discord-for-help-">This documentation is still under construction! Join the <a href="https://rugbug.net/discord">Discord Server</a> for help.</h1>
