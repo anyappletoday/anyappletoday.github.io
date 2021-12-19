@@ -1,6 +1,6 @@
 # Redmatch 2 Resource Pack Documentation
 
-![demo](/images/demo.png)
+![demo](images/demo.png)
 
 ## What's a resource pack?
 
@@ -14,11 +14,11 @@ You can get resource packs on the [Steam Workshop](https://steamcommunity.com/ap
 
 You can make your own resource pack by creating a folder and filling it with various files.
 
-![files](/images/files.png)
+![files](images/files.png)
 
 Any files in your resource pack folder will replace the ones with the corresponding name in-game. For example, logo.png replaces the Redmatch 2 logo in-game.
 
-The texture files (end in .png) you can replace are:
+The texture files (end in .png or .jpg) you can replace are:
 
 	background
 	bullet_hole
@@ -50,6 +50,11 @@ The texture files (end in .png) you can replace are:
 	win_or_die_poster
 	work_is_family_poster
 	your_job_poster
+    health_background
+    health_foreground
+    hitmarker
+    unsuccessful_hitmarker
+    loading
 
 The audio files (end in .ogg or .wav) you can replace are:
 
