@@ -55,6 +55,11 @@ The texture files (end in .png or .jpg) you can replace are:
     hitmarker
     unsuccessful_hitmarker
     loading
+	telescopic
+	red_dot
+	rifle
+	shotgun
+	sniper
 
 The audio files (end in .ogg or .wav) you can replace are:
 
