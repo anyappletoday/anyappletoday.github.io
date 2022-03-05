@@ -85,8 +85,10 @@ The audio files (end in .ogg or .wav) you can replace are:
 	ui_hover
 	ui_level_up
 	unsuccessful_hit
+	melee_hit
+	melee_miss
 
-You can also use a folder of audio files with the same name, and the game will choose a random audio file to play out of the folder (ui_ sounds do not support this).
+You can also use a folder of audio files with the same name, and the game will choose a random audio file to play out of the folder (ui sounds do not support this).
 
 JSON files can optionally be used to customize various aspects of the files you provide.
 
@@ -117,13 +119,24 @@ filterMode can be Point, Bilinear, or Trilinear
 
 	{
 		"height": 200,
-		"time": 2
+		"time": 2,
+		"ease": "Linear",
+		"loopType": "Restart"
+	}
+	
+### background_scroll_horizontal.json
+
+	{
+		"width": 0,
+		"time": 2,
+		"ease": "Linear",
+		"loopType": "Restart"
 	}
 
-To test your resource pack before releasing it on the workshop, put all your files in a folder named ResourcePack (not ResourcePacks) in %appdata%..\LocalLow\Redlabs\Redmatch 2
+To test your resource pack before releasing it on the workshop, put all your files in a folder named ResourcePack (not ResourcePacks) in `%appdata%\..\LocalLow\Redlabs\Redmatch 2`
 
 Press F5 at any time to reload all files in the resource pack (except for level textures)
 
-When you've finished replacing all the files you want, you can upload your folder using the Upload button in-game on the Resource Pack menu.
+When you've finished replacing all the files you want, you can upload your folder using the Upload button in-game on the Resource Pack menu. Uploading a pack with the same name as one you've previously uploaded will update the existing pack instead of uploading a new one.
 
 # This documentation is still under construction! Join the [Discord Server](https://rugbug.net/discord) for help.
