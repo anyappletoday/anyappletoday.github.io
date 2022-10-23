@@ -59,12 +59,13 @@ function toggleNavBarElement(categoryName, transition) {
 <li id="navbar-file-melee_hit"><a href="https://rugbug.net/redmatch/resource-packs/files/melee_hit.html" style="color: #ADDA78">melee_hit</a></li>
 <li id="navbar-file-melee_miss"><a href="https://rugbug.net/redmatch/resource-packs/files/melee_miss.html" style="color: #ADDA78">melee_miss</a></li>
 <li id="navbar-file-menu_music"><a href="https://rugbug.net/redmatch/resource-packs/files/menu_music.html" style="color: #ADDA78">menu_music</a></li>
-<li id="navbar-file-reload"><a href="https://rugbug.net/redmatch/resource-packs/files/reload.html" style="color: #ADDA78">reload</a></li>
 <li id="navbar-file-revolver_shot"><a href="https://rugbug.net/redmatch/resource-packs/files/revolver_shot.html" style="color: #ADDA78">revolver_shot</a></li>
 <li id="navbar-file-rifle_prime"><a href="https://rugbug.net/redmatch/resource-packs/files/rifle_prime.html" style="color: #ADDA78">rifle_prime</a></li>
 <li id="navbar-file-rifle_shot"><a href="https://rugbug.net/redmatch/resource-packs/files/rifle_shot.html" style="color: #ADDA78">rifle_shot</a></li>
 <li id="navbar-file-shotgun_prime"><a href="https://rugbug.net/redmatch/resource-packs/files/shotgun_prime.html" style="color: #ADDA78">shotgun_prime</a></li>
+<li id="navbar-file-shotgun_reload"><a href="https://rugbug.net/redmatch/resource-packs/files/shotgun_reload.html" style="color: #ADDA78">shotgun_reload</a></li>
 <li id="navbar-file-shotgun_shot"><a href="https://rugbug.net/redmatch/resource-packs/files/shotgun_shot.html" style="color: #ADDA78">shotgun_shot</a></li>
+<li id="navbar-file-sniper_bolt_rack"><a href="https://rugbug.net/redmatch/resource-packs/files/sniper_bolt_rack.html" style="color: #ADDA78">sniper_bolt_rack</a></li>
 <li id="navbar-file-sniper_shot"><a href="https://rugbug.net/redmatch/resource-packs/files/sniper_shot.html" style="color: #ADDA78">sniper_shot</a></li>
 <li id="navbar-file-time_trial_node_completed"><a href="https://rugbug.net/redmatch/resource-packs/files/time_trial_node_completed.html" style="color: #ADDA78">time_trial_node_completed</a></li>
 <li id="navbar-file-ui_exp_tick"><a href="https://rugbug.net/redmatch/resource-packs/files/ui_exp_tick.html" style="color: #ADDA78">ui_exp_tick</a></li>
@@ -77,7 +78,6 @@ function toggleNavBarElement(categoryName, transition) {
 <ul id="navbar-category-BackgroundAnimation" style="display: none" class="navbar-expandable">
 <li>
 <li id="navbar-file-background_scroll"><a href="https://rugbug.net/redmatch/resource-packs/files/background_scroll.html" style="color: #ADDA78">background_scroll</a></li>
-<li id="navbar-file-background_scroll_horizontal"><a href="https://rugbug.net/redmatch/resource-packs/files/background_scroll_horizontal.html" style="color: #ADDA78">background_scroll_horizontal</a></li>
 </ul>
 </li>
 <li style="display: flex"><span class="icon icon_shift_right" onclick="toggleNavBarElement('Font', true)" id="navbar-category-icon-Font"></span><a href="https://rugbug.net/redmatch/resource-packs/Font.html" style="padding: 0px"><span>Font</span></a></li>
@@ -234,66 +234,66 @@ function toggleNavBarElement(categoryName, transition) {
 <table>
 <tr>
 <th>
-Type
+Name
 </th>
 <th>
-Name
+Description
 </th>
 </tr>
 <tr>
-<td>
-Single
-</td>
 <td>
 rotation
 </td>
+<td>
+The rotation of the UI element.
+</td>
 </tr>
 <tr>
-<td>
-SerializableVector3
-</td>
 <td>
 scale
 </td>
+<td>
+A 2D vector. Sets the scaling of the UI element on the x and y axis.
+</td>
 </tr>
 <tr>
-<td>
-SerializableVector2
-</td>
 <td>
 anchorMin
 </td>
+<td>
+A 2D vector, with values between 0.0 - 1.0. Sets the position that the lower left corner of the UI element is anchored to.
+</td>
 </tr>
 <tr>
-<td>
-SerializableVector2
-</td>
 <td>
 anchorMax
 </td>
+<td>
+A 2D vector, with values between 0.0 - 1.0. Sets the position that the upper right corner of the UI element is anchored to.
+</td>
 </tr>
 <tr>
-<td>
-SerializableVector2
-</td>
 <td>
 pivot
 </td>
+<td>
+A 2D vector, with values between 0.0 - 1.0. If the UI element expands dynamically, this will be the anchor for the expansion.
+</td>
 </tr>
 <tr>
-<td>
-SerializableVector2
-</td>
 <td>
 anchoredPosition
 </td>
+<td>
+A 2D vector, with x values between 0.0 - 1920.0 and y values between 0.0 - 1080.0. The game's UI is on a canvas with a virtual scale of 1920x1080, resized to different monitor resolutions. This is the position that the UI element will have relative to the anchors.
+</td>
 </tr>
 <tr>
 <td>
-SerializableVector2
+sizeDelta
 </td>
 <td>
-sizeDelta
+A 2D vector. This is similar to scale, but instead of stretching the UI element it will expand its bounding box. For example, you might want a text UI element to have more room but not necessarily stretch out the text. If the anchors have been set to the corners of the screen, then this value represents how much bigger or smaller this UI element is relative to the screen.
 </td>
 </tr>
 </table><h2>Related Files</h2>

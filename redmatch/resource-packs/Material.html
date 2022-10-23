@@ -59,12 +59,13 @@ function toggleNavBarElement(categoryName, transition) {
 <li id="navbar-file-melee_hit"><a href="https://rugbug.net/redmatch/resource-packs/files/melee_hit.html" style="color: #ADDA78">melee_hit</a></li>
 <li id="navbar-file-melee_miss"><a href="https://rugbug.net/redmatch/resource-packs/files/melee_miss.html" style="color: #ADDA78">melee_miss</a></li>
 <li id="navbar-file-menu_music"><a href="https://rugbug.net/redmatch/resource-packs/files/menu_music.html" style="color: #ADDA78">menu_music</a></li>
-<li id="navbar-file-reload"><a href="https://rugbug.net/redmatch/resource-packs/files/reload.html" style="color: #ADDA78">reload</a></li>
 <li id="navbar-file-revolver_shot"><a href="https://rugbug.net/redmatch/resource-packs/files/revolver_shot.html" style="color: #ADDA78">revolver_shot</a></li>
 <li id="navbar-file-rifle_prime"><a href="https://rugbug.net/redmatch/resource-packs/files/rifle_prime.html" style="color: #ADDA78">rifle_prime</a></li>
 <li id="navbar-file-rifle_shot"><a href="https://rugbug.net/redmatch/resource-packs/files/rifle_shot.html" style="color: #ADDA78">rifle_shot</a></li>
 <li id="navbar-file-shotgun_prime"><a href="https://rugbug.net/redmatch/resource-packs/files/shotgun_prime.html" style="color: #ADDA78">shotgun_prime</a></li>
+<li id="navbar-file-shotgun_reload"><a href="https://rugbug.net/redmatch/resource-packs/files/shotgun_reload.html" style="color: #ADDA78">shotgun_reload</a></li>
 <li id="navbar-file-shotgun_shot"><a href="https://rugbug.net/redmatch/resource-packs/files/shotgun_shot.html" style="color: #ADDA78">shotgun_shot</a></li>
+<li id="navbar-file-sniper_bolt_rack"><a href="https://rugbug.net/redmatch/resource-packs/files/sniper_bolt_rack.html" style="color: #ADDA78">sniper_bolt_rack</a></li>
 <li id="navbar-file-sniper_shot"><a href="https://rugbug.net/redmatch/resource-packs/files/sniper_shot.html" style="color: #ADDA78">sniper_shot</a></li>
 <li id="navbar-file-time_trial_node_completed"><a href="https://rugbug.net/redmatch/resource-packs/files/time_trial_node_completed.html" style="color: #ADDA78">time_trial_node_completed</a></li>
 <li id="navbar-file-ui_exp_tick"><a href="https://rugbug.net/redmatch/resource-packs/files/ui_exp_tick.html" style="color: #ADDA78">ui_exp_tick</a></li>
@@ -77,7 +78,6 @@ function toggleNavBarElement(categoryName, transition) {
 <ul id="navbar-category-BackgroundAnimation" style="display: none" class="navbar-expandable">
 <li>
 <li id="navbar-file-background_scroll"><a href="https://rugbug.net/redmatch/resource-packs/files/background_scroll.html" style="color: #ADDA78">background_scroll</a></li>
-<li id="navbar-file-background_scroll_horizontal"><a href="https://rugbug.net/redmatch/resource-packs/files/background_scroll_horizontal.html" style="color: #ADDA78">background_scroll_horizontal</a></li>
 </ul>
 </li>
 <li style="display: flex"><span class="icon icon_shift_right" onclick="toggleNavBarElement('Font', true)" id="navbar-category-icon-Font"></span><a href="https://rugbug.net/redmatch/resource-packs/Font.html" style="padding: 0px"><span>Font</span></a></li>
@@ -236,50 +236,50 @@ function toggleNavBarElement(categoryName, transition) {
 <table>
 <tr>
 <th>
-Type
+Name
 </th>
 <th>
-Name
+Description
 </th>
 </tr>
 <tr>
-<td>
-Single
-</td>
 <td>
 metallic
 </td>
+<td>
+A number from 0.0 - 1.0. Determines how "metal-like" the surface is. When a surface is more metallic, it reflects the environment more and its colour becomes less visible. At full metallic level, the surface colour is entirely driven by reflections from the environment. You can specify which parts are metallic with the red channel in a metallic_map texture.
+</td>
 </tr>
 <tr>
-<td>
-Single
-</td>
 <td>
 smoothness
 </td>
+<td>
+A number from 0.0 - 1.0. Determines how rough/smooth the surface is. You can specify which parts are smooth with the alpha channel in a metallic_map texture.
+</td>
 </tr>
 <tr>
-<td>
-SerializableVector2
-</td>
 <td>
 tiling
 </td>
+<td>
+A 2D vector. Specifies how much the texture repeats in the x and y direction.
+</td>
 </tr>
 <tr>
-<td>
-String
-</td>
 <td>
 emissionColor
 </td>
+<td>
+A hex color. The color that the material should glow. If you want have more than one color and intensity, you can use an emission_map texture.
+</td>
 </tr>
 <tr>
 <td>
-Single
+emissionIntensity
 </td>
 <td>
-emissionIntensity
+A number above 0. How bright the glow is. You should have this above around 1 for the glow be noticeable. You can specify which parts glow and what color they are with an emission_map texture.
 </td>
 </tr>
 </table><h2>Related Files</h2>
