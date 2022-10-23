@@ -1,0 +1,221 @@
+@font-face { 
+	font-family: 'Bahnschrift';
+	src: url('.../bahnschrift.ttf') format('ttf');
+}
+
+h1, h2, h3, li {
+	font-family: Bahnschrift;
+}
+
+li {
+	margin: 3px 0;
+}
+
+ul a {
+	color: #ACB5BE;
+	text-decoration: none;
+	background-color: rgba(0, 0, 0, 0);
+	transition: background-color 0.1s linear;
+	transition: margin 0.1s linear;
+	border-radius: 5px;
+	margin: 0 0;
+	padding: 5px;
+}
+
+a {
+	color: #62b0ff;
+}
+
+ul a:hover {
+	background-color: rgba(0, 0, 0, 0.6);
+	border-radius: 5px;
+	margin: 0 5;
+	padding: 5px;
+}
+
+h2, h3 {
+	font-weight: normal;
+}
+
+h1:after, h2:after, h3:after {
+	content: ' ';
+	display: block;
+	border: 1px solid #45474D;
+}
+
+.hljs-string, h2, .sidebar a {
+	color: #F38D68;
+}
+
+.hljs-number {
+	color: #A8A9EB;
+}
+
+.hljs-built_in, h3, .sidebar li ul a {
+	color: #ADDA78;
+}
+
+.hljs-literal {
+	color: #A8A9EB;
+}
+
+.hljs-function {
+	color: #85DACC;
+}
+
+.hljs-params {
+	color: #F38D68;
+}
+
+p, ul, table {
+	font-size: 16px;
+	font-family: Bahnschrift;
+	/* font-family: Helvetica; */
+	color: #ACB5BE;
+}
+
+body {
+	max-width: 50%;
+	min-width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #161920;
+	color: #E6E6E6;
+}
+
+.checkered-background {
+	background-image: url("checkerboard.png");
+	background-size: 20px 20px;
+	background-position: 0 0, 10px 0, 10px -10px, 0px 10px;
+}
+
+.dark-checkered-background {
+	background-image: url("dark-checkerboard.png");
+	background-size: 20px 20px;
+	background-position: 0 0, 10px 0, 10px -10px, 0px 10px;
+}
+
+pre code {
+	margin-left: 40px;
+	background-color: #1E1F22;
+	border: 1px solid #535354;
+	border-radius: 5px;
+	padding: 20px;
+	display: block;
+	white-space: pre-wrap;
+}
+
+tr, t, th.invisible-table {
+	background: rgb(0, 0, 0, 0);
+}
+
+th.invisible-table {
+	background: rgb(0, 0, 0, 0);
+}
+
+table {
+	width: 100%;
+}
+
+tr, td, th {
+	padding: 5px;
+}
+
+th {
+	background: #4E5155;
+	color: #E6E6E6;
+	text-align: left;
+}
+
+td:first-child {
+	width: 150px;
+}
+
+tr:nth-child(even) {
+	background: #1D2027;
+}
+
+tr:nth-child(odd) {
+	background: #22252B;
+}
+
+.sidebar {
+	height: 100%;
+	width: 300px;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #111;
+	overflow-x: hidden;
+	padding-top: 5px;
+}
+
+.sidebar ul {
+	margin-left: -20px;
+	list-style-type: none;
+}
+
+.sidebar a {
+	text-decoration: none;
+}
+
+.sidebar a:hover {
+	text-decoration: underline;
+}
+
+audio::-webkit-media-controls-panel {
+	background-color: #ACB5BE;
+}
+
+#page-container {
+	position: relative;
+	min-height: 100vh;
+}
+
+#content-wrap {
+	padding-bottom: 50px;    /* Footer height */
+}
+
+#footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 50px;            /* Footer height */
+}
+
+#footer p {
+	font-size: 14px;
+	text-align: center;
+	padding-bottom: 10px;
+}
+
+.navbar-expandable {
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.15s ease-out;
+}
+
+.icon_shift_right{ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwgAADsIBFShKgAAAABl0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC4xMzQDW3oAAAB9SURBVDhPpZJLDsAgCETtPbz/ibroonehM4YYKCxUSF6srzCxnyYiJVK5Qyp3yCUK60XGxpTtI0EoHL7BA7rOjtL7kyAUBnCY9YIZgmtHEIYOOMyaIVgdQRh4ChvCE9G5Prf5UQ4oPUL5JTLg/DNqI0OOf6RlUrlDKteR9gEM/tAXCSMyLQAAAABJRU5ErkJggg==) }
+
+.icon {
+	cursor: pointer;
+	width: 16px;
+	height: 16px;
+	display:block;
+	margin-right: 2px;
+	transform: rotate(0deg);
+	transition-property: all;
+	transition-duration: 0.15s;
+}
+
+.open {
+	transform: rotate(90deg);
+}
+
+.no_transition {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}

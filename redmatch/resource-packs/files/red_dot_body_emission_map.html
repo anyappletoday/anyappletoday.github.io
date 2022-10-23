@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>red_dot_body_emission_map</title>
+		<link rel="stylesheet" type="text/css" href="../stylesheet.css">
+		<script>
+function toggleNavBarElement(categoryName, transition) {
+	let element = document.getElementById('navbar-category-' + categoryName);
+	let icon = document.getElementById('navbar-category-icon-' + categoryName);
+	if(transition === false) {
+		element.classList.add('no_transition');
+		icon.classList.add('no_transition');
+	}
+	if(element.style.display === "") {		
+		setTimeout(function() {
+			element.style.maxHeight = '0px';
+			icon.classList.remove('open');
+  		}, 10);
+		setTimeout(function() {
+			element.style.display = "none";
+		}, 200)
+	} else {
+		element.style.display = "";
+		setTimeout(function() {
+			element.style.maxHeight = element.scrollHeight + 'px';
+			icon.classList.add('open');
+ 		}, 10);
+	}
+	setTimeout(function() {
+		if(transition === false) {
+			element.classList.remove('no_transition');
+			icon.classList.remove('no_transition');
+		}
+	}, 200);
+}
+		</script>
+	</head>
+	<body>
+		<div id="page-container">
+			<div id="content-wrap"><div class="sidebar">
+<ul>
+<li><a href="https://rugbug.net/redmatch/resource-packs/index.html" style="color: white">Home</a></li>
+</ul>
+<ul>
+<li style="display: flex"><span class="icon icon_shift_right" onclick="toggleNavBarElement('Audio', true)" id="navbar-category-icon-Audio"></span><a href="https://rugbug.net/redmatch/resource-packs/Audio.html" style="padding: 0px"><span>Audio</span></a></li>
+<ul id="navbar-category-Audio" style="display: none" class="navbar-expandable">
+<li>
+<li id="navbar-file-bullet_flyby"><a href="https://rugbug.net/redmatch/resource-packs/files/bullet_flyby.html" style="color: #ADDA78">bullet_flyby</a></li>
+<li id="navbar-file-cabinet_buy"><a href="https://rugbug.net/redmatch/resource-packs/files/cabinet_buy.html" style="color: #ADDA78">cabinet_buy</a></li>
+<li id="navbar-file-cabinet_change_option"><a href="https://rugbug.net/redmatch/resource-packs/files/cabinet_change_option.html" style="color: #ADDA78">cabinet_change_option</a></li>
+<li id="navbar-file-cabinet_not_enough"><a href="https://rugbug.net/redmatch/resource-packs/files/cabinet_not_enough.html" style="color: #ADDA78">cabinet_not_enough</a></li>
+<li id="navbar-file-cabinet_startup"><a href="https://rugbug.net/redmatch/resource-packs/files/cabinet_startup.html" style="color: #ADDA78">cabinet_startup</a></li>
+<li id="navbar-file-footstep"><a href="https://rugbug.net/redmatch/resource-packs/files/footstep.html" style="color: #ADDA78">footstep</a></li>
+<li id="navbar-file-hurt"><a href="https://rugbug.net/redmatch/resource-packs/files/hurt.html" style="color: #ADDA78">hurt</a></li>
+<li id="navbar-file-kill"><a href="https://rugbug.net/redmatch/resource-packs/files/kill.html" style="color: #ADDA78">kill</a></li>
+<li id="navbar-file-mag_in"><a href="https://rugbug.net/redmatch/resource-packs/files/mag_in.html" style="color: #ADDA78">mag_in</a></li>
+<li id="navbar-file-mag_out"><a href="https://rugbug.net/redmatch/resource-packs/files/mag_out.html" style="color: #ADDA78">mag_out</a></li>
+<li id="navbar-file-melee_hit"><a href="https://rugbug.net/redmatch/resource-packs/files/melee_hit.html" style="color: #ADDA78">melee_hit</a></li>
+<li id="navbar-file-melee_miss"><a href="https://rugbug.net/redmatch/resource-packs/files/melee_miss.html" style="color: #ADDA78">melee_miss</a></li>
+<li id="navbar-file-menu_music"><a href="https://rugbug.net/redmatch/resource-packs/files/menu_music.html" style="color: #ADDA78">menu_music</a></li>
+<li id="navbar-file-reload"><a href="https://rugbug.net/redmatch/resource-packs/files/reload.html" style="color: #ADDA78">reload</a></li>
+<li id="navbar-file-revolver_shot"><a href="https://rugbug.net/redmatch/resource-packs/files/revolver_shot.html" style="color: #ADDA78">revolver_shot</a></li>
+<li id="navbar-file-rifle_prime"><a href="https://rugbug.net/redmatch/resource-packs/files/rifle_prime.html" style="color: #ADDA78">rifle_prime</a></li>
+<li id="navbar-file-rifle_shot"><a href="https://rugbug.net/redmatch/resource-packs/files/rifle_shot.html" style="color: #ADDA78">rifle_shot</a></li>
+<li id="navbar-file-shotgun_prime"><a href="https://rugbug.net/redmatch/resource-packs/files/shotgun_prime.html" style="color: #ADDA78">shotgun_prime</a></li>
+<li id="navbar-file-shotgun_shot"><a href="https://rugbug.net/redmatch/resource-packs/files/shotgun_shot.html" style="color: #ADDA78">shotgun_shot</a></li>
+<li id="navbar-file-sniper_shot"><a href="https://rugbug.net/redmatch/resource-packs/files/sniper_shot.html" style="color: #ADDA78">sniper_shot</a></li>
+<li id="navbar-file-time_trial_node_completed"><a href="https://rugbug.net/redmatch/resource-packs/files/time_trial_node_completed.html" style="color: #ADDA78">time_trial_node_completed</a></li>
+<li id="navbar-file-ui_exp_tick"><a href="https://rugbug.net/redmatch/resource-packs/files/ui_exp_tick.html" style="color: #ADDA78">ui_exp_tick</a></li>
+<li id="navbar-file-ui_hover"><a href="https://rugbug.net/redmatch/resource-packs/files/ui_hover.html" style="color: #ADDA78">ui_hover</a></li>
+<li id="navbar-file-ui_level_up"><a href="https://rugbug.net/redmatch/resource-packs/files/ui_level_up.html" style="color: #ADDA78">ui_level_up</a></li>
+<li id="navbar-file-unsuccessful_hit"><a href="https://rugbug.net/redmatch/resource-packs/files/unsuccessful_hit.html" style="color: #ADDA78">unsuccessful_hit</a></li>
+</ul>
+</li>
+<li style="display: flex"><span class="icon icon_shift_right" onclick="toggleNavBarElement('BackgroundAnimation', true)" id="navbar-category-icon-BackgroundAnimation"></span><a href="https://rugbug.net/redmatch/resource-packs/BackgroundAnimation.html" style="padding: 0px"><span>BackgroundAnimation</span></a></li>
+<ul id="navbar-category-BackgroundAnimation" style="display: none" class="navbar-expandable">
+<li>
+<li id="navbar-file-background_scroll"><a href="https://rugbug.net/redmatch/resource-packs/files/background_scroll.html" style="color: #ADDA78">background_scroll</a></li>
+<li id="navbar-file-background_scroll_horizontal"><a href="https://rugbug.net/redmatch/resource-packs/files/background_scroll_horizontal.html" style="color: #ADDA78">background_scroll_horizontal</a></li>
+</ul>
+</li>
+<li style="display: flex"><span class="icon icon_shift_right" onclick="toggleNavBarElement('Font', true)" id="navbar-category-icon-Font"></span><a href="https://rugbug.net/redmatch/resource-packs/Font.html" style="padding: 0px"><span>Font</span></a></li>
+<ul id="navbar-category-Font" style="display: none" class="navbar-expandable">
+<li>
+<li id="navbar-file-ammo_text"><a href="https://rugbug.net/redmatch/resource-packs/files/ammo_text.html" style="color: #ADDA78">ammo_text</a></li>
+<li id="navbar-file-font"><a href="https://rugbug.net/redmatch/resource-packs/files/font.html" style="color: #ADDA78">font</a></li>
+<li id="navbar-file-health_text"><a href="https://rugbug.net/redmatch/resource-packs/files/health_text.html" style="color: #ADDA78">health_text</a></li>
+<li id="navbar-file-shield_text"><a href="https://rugbug.net/redmatch/resource-packs/files/shield_text.html" style="color: #ADDA78">shield_text</a></li>
+<li id="navbar-file-timer_text"><a href="https://rugbug.net/redmatch/resource-packs/files/timer_text.html" style="color: #ADDA78">timer_text</a></li>
+<li id="navbar-file-total_ammo_text"><a href="https://rugbug.net/redmatch/resource-packs/files/total_ammo_text.html" style="color: #ADDA78">total_ammo_text</a></li>
+</ul>
+</li>
+<li style="display: flex"><span class="icon icon_shift_right" onclick="toggleNavBarElement('Image', true)" id="navbar-category-icon-Image"></span><a href="https://rugbug.net/redmatch/resource-packs/Image.html" style="padding: 0px"><span>Image</span></a></li>
+<ul id="navbar-category-Image" style="display: none" class="navbar-expandable">
+<li>
+<li id="navbar-file-background"><a href="https://rugbug.net/redmatch/resource-packs/files/background.html" style="color: #ADDA78">background</a></li>
+<li id="navbar-file-fullscreen_background"><a href="https://rugbug.net/redmatch/resource-packs/files/fullscreen_background.html" style="color: #ADDA78">fullscreen_background</a></li>
+<li id="navbar-file-game_ui_overlay"><a href="https://rugbug.net/redmatch/resource-packs/files/game_ui_overlay.html" style="color: #ADDA78">game_ui_overlay</a></li>
+<li id="navbar-file-game_ui_underlay"><a href="https://rugbug.net/redmatch/resource-packs/files/game_ui_underlay.html" style="color: #ADDA78">game_ui_underlay</a></li>
+<li id="navbar-file-health_background"><a href="https://rugbug.net/redmatch/resource-packs/files/health_background.html" style="color: #ADDA78">health_background</a></li>
+<li id="navbar-file-health_foreground"><a href="https://rugbug.net/redmatch/resource-packs/files/health_foreground.html" style="color: #ADDA78">health_foreground</a></li>
+<li id="navbar-file-hitmarker"><a href="https://rugbug.net/redmatch/resource-packs/files/hitmarker.html" style="color: #ADDA78">hitmarker</a></li>
+<li id="navbar-file-kill_points_icon"><a href="https://rugbug.net/redmatch/resource-packs/files/kill_points_icon.html" style="color: #ADDA78">kill_points_icon</a></li>
+<li id="navbar-file-locked_shield_foreground"><a href="https://rugbug.net/redmatch/resource-packs/files/locked_shield_foreground.html" style="color: #ADDA78">locked_shield_foreground</a></li>
+<li id="navbar-file-logo"><a href="https://rugbug.net/redmatch/resource-packs/files/logo.html" style="color: #ADDA78">logo</a></li>
+<li id="navbar-file-shield_background"><a href="https://rugbug.net/redmatch/resource-packs/files/shield_background.html" style="color: #ADDA78">shield_background</a></li>
+<li id="navbar-file-shield_foreground"><a href="https://rugbug.net/redmatch/resource-packs/files/shield_foreground.html" style="color: #ADDA78">shield_foreground</a></li>
+<li id="navbar-file-ui"><a href="https://rugbug.net/redmatch/resource-packs/files/ui.html" style="color: #ADDA78">ui</a></li>
+<li id="navbar-file-ui_tab"><a href="https://rugbug.net/redmatch/resource-packs/files/ui_tab.html" style="color: #ADDA78">ui_tab</a></li>
+<li id="navbar-file-unsuccessful_hitmarker"><a href="https://rugbug.net/redmatch/resource-packs/files/unsuccessful_hitmarker.html" style="color: #ADDA78">unsuccessful_hitmarker</a></li>
+</ul>
+</li>
+<li style="display: flex"><span class="icon icon_shift_right" onclick="toggleNavBarElement('LoadingScreen', true)" id="navbar-category-icon-LoadingScreen"></span><a href="https://rugbug.net/redmatch/resource-packs/LoadingScreen.html" style="padding: 0px"><span>LoadingScreen</span></a></li>
+<ul id="navbar-category-LoadingScreen" style="display: none" class="navbar-expandable">
+<li>
+<li id="navbar-file-loading"><a href="https://rugbug.net/redmatch/resource-packs/files/loading.html" style="color: #ADDA78">loading</a></li>
+</ul>
+</li>
+<li style="display: flex"><span class="icon icon_shift_right" onclick="toggleNavBarElement('Material', true)" id="navbar-category-icon-Material"></span><a href="https://rugbug.net/redmatch/resource-packs/Material.html" style="padding: 0px"><span>Material</span></a></li>
+<ul id="navbar-category-Material" style="display: none" class="navbar-expandable">
+<li>
+<li id="navbar-file-grapple_hook"><a href="https://rugbug.net/redmatch/resource-packs/files/grapple_hook.html" style="color: #ADDA78">grapple_hook</a></li>
+<li id="navbar-file-grapple_hook_emission_map"><a href="https://rugbug.net/redmatch/resource-packs/files/grapple_hook_emission_map.html" style="color: #ADDA78">grapple_hook_emission_map</a></li>
+<li id="navbar-file-grapple_hook_metallic_map"><a href="https://rugbug.net/redmatch/resource-packs/files/grapple_hook_metallic_map.html" style="color: #ADDA78">grapple_hook_metallic_map</a></li>
+<li id="navbar-file-level_blue"><a href="https://rugbug.net/redmatch/resource-packs/files/level_blue.html" style="color: #ADDA78">level_blue</a></li>
+<li id="navbar-file-level_blue_cracked"><a href="https://rugbug.net/redmatch/resource-packs/files/level_blue_cracked.html" style="color: #ADDA78">level_blue_cracked</a></li>
+<li id="navbar-file-level_brown"><a href="https://rugbug.net/redmatch/resource-packs/files/level_brown.html" style="color: #ADDA78">level_brown</a></li>
+<li id="navbar-file-level_glass"><a href="https://rugbug.net/redmatch/resource-packs/files/level_glass.html" style="color: #ADDA78">level_glass</a></li>
+<li id="navbar-file-level_gray"><a href="https://rugbug.net/redmatch/resource-packs/files/level_gray.html" style="color: #ADDA78">level_gray</a></li>
+<li id="navbar-file-level_gray_cracked"><a href="https://rugbug.net/redmatch/resource-packs/files/level_gray_cracked.html" style="color: #ADDA78">level_gray_cracked</a></li>
+<li id="navbar-file-level_green"><a href="https://rugbug.net/redmatch/resource-packs/files/level_green.html" style="color: #ADDA78">level_green</a></li>
+<li id="navbar-file-level_light"><a href="https://rugbug.net/redmatch/resource-packs/files/level_light.html" style="color: #ADDA78">level_light</a></li>
+<li id="navbar-file-level_red"><a href="https://rugbug.net/redmatch/resource-packs/files/level_red.html" style="color: #ADDA78">level_red</a></li>
+<li id="navbar-file-level_tan"><a href="https://rugbug.net/redmatch/resource-packs/files/level_tan.html" style="color: #ADDA78">level_tan</a></li>
+<li id="navbar-file-level_white"><a href="https://rugbug.net/redmatch/resource-packs/files/level_white.html" style="color: #ADDA78">level_white</a></li>
+<li id="navbar-file-level_white_cracked"><a href="https://rugbug.net/redmatch/resource-packs/files/level_white_cracked.html" style="color: #ADDA78">level_white_cracked</a></li>
+<li id="navbar-file-level_yellow"><a href="https://rugbug.net/redmatch/resource-packs/files/level_yellow.html" style="color: #ADDA78">level_yellow</a></li>
+<li id="navbar-file-red_dot"><a href="https://rugbug.net/redmatch/resource-packs/files/red_dot.html" style="color: #ADDA78">red_dot</a></li>
+<li id="navbar-file-red_dot_body"><a href="https://rugbug.net/redmatch/resource-packs/files/red_dot_body.html" style="color: #ADDA78">red_dot_body</a></li>
+<li id="navbar-file-red_dot_body_emission_map"><a href="https://rugbug.net/redmatch/resource-packs/files/red_dot_body_emission_map.html" style="color: #ADDA78">red_dot_body_emission_map</a></li>
+<li id="navbar-file-red_dot_body_metallic_map"><a href="https://rugbug.net/redmatch/resource-packs/files/red_dot_body_metallic_map.html" style="color: #ADDA78">red_dot_body_metallic_map</a></li>
+<li id="navbar-file-reflex"><a href="https://rugbug.net/redmatch/resource-packs/files/reflex.html" style="color: #ADDA78">reflex</a></li>
+<li id="navbar-file-reflex_body"><a href="https://rugbug.net/redmatch/resource-packs/files/reflex_body.html" style="color: #ADDA78">reflex_body</a></li>
+<li id="navbar-file-reflex_body_emission_map"><a href="https://rugbug.net/redmatch/resource-packs/files/reflex_body_emission_map.html" style="color: #ADDA78">reflex_body_emission_map</a></li>
+<li id="navbar-file-reflex_body_metallic_map"><a href="https://rugbug.net/redmatch/resource-packs/files/reflex_body_metallic_map.html" style="color: #ADDA78">reflex_body_metallic_map</a></li>
+<li id="navbar-file-relax_poster"><a href="https://rugbug.net/redmatch/resource-packs/files/relax_poster.html" style="color: #ADDA78">relax_poster</a></li>
+<li id="navbar-file-revolver"><a href="https://rugbug.net/redmatch/resource-packs/files/revolver.html" style="color: #ADDA78">revolver</a></li>
+<li id="navbar-file-revolver_emission_map"><a href="https://rugbug.net/redmatch/resource-packs/files/revolver_emission_map.html" style="color: #ADDA78">revolver_emission_map</a></li>
+<li id="navbar-file-revolver_metallic_map"><a href="https://rugbug.net/redmatch/resource-packs/files/revolver_metallic_map.html" style="color: #ADDA78">revolver_metallic_map</a></li>
+<li id="navbar-file-rifle"><a href="https://rugbug.net/redmatch/resource-packs/files/rifle.html" style="color: #ADDA78">rifle</a></li>
+<li id="navbar-file-rifle_emission_map"><a href="https://rugbug.net/redmatch/resource-packs/files/rifle_emission_map.html" style="color: #ADDA78">rifle_emission_map</a></li>
+<li id="navbar-file-rifle_metallic_map"><a href="https://rugbug.net/redmatch/resource-packs/files/rifle_metallic_map.html" style="color: #ADDA78">rifle_metallic_map</a></li>
+<li id="navbar-file-rope"><a href="https://rugbug.net/redmatch/resource-packs/files/rope.html" style="color: #ADDA78">rope</a></li>
+<li id="navbar-file-rope_emission_map"><a href="https://rugbug.net/redmatch/resource-packs/files/rope_emission_map.html" style="color: #ADDA78">rope_emission_map</a></li>
+<li id="navbar-file-rope_metallic_map"><a href="https://rugbug.net/redmatch/resource-packs/files/rope_metallic_map.html" style="color: #ADDA78">rope_metallic_map</a></li>
+<li id="navbar-file-shotgun"><a href="https://rugbug.net/redmatch/resource-packs/files/shotgun.html" style="color: #ADDA78">shotgun</a></li>
+<li id="navbar-file-shotgun_emission_map"><a href="https://rugbug.net/redmatch/resource-packs/files/shotgun_emission_map.html" style="color: #ADDA78">shotgun_emission_map</a></li>
+<li id="navbar-file-shotgun_metallic_map"><a href="https://rugbug.net/redmatch/resource-packs/files/shotgun_metallic_map.html" style="color: #ADDA78">shotgun_metallic_map</a></li>
+<li id="navbar-file-sniper"><a href="https://rugbug.net/redmatch/resource-packs/files/sniper.html" style="color: #ADDA78">sniper</a></li>
+<li id="navbar-file-sniper_emission_map"><a href="https://rugbug.net/redmatch/resource-packs/files/sniper_emission_map.html" style="color: #ADDA78">sniper_emission_map</a></li>
+<li id="navbar-file-sniper_metallic_map"><a href="https://rugbug.net/redmatch/resource-packs/files/sniper_metallic_map.html" style="color: #ADDA78">sniper_metallic_map</a></li>
+<li id="navbar-file-telescopic"><a href="https://rugbug.net/redmatch/resource-packs/files/telescopic.html" style="color: #ADDA78">telescopic</a></li>
+<li id="navbar-file-work_is_family_poster"><a href="https://rugbug.net/redmatch/resource-packs/files/work_is_family_poster.html" style="color: #ADDA78">work_is_family_poster</a></li>
+<li id="navbar-file-your_job_poster"><a href="https://rugbug.net/redmatch/resource-packs/files/your_job_poster.html" style="color: #ADDA78">your_job_poster</a></li>
+</ul>
+</li>
+<li style="display: flex"><span class="icon icon_shift_right" onclick="toggleNavBarElement('Skybox', true)" id="navbar-category-icon-Skybox"></span><a href="https://rugbug.net/redmatch/resource-packs/Skybox.html" style="padding: 0px"><span>Skybox</span></a></li>
+<ul id="navbar-category-Skybox" style="display: none" class="navbar-expandable">
+<li>
+<li id="navbar-file-skybox_back"><a href="https://rugbug.net/redmatch/resource-packs/files/skybox_back.html" style="color: #ADDA78">skybox_back</a></li>
+<li id="navbar-file-skybox_down"><a href="https://rugbug.net/redmatch/resource-packs/files/skybox_down.html" style="color: #ADDA78">skybox_down</a></li>
+<li id="navbar-file-skybox_front"><a href="https://rugbug.net/redmatch/resource-packs/files/skybox_front.html" style="color: #ADDA78">skybox_front</a></li>
+<li id="navbar-file-skybox_left"><a href="https://rugbug.net/redmatch/resource-packs/files/skybox_left.html" style="color: #ADDA78">skybox_left</a></li>
+<li id="navbar-file-skybox_right"><a href="https://rugbug.net/redmatch/resource-packs/files/skybox_right.html" style="color: #ADDA78">skybox_right</a></li>
+<li id="navbar-file-skybox_up"><a href="https://rugbug.net/redmatch/resource-packs/files/skybox_up.html" style="color: #ADDA78">skybox_up</a></li>
+</ul>
+</li>
+<li style="display: flex"><span class="icon icon_shift_right" onclick="toggleNavBarElement('Terrain', true)" id="navbar-category-icon-Terrain"></span><a href="https://rugbug.net/redmatch/resource-packs/Terrain.html" style="padding: 0px"><span>Terrain</span></a></li>
+<ul id="navbar-category-Terrain" style="display: none" class="navbar-expandable">
+<li>
+<li id="navbar-file-terrain"><a href="https://rugbug.net/redmatch/resource-packs/files/terrain.html" style="color: #ADDA78">terrain</a></li>
+</ul>
+</li>
+<li style="display: flex"><span class="icon icon_shift_right" onclick="toggleNavBarElement('Text', true)" id="navbar-category-icon-Text"></span><a href="https://rugbug.net/redmatch/resource-packs/Text.html" style="padding: 0px"><span>Text</span></a></li>
+<ul id="navbar-category-Text" style="display: none" class="navbar-expandable">
+<li>
+<li id="navbar-file-ammo_text"><a href="https://rugbug.net/redmatch/resource-packs/files/ammo_text.html" style="color: #ADDA78">ammo_text</a></li>
+<li id="navbar-file-font"><a href="https://rugbug.net/redmatch/resource-packs/files/font.html" style="color: #ADDA78">font</a></li>
+<li id="navbar-file-health_text"><a href="https://rugbug.net/redmatch/resource-packs/files/health_text.html" style="color: #ADDA78">health_text</a></li>
+<li id="navbar-file-shield_text"><a href="https://rugbug.net/redmatch/resource-packs/files/shield_text.html" style="color: #ADDA78">shield_text</a></li>
+<li id="navbar-file-timer_text"><a href="https://rugbug.net/redmatch/resource-packs/files/timer_text.html" style="color: #ADDA78">timer_text</a></li>
+<li id="navbar-file-total_ammo_text"><a href="https://rugbug.net/redmatch/resource-packs/files/total_ammo_text.html" style="color: #ADDA78">total_ammo_text</a></li>
+</ul>
+</li>
+<li style="display: flex"><span class="icon icon_shift_right" onclick="toggleNavBarElement('UITransformation', true)" id="navbar-category-icon-UITransformation"></span><a href="https://rugbug.net/redmatch/resource-packs/UITransformation.html" style="padding: 0px"><span>UITransformation</span></a></li>
+<ul id="navbar-category-UITransformation" style="display: none" class="navbar-expandable">
+<li>
+<li id="navbar-file-ammo_text"><a href="https://rugbug.net/redmatch/resource-packs/files/ammo_text.html" style="color: #ADDA78">ammo_text</a></li>
+<li id="navbar-file-game_ui_overlay"><a href="https://rugbug.net/redmatch/resource-packs/files/game_ui_overlay.html" style="color: #ADDA78">game_ui_overlay</a></li>
+<li id="navbar-file-game_ui_underlay"><a href="https://rugbug.net/redmatch/resource-packs/files/game_ui_underlay.html" style="color: #ADDA78">game_ui_underlay</a></li>
+<li id="navbar-file-health_background"><a href="https://rugbug.net/redmatch/resource-packs/files/health_background.html" style="color: #ADDA78">health_background</a></li>
+<li id="navbar-file-health_foreground"><a href="https://rugbug.net/redmatch/resource-packs/files/health_foreground.html" style="color: #ADDA78">health_foreground</a></li>
+<li id="navbar-file-health_text"><a href="https://rugbug.net/redmatch/resource-packs/files/health_text.html" style="color: #ADDA78">health_text</a></li>
+<li id="navbar-file-locked_shield_foreground"><a href="https://rugbug.net/redmatch/resource-packs/files/locked_shield_foreground.html" style="color: #ADDA78">locked_shield_foreground</a></li>
+<li id="navbar-file-logo"><a href="https://rugbug.net/redmatch/resource-packs/files/logo.html" style="color: #ADDA78">logo</a></li>
+<li id="navbar-file-menu_level_information"><a href="https://rugbug.net/redmatch/resource-packs/files/menu_level_information.html" style="color: #ADDA78">menu_level_information</a></li>
+<li id="navbar-file-menu_main_button_container"><a href="https://rugbug.net/redmatch/resource-packs/files/menu_main_button_container.html" style="color: #ADDA78">menu_main_button_container</a></li>
+<li id="navbar-file-shield_background"><a href="https://rugbug.net/redmatch/resource-packs/files/shield_background.html" style="color: #ADDA78">shield_background</a></li>
+<li id="navbar-file-shield_foreground"><a href="https://rugbug.net/redmatch/resource-packs/files/shield_foreground.html" style="color: #ADDA78">shield_foreground</a></li>
+<li id="navbar-file-shield_text"><a href="https://rugbug.net/redmatch/resource-packs/files/shield_text.html" style="color: #ADDA78">shield_text</a></li>
+<li id="navbar-file-timer_text"><a href="https://rugbug.net/redmatch/resource-packs/files/timer_text.html" style="color: #ADDA78">timer_text</a></li>
+<li id="navbar-file-total_ammo_text"><a href="https://rugbug.net/redmatch/resource-packs/files/total_ammo_text.html" style="color: #ADDA78">total_ammo_text</a></li>
+</ul>
+</li>
+<li style="display: flex"><span class="icon icon_shift_right" onclick="toggleNavBarElement('Video', true)" id="navbar-category-icon-Video"></span><a href="https://rugbug.net/redmatch/resource-packs/Video.html" style="padding: 0px"><span>Video</span></a></li>
+<ul id="navbar-category-Video" style="display: none" class="navbar-expandable">
+<li>
+<li id="navbar-file-background_video"><a href="https://rugbug.net/redmatch/resource-packs/files/background_video.html" style="color: #ADDA78">background_video</a></li>
+</ul>
+</li>
+</ul>
+<ul style="bottom: 10px"><li><a href="https://rugbug.net/discord" style="color: #7289DA">Discord</a></li><li><a href="https://store.steampowered.com/app/1280770/Redmatch_2/" style="color: #7289DA">Steam Page</a></li></ul>
+</div>
+<h1>File: red_dot_body_emission_map</h2>
+<h2>Default JSON</h2>
+<pre><code>{
+  "filterMode": "Bilinear",
+  "wrapMode": "Repeat"
+}</pre></code>
+<p>This JSON file uses enums, which are just variables that have multiple preset options. Here are the options for the included enums:</p>
+<ul>
+<li>filterMode: Point, Bilinear, Trilinear</li>
+<li>wrapMode: Repeat, Clamp, Mirror, MirrorOnce</li>
+</ul>
+<h2>Associated Categories</h2>
+<ul>
+<li><a href="../Material.html">Material</a></li>
+</ul>
+
+			</div>
+			<div id="footer">
+				<p>Copyright © 2022 Rugbug Redfern. All rights reserved. Reuse of any content provided by this website outside of the game Redmatch 2 is prohibited.</p>
+			</div>
+		</div>
+	</body>
+</html><script>
+toggleNavBarElement('Material', false)
+</script>
