@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>timer_text</title>
+		<title>multi_kill_icon</title>
 		<link rel="stylesheet" type="text/css" href="../stylesheet.css">
 		<script>
 function toggleNavBarElement(categoryName, transition) {
@@ -249,59 +249,42 @@ function toggleNavBarElement(categoryName, transition) {
 </ul>
 <ul style="bottom: 10px"><li><a href="https://rugbug.net/discord" style="color: #7289DA">Discord</a></li><li><a href="https://store.steampowered.com/app/1280770/Redmatch_2/" style="color: #7289DA">Steam Page</a></li></ul>
 </div>
-<h1>File: timer_text</h1>
+<h1>File: multi_kill_icon</h1>
+<h2>Description</h2>
+<p>The icon that pops up on your screen when you get 3 or more kills.</p>
+<h2>Default Texture</h2>
+<p>Default Dimensions: 256x256 pixels (this can be any size you want)</p>
+<table class="invisible-table">
+	<tr class="invisible-table">
+		<th class="invisible-table">
+			<p>Light background</p>
+		</th>
+		<th class="invisible-table">
+			<p>Dark background</p>
+		</th>
+	</tr>
+	<tr class="invisible-table">
+		<th class="invisible-table">
+			<img src="multi_kill_icon_texture.png" style="width: 100%; max-width: 300px" class="checkered-background">
+		</th>
+		<th class="invisible-table">
+			<img src="multi_kill_icon_texture.png" style="width: 100%; max-width: 300px" class="dark-checkered-background">
+		</th>
+	</tr>
+</table>
 <h2>Default JSON</h2>
 <pre><code>{
-  "fontSize": 45.0,
-  "horizontalAlignment": "Center",
-  "verticalAlignment": "Middle",
-  "color": "FFFFFFFF",
-  "unsupportedLanguages": [],
-  "gradient": {
-    "topLeft": "#FFFFFF",
-    "topRight": "#FFFFFF",
-    "bottomLeft": "#9A9A9A",
-    "bottomRight": "#9A9A9A"
-  },
-  "samplingPointSize": 50,
-  "atlasPadding": 10,
-  "rotation": 0.0,
-  "scale": {
-    "x": 1.0,
-    "y": 1.0
-  },
-  "anchorMin": {
-    "x": 0.5,
-    "y": 1.0
-  },
-  "anchorMax": {
-    "x": 0.5,
-    "y": 1.0
-  },
-  "pivot": {
-    "x": 0.5,
-    "y": 1.0
-  },
-  "anchoredPosition": {
-    "x": 0.0,
-    "y": 0.0
-  },
-  "sizeDelta": {
-    "x": 200.0,
-    "y": 75.0
-  }
+  "color": "E80000FF",
+  "type": "Simple"
 }</pre></code>
 <p>When you create your JSON file, if you don't include a variable it will just use the default value. You don't need to include every variable! Only include variables you want to change, otherwise it will get messy.</p>
 <p>This JSON file uses enums, which are just variables that have multiple preset options. Here are the options for the included enums:</p>
 <ul>
-<li>horizontalAlignment: Left, Center, Right, Justified, Flush, Geometry</li>
-<li>verticalAlignment: Top, Middle, Bottom, Baseline, Geometry, Capline</li>
+<li>type: Simple, Sliced, Tiled, Filled</li>
 </ul>
 <h2>Associated Categories</h2>
 <ul>
-<li><a href="../Font.html">Font</a></li>
-<li><a href="../Text.html">Text</a></li>
-<li><a href="../UITransformation.html">UITransformation</a></li>
+<li><a href="../Image.html">Image</a></li>
 </ul>
 
 			</div>
@@ -311,7 +294,5 @@ function toggleNavBarElement(categoryName, transition) {
 		</div>
 	</body>
 </html><script>
-toggleNavBarElement('Font', false)
-toggleNavBarElement('Text', false)
-toggleNavBarElement('UITransformation', false)
+toggleNavBarElement('Image', false)
 </script>
