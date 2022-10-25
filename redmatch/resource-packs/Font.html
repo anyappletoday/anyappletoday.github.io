@@ -213,7 +213,6 @@ function toggleNavBarElement(categoryName, transition) {
 <ul id="navbar-category-Text" style="display: none" class="navbar-expandable">
 <li>
 <li id="navbar-file-ammo_text"><a href="https://rugbug.net/redmatch/resource-packs/files/ammo_text.html" style="color: #ADDA78">ammo_text</a></li>
-<li id="navbar-file-font"><a href="https://rugbug.net/redmatch/resource-packs/files/font.html" style="color: #ADDA78">font</a></li>
 <li id="navbar-file-health_text"><a href="https://rugbug.net/redmatch/resource-packs/files/health_text.html" style="color: #ADDA78">health_text</a></li>
 <li id="navbar-file-shield_text"><a href="https://rugbug.net/redmatch/resource-packs/files/shield_text.html" style="color: #ADDA78">shield_text</a></li>
 <li id="navbar-file-timer_text"><a href="https://rugbug.net/redmatch/resource-packs/files/timer_text.html" style="color: #ADDA78">timer_text</a></li>
@@ -247,6 +246,11 @@ function toggleNavBarElement(categoryName, transition) {
 </ul>
 </li>
 </ul>
+<ul>
+<li><a href="https://rugbug.net/redmatch/resource-packs/emission-maps.html" style="color: white">Emission Maps</a></li>
+<li><a href="https://rugbug.net/redmatch/resource-packs/metallic-maps.html" style="color: white">Metallic Maps</a></li>
+<li><a href="https://rugbug.net/redmatch/resource-packs/font-styles.html" style="color: white">Font Styles</a></li>
+</ul>
 <ul style="bottom: 10px"><li><a href="https://rugbug.net/discord" style="color: #7289DA">Discord</a></li><li><a href="https://store.steampowered.com/app/1280770/Redmatch_2/" style="color: #7289DA">Steam Page</a></li></ul>
 </div>
 <h1>Category: Font</h1>
@@ -269,14 +273,6 @@ Description
 </tr>
 <tr>
 <td>
-unsupportedLanguages
-</td>
-<td>
-An array of languages. Add any languages to this that your font does not have character support for.
-</td>
-</tr>
-<tr>
-<td>
 gradient
 </td>
 <td>
@@ -285,18 +281,10 @@ A custom gradient applied to each character in the font.
 </tr>
 <tr>
 <td>
-properties
+styles
 </td>
 <td>
-Allows you to add different styles to the font, like an outline or drop shadow. I will make a webpage that explains this further later.
-</td>
-</tr>
-<tr>
-<td>
-samplingPointSize
-</td>
-<td>
-The quality of the characters. A lower value will let you include more characters in your font, but they will be lower quality.
+Allows you to add different styles to the font, like an outline or drop shadow. Read more <a href='font-styles.html'>here</a>.
 </td>
 </tr>
 <tr>
@@ -304,7 +292,7 @@ The quality of the characters. A lower value will let you include more character
 atlasPadding
 </td>
 <td>
-Determines how far apart the characters are in the generated atlas. The farther apart they are, the bigger an outline you can have.
+Leave this as the default unless you really have a reason to change it. Determines how far apart the characters are in the generated atlas. The farther apart they are, the bigger an underlay style you can have.
 </td>
 </tr>
 </table><h2>Related Files</h2>

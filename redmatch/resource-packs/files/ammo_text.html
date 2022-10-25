@@ -213,7 +213,6 @@ function toggleNavBarElement(categoryName, transition) {
 <ul id="navbar-category-Text" style="display: none" class="navbar-expandable">
 <li>
 <li id="navbar-file-ammo_text"><a href="https://rugbug.net/redmatch/resource-packs/files/ammo_text.html" style="color: #ADDA78">ammo_text</a></li>
-<li id="navbar-file-font"><a href="https://rugbug.net/redmatch/resource-packs/files/font.html" style="color: #ADDA78">font</a></li>
 <li id="navbar-file-health_text"><a href="https://rugbug.net/redmatch/resource-packs/files/health_text.html" style="color: #ADDA78">health_text</a></li>
 <li id="navbar-file-shield_text"><a href="https://rugbug.net/redmatch/resource-packs/files/shield_text.html" style="color: #ADDA78">shield_text</a></li>
 <li id="navbar-file-timer_text"><a href="https://rugbug.net/redmatch/resource-packs/files/timer_text.html" style="color: #ADDA78">timer_text</a></li>
@@ -247,6 +246,11 @@ function toggleNavBarElement(categoryName, transition) {
 </ul>
 </li>
 </ul>
+<ul>
+<li><a href="https://rugbug.net/redmatch/resource-packs/emission-maps.html" style="color: white">Emission Maps</a></li>
+<li><a href="https://rugbug.net/redmatch/resource-packs/metallic-maps.html" style="color: white">Metallic Maps</a></li>
+<li><a href="https://rugbug.net/redmatch/resource-packs/font-styles.html" style="color: white">Font Styles</a></li>
+</ul>
 <ul style="bottom: 10px"><li><a href="https://rugbug.net/discord" style="color: #7289DA">Discord</a></li><li><a href="https://store.steampowered.com/app/1280770/Redmatch_2/" style="color: #7289DA">Steam Page</a></li></ul>
 </div>
 <h1>File: ammo_text</h1>
@@ -256,14 +260,22 @@ function toggleNavBarElement(categoryName, transition) {
   "horizontalAlignment": "Right",
   "verticalAlignment": "Middle",
   "color": "FFFFFFFF",
-  "unsupportedLanguages": [],
   "gradient": {
     "topLeft": "#FFFFFF",
     "topRight": "#FFFFFF",
     "bottomLeft": "#9A9A9A",
     "bottomRight": "#9A9A9A"
   },
-  "samplingPointSize": 50,
+  "styles": [
+    {
+      "name": "UnderlayDilate",
+      "value": 0.5
+    },
+    {
+      "name": "UnderlayColor",
+      "color": "#000000"
+    }
+  ],
   "atlasPadding": 10,
   "rotation": 0.0,
   "scale": {

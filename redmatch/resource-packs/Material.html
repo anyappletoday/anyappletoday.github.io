@@ -213,7 +213,6 @@ function toggleNavBarElement(categoryName, transition) {
 <ul id="navbar-category-Text" style="display: none" class="navbar-expandable">
 <li>
 <li id="navbar-file-ammo_text"><a href="https://rugbug.net/redmatch/resource-packs/files/ammo_text.html" style="color: #ADDA78">ammo_text</a></li>
-<li id="navbar-file-font"><a href="https://rugbug.net/redmatch/resource-packs/files/font.html" style="color: #ADDA78">font</a></li>
 <li id="navbar-file-health_text"><a href="https://rugbug.net/redmatch/resource-packs/files/health_text.html" style="color: #ADDA78">health_text</a></li>
 <li id="navbar-file-shield_text"><a href="https://rugbug.net/redmatch/resource-packs/files/shield_text.html" style="color: #ADDA78">shield_text</a></li>
 <li id="navbar-file-timer_text"><a href="https://rugbug.net/redmatch/resource-packs/files/timer_text.html" style="color: #ADDA78">timer_text</a></li>
@@ -247,6 +246,11 @@ function toggleNavBarElement(categoryName, transition) {
 </ul>
 </li>
 </ul>
+<ul>
+<li><a href="https://rugbug.net/redmatch/resource-packs/emission-maps.html" style="color: white">Emission Maps</a></li>
+<li><a href="https://rugbug.net/redmatch/resource-packs/metallic-maps.html" style="color: white">Metallic Maps</a></li>
+<li><a href="https://rugbug.net/redmatch/resource-packs/font-styles.html" style="color: white">Font Styles</a></li>
+</ul>
 <ul style="bottom: 10px"><li><a href="https://rugbug.net/discord" style="color: #7289DA">Discord</a></li><li><a href="https://store.steampowered.com/app/1280770/Redmatch_2/" style="color: #7289DA">Steam Page</a></li></ul>
 </div>
 <h1>Category: Material</h1>
@@ -274,7 +278,7 @@ Description
 metallic
 </td>
 <td>
-A number from 0.0 - 1.0. Determines how "metal-like" the surface is. When a surface is more metallic, it reflects the environment more and its colour becomes less visible. At full metallic level, the surface colour is entirely driven by reflections from the environment. You can specify which parts are metallic with the red channel in a metallic_map texture.
+A number from 0.0 - 1.0. Determines how "metal-like" the surface is. When a surface is more metallic, it reflects the environment more and its colour becomes less visible. At full metallic level, the surface colour is entirely driven by reflections from the environment. You can specify which parts are metallic with the red channel in a <a href='../metallic-maps.html'>metallic_map</a> texture.
 </td>
 </tr>
 <tr>
@@ -282,7 +286,7 @@ A number from 0.0 - 1.0. Determines how "metal-like" the surface is. When a surf
 smoothness
 </td>
 <td>
-A number from 0.0 - 1.0. Determines how rough/smooth the surface is. You can specify which parts are smooth with the alpha channel in a metallic_map texture.
+A number from 0.0 - 1.0. Determines how rough/smooth the surface is. You can specify which parts are smooth with the alpha channel in a <a href='../metallic-maps.html'>metallic_map</a> texture.
 </td>
 </tr>
 <tr>
@@ -298,7 +302,7 @@ A 2D vector. Specifies how much the texture repeats in the x and y direction.
 emissionColor
 </td>
 <td>
-A hex color. The color that the material should glow. If you want have more than one color and intensity, you can use an emission_map texture.
+A hex color. The color that the material should glow. If you want have more than one color and intensity, you can use an <a href='../emission-maps.html'>emission_map</a> texture.
 </td>
 </tr>
 <tr>
@@ -306,7 +310,7 @@ A hex color. The color that the material should glow. If you want have more than
 emissionIntensity
 </td>
 <td>
-A number above 0. How bright the glow is. You should have this above around 1 for the glow be noticeable. You can specify which parts glow and what color they are with an emission_map texture.
+A number above 0. How bright the glow is. You should have this above around 1 for the glow be noticeable. You can specify which parts glow and what color they are with an <a href='../emission-maps.html'>emission_map</a> texture.
 </td>
 </tr>
 </table><h2>Related Files</h2>
