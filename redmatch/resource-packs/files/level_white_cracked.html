@@ -6,13 +6,15 @@
 		<link rel="stylesheet" type="text/css" href="../stylesheet.css">
 		<script>
 function toggleNavBarElement(categoryName, transition) {
+	console.log('toggling nav bar element ' + categoryName);
 	let element = document.getElementById('navbar-category-' + categoryName);
 	let icon = document.getElementById('navbar-category-icon-' + categoryName);
 	if(transition === false) {
 		element.classList.add('no_transition');
 		icon.classList.add('no_transition');
 	}
-	if(element.style.display === "") {		
+	if(element.style.display === "") {
+		sessionStorage.removeItem(categoryName);
 		setTimeout(function() {
 			element.style.maxHeight = '0px';
 			icon.classList.remove('open');
@@ -21,6 +23,7 @@ function toggleNavBarElement(categoryName, transition) {
 			element.style.display = "none";
 		}, 200)
 	} else {
+		sessionStorage.setItem(categoryName, 'open');
 		element.style.display = "";
 		setTimeout(function() {
 			element.style.maxHeight = element.scrollHeight + 'px';
@@ -34,6 +37,15 @@ function toggleNavBarElement(categoryName, transition) {
 		}
 	}, 200);
 }
+
+window.onload = () => {
+	for(let category of Object.keys(sessionStorage)) {
+		if(typeof category !== 'undefined') {
+			toggleNavBarElement(category, false);
+		}
+	}
+}
+
 		</script>
 	</head>
 	<body>
@@ -280,6 +292,4 @@ function toggleNavBarElement(categoryName, transition) {
 			</div>
 		</div>
 	</body>
-</html><script>
-toggleNavBarElement('Material', false)
-</script>
+</html>
