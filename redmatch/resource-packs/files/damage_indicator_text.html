@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>health_foreground</title>
+		<title>damage_indicator_text</title>
 		<link rel="stylesheet" type="text/css" href="../stylesheet.css">
 		<script>
 function toggleNavBarElement(categoryName, transition) {
@@ -268,72 +268,41 @@ window.onload = () => {
 </ul>
 <ul style="bottom: 10px"><li><a href="https://rugbug.net/discord" style="color: #7289DA">Discord</a></li><li><a href="https://store.steampowered.com/app/1280770/Redmatch_2/" style="color: #7289DA">Steam Page</a></li></ul>
 </div>
-<h1>File: health_foreground</h1>
-<h2>Description</h2>
-<p>The amount of shield the player has bought from upgrade cabinets. It's completely filled when the player has 100 health, and completely empty when the player has 0 health.</p>
-<h2>Default Texture</h2>
-<p>Default Dimensions: 256x256 pixels (this can be any size you want)</p>
-<table class="invisible-table">
-	<tr class="invisible-table">
-		<th class="invisible-table">
-			<p>Light background</p>
-		</th>
-		<th class="invisible-table">
-			<p>Dark background</p>
-		</th>
-	</tr>
-	<tr class="invisible-table">
-		<th class="invisible-table">
-			<img src="health_foreground_texture.png" style="width: 100%; max-width: 300px" class="checkered-background">
-		</th>
-		<th class="invisible-table">
-			<img src="health_foreground_texture.png" style="width: 100%; max-width: 300px" class="dark-checkered-background">
-		</th>
-	</tr>
-</table>
+<h1>File: damage_indicator_text</h1>
 <h2>Default JSON</h2>
 <pre><code>{
-  "fillMethod": "Radial360",
-  "fillOrigin": 0,
-  "fillClockwise": true,
-  "color": "FF000EFF",
-  "type": "Filled",
-  "rotation": 0.0,
-  "scale": {
-    "x": 1.0,
-    "y": 1.0
-  },
-  "anchorMin": {
-    "x": 0.0,
-    "y": 0.0
-  },
-  "anchorMax": {
-    "x": 0.0,
-    "y": 0.0
-  },
-  "pivot": {
-    "x": 0.5,
-    "y": 0.5
-  },
-  "anchoredPosition": {
-    "x": 75.0,
-    "y": 75.0
-  },
-  "sizeDelta": {
-    "x": 150.0,
-    "y": 150.0
+  "fontSize": 20.0,
+  "horizontalAlignment": "Center",
+  "verticalAlignment": "Middle",
+  "color": "FFFFFFFF",
+  "styles": [
+    {
+      "name": "UnderlayDilate",
+      "value": 0.5
+    },
+    {
+      "name": "UnderlayColor",
+      "color": "#000000"
+    }
+  ],
+  "atlasPadding": 10,
+  "gradient": {
+    "topLeft": "#FFFFFF",
+    "topRight": "#FFFFFF",
+    "bottomLeft": "#9A9A9A",
+    "bottomRight": "#9A9A9A"
   }
 }</pre></code>
 <p>When you create your JSON file, if you don't include a variable it will just use the default value. You don't need to include every variable! Only include variables you want to change, otherwise it will get messy.</p>
 <p>This JSON file uses enums, which are just variables that have multiple preset options. Here are the options for the included enums:</p>
 <ul>
-<li>fillMethod: Horizontal, Vertical, Radial90, Radial180, Radial360</li>
-<li>type: Simple, Sliced, Tiled, Filled</li>
+<li>horizontalAlignment: Left, Center, Right, Justified, Flush, Geometry</li>
+<li>verticalAlignment: Top, Middle, Bottom, Baseline, Geometry, Capline</li>
 </ul>
 <h2>Associated Categories</h2>
 <ul>
-<li><a href="../Image.html">Image</a></li>
-<li><a href="../UITransformation.html">UITransformation</a></li>
+<li><a href="../Font.html">Font</a></li>
+<li><a href="../Text.html">Text</a></li>
 </ul>
 
 			</div>
