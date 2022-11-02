@@ -110,6 +110,7 @@ window.onload = () => {
 <ul id="navbar-category-Image" style="display: none" class="navbar-expandable">
 <li>
 <li id="navbar-file-background"><a href="https://rugbug.net/redmatch/resource-packs/files/background.html" style="color: #ADDA78">background</a></li>
+<li id="navbar-file-bullet_hole"><a href="https://rugbug.net/redmatch/resource-packs/files/bullet_hole.html" style="color: #ADDA78">bullet_hole</a></li>
 <li id="navbar-file-fullscreen_background"><a href="https://rugbug.net/redmatch/resource-packs/files/fullscreen_background.html" style="color: #ADDA78">fullscreen_background</a></li>
 <li id="navbar-file-game_ui_overlay"><a href="https://rugbug.net/redmatch/resource-packs/files/game_ui_overlay.html" style="color: #ADDA78">game_ui_overlay</a></li>
 <li id="navbar-file-game_ui_underlay"><a href="https://rugbug.net/redmatch/resource-packs/files/game_ui_underlay.html" style="color: #ADDA78">game_ui_underlay</a></li>
@@ -267,6 +268,7 @@ window.onload = () => {
 <li><a href="https://rugbug.net/redmatch/resource-packs/metallic-maps.html" style="color: white">Metallic Maps</a></li>
 <li><a href="https://rugbug.net/redmatch/resource-packs/font-styles.html" style="color: white">Font Styles</a></li>
 <li><a href="https://rugbug.net/redmatch/resource-packs/anchors.html" style="color: white">Anchors</a></li>
+<li><a href="https://rugbug.net/redmatch/resource-packs/metadata.html" style="color: white">Metadata</a></li>
 </ul>
 <ul style="bottom: 10px"><li><a href="https://rugbug.net/discord" style="color: #7289DA">Discord</a></li><li><a href="https://store.steampowered.com/app/1280770/Redmatch_2/" style="color: #7289DA">Steam Page</a></li></ul>
 </div>
@@ -346,9 +348,26 @@ type
 The type of image. This mostly affects how the image scales. Simple images stretch when scaled. Sliced images scale using the border and borderWidth values. Tiled images use repeating textures, and the tiling size is affected by borderWidth. If you have a sliced image, then only the center portion will tile.. You shouldn't set something to be a Filled image if it's not Filled by default, since nothing will happen.
 </td>
 </tr>
+<tr>
+<td>
+filterMode
+</td>
+<td>
+Change the way the texture upscales to higher resolutions. Point will not attempt smoothing (good for pixel art). Bilinear will take 4 sample points and blend them together.
+</td>
+</tr>
+<tr>
+<td>
+wrapMode
+</td>
+<td>
+Change the way the texture tiles. Repeat tiles the texture, creating a repeating patter. Clamp clamps the texture to the last pixel at the edge. Mirror tiles the texture, creating a repeating pattern by mirroring it. MirrorOnce mirrors the texture once before clamping the edge pixels.
+</td>
+</tr>
 </table><h2>Related Files</h2>
 <ul>
 <li><a href="files/background.html">background</a></li>
+<li><a href="files/bullet_hole.html">bullet_hole</a></li>
 <li><a href="files/fullscreen_background.html">fullscreen_background</a></li>
 <li><a href="files/game_ui_overlay.html">game_ui_overlay</a></li>
 <li><a href="files/game_ui_underlay.html">game_ui_underlay</a></li>

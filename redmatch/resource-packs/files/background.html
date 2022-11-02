@@ -110,6 +110,7 @@ window.onload = () => {
 <ul id="navbar-category-Image" style="display: none" class="navbar-expandable">
 <li>
 <li id="navbar-file-background"><a href="https://rugbug.net/redmatch/resource-packs/files/background.html" style="color: #ADDA78">background</a></li>
+<li id="navbar-file-bullet_hole"><a href="https://rugbug.net/redmatch/resource-packs/files/bullet_hole.html" style="color: #ADDA78">bullet_hole</a></li>
 <li id="navbar-file-fullscreen_background"><a href="https://rugbug.net/redmatch/resource-packs/files/fullscreen_background.html" style="color: #ADDA78">fullscreen_background</a></li>
 <li id="navbar-file-game_ui_overlay"><a href="https://rugbug.net/redmatch/resource-packs/files/game_ui_overlay.html" style="color: #ADDA78">game_ui_overlay</a></li>
 <li id="navbar-file-game_ui_underlay"><a href="https://rugbug.net/redmatch/resource-packs/files/game_ui_underlay.html" style="color: #ADDA78">game_ui_underlay</a></li>
@@ -267,6 +268,7 @@ window.onload = () => {
 <li><a href="https://rugbug.net/redmatch/resource-packs/metallic-maps.html" style="color: white">Metallic Maps</a></li>
 <li><a href="https://rugbug.net/redmatch/resource-packs/font-styles.html" style="color: white">Font Styles</a></li>
 <li><a href="https://rugbug.net/redmatch/resource-packs/anchors.html" style="color: white">Anchors</a></li>
+<li><a href="https://rugbug.net/redmatch/resource-packs/metadata.html" style="color: white">Metadata</a></li>
 </ul>
 <ul style="bottom: 10px"><li><a href="https://rugbug.net/discord" style="color: #7289DA">Discord</a></li><li><a href="https://store.steampowered.com/app/1280770/Redmatch_2/" style="color: #7289DA">Steam Page</a></li></ul>
 </div>
@@ -294,12 +296,16 @@ window.onload = () => {
 <h2>Default JSON</h2>
 <pre><code>{
   "color": "FFFFFFFF",
-  "type": "Tiled"
+  "type": "Tiled",
+  "filterMode": "Bilinear",
+  "wrapMode": "Repeat"
 }</pre></code>
 <p>When you create your JSON file, if you don't include a variable it will just use the default value. You don't need to include every variable! Only include variables you want to change, otherwise it will get messy.</p>
 <p>This JSON file uses enums, which are just variables that have multiple preset options. Here are the options for the included enums:</p>
 <ul>
 <li>type: Simple, Sliced, Tiled, Filled</li>
+<li>filterMode: Point, Bilinear, Trilinear</li>
+<li>wrapMode: Repeat, Clamp, Mirror, MirrorOnce</li>
 </ul>
 <h2>Associated Categories</h2>
 <ul>
