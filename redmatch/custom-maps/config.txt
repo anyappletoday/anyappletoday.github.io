@@ -1,4 +1,4 @@
 {
-	"currentVersion": "0.0.1",
-	"downloadPage": "https://google.com",
+	"currentVersion": "0.1.0",
+	"downloadPage": "https://rugbug.net/redmatch/custom-maps/update",
 }
