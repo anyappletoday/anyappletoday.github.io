@@ -13,7 +13,7 @@
 			<div class="container">
 				<h1>Redmatch 2 Custom Map SDK</h1>
 				<section>
-					<h3>Download v0.1.0:</h3>
+					<h3>Download v1.0.0:</h3>
 					<ul>
 						<li style="list-style: none;"><a href="Redmatch 2 Custom Map SDK.unitypackage" aria-label="Download">Redmatch 2 Custom Map SDK</a></li>
 					</ul>
@@ -21,6 +21,26 @@
 						<h4>Delete the <i>Redmatch 2 Custom Map SDK</i> folder before importing the new version.</h4>
 					</hgroup>
 					<h3>Changelog</h3>
+					<ul>
+						<li style="list-style: none;"><h5>1.0.0 (Not Completed)</h5></li>
+						<li>Created a new Demo Map to better showcase all the new features.</li>
+						<li>The TriggerActivator has been separated into Triggers and Activators. You reference the Activators using Triggers. The Activator itself does not contain any networking logic. Think of it as a bridge between Triggers and actions taken on Syncer components.</li>
+						<li>Added more actions including dealing damage to HealthSyncers and setting Animator parameters, which allows dynamic Animator logic.</li>
+						<li>Added DamageableTrigger, EnterTrigger, ExitTrigger, StayTrigger, GameEndedTrigger, and RoundStartedTrigger.</li>
+						<li>Added HealthSyncer, RigidbodySyncer, and GameObjectSyncer.</li>
+						<li>Added FilledImageValueDisplay and TextValueDisplay.</li>
+						<li>The scene will no longer reset the window layout if you try to build and get an error.</li>
+						<li>Layers will now automatically be set up when you import the SDK.</li>
+						<li>Added sweet icons to all the components.</li>
+						<li>Added the CameraFacingBillboard utility script.</li>
+						<li>You can no longer teleport/spawn players at weird angles.</li>
+						<li>Inactive Upgrade Cabinets will no longer spawn.</li>
+						<li>Added consistency to error popups and console messages.</li>
+						<li>When using Build and Test, the map will no longer launch if there are build errors.</li>
+						<li>Added an error checking feature because wozzA wanted it.</li>
+						<li>Added new shortcuts for Check For Errors (F3), Build Map (F4), and Build and Test Map (F5).</li>
+						<li>Whitelisted additional components.</li>
+					</ul>
 					<ul>
 						<li style="list-style: none;"><h5>0.1.0 (8/17/2023)</h5></li>
 						<li>Added the TriggerActivator.</li>
