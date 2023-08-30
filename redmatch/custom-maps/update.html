@@ -22,6 +22,24 @@
 					</hgroup>
 					<h3>Changelog</h3>
 					<ul>
+						<li style="list-style: none;"><h5>1.0.1 (8/30/2023)</h5></li>
+						<li>You can now create a new map using the Redmatch 2 > New Map option.</li>
+						<li>Maps now require a PostProcessingVolume.</li>
+						<li>Match setting overrides will no longer carry on to future maps.</li>
+						<li>The editor now automatically installs the required packages.</li>
+						<li>Fixed some errors with maps not loading in-game. IDK if all of them are fixed because some are hard to reproduce.</li>
+						<li>Stay Triggers have frame independence now via a rolling timer.</li>
+						<li>You can now unsubscribe or view the workshop page for custom maps in-game by right clicking the map button.</li>
+						<li>You will no longer automatically subscribe to custom maps when loading a match with one. Instead the game will temporarily download it and delete it after. This prevents excessive file bloating over time.</li>
+						<li>Replaced the Relative Force toggle with 4 options for a Relative Force Mode: World, Self, Target, and Orbital, which allow you to apply force based on different coordinate systems.</li>
+						<li>Relative Force now respects the player's vertical look rotation.</li>
+						<li>Local custom maps will now start at 60 minutes by default.</li>
+						<li>Added hot-reloading. If the game is open and you build the map with F4, it will reload in-game.</li>
+						<li>Press F6 inside Redmatch 2 while on a local custom map to reload it.</li>
+						<li>Renamed the "Authority Requirement" setting to "Execute On" and changed "Anyone" to "Everyone" to try to make it less confusing.</li>
+						<li>The editor now pings objects that have errors during an error check.</li>
+					</ul>
+					<ul>
 						<li style="list-style: none;"><h5>1.0.0 (8/25/2023)</h5></li>
 						<li>Created a new Demo Map to better showcase all the new features.</li>
 						<li>IDs now automatically assign.</li>
@@ -50,7 +68,7 @@
 						<li>Fixed a bug where you couldn't have more than 1 Upgrade Cabinet.</li>
 						<li>Added Text as a usable component.</li>
 						<li>The Map folder now deletes itself before building to avoid unwanted contamination from misnaming.</li>
-						<li>The Editor now asks for confirmation to save your scene before building to prevent the loss of unsaved changes.</li>
+						<li>The editor now asks for confirmation to save your scene before building to prevent the loss of unsaved changes.</li>
 					</ul>
 				</section>
 			</div>
