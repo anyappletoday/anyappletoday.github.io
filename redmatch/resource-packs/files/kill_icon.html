@@ -262,6 +262,7 @@ window.onload = () => {
 <li id="navbar-file-health_background"><a href="https://rugbug.net/redmatch/resource-packs/files/health_background.html" style="color: #ADDA78">health_background</a></li>
 <li id="navbar-file-health_foreground"><a href="https://rugbug.net/redmatch/resource-packs/files/health_foreground.html" style="color: #ADDA78">health_foreground</a></li>
 <li id="navbar-file-health_text"><a href="https://rugbug.net/redmatch/resource-packs/files/health_text.html" style="color: #ADDA78">health_text</a></li>
+<li id="navbar-file-kill_icon"><a href="https://rugbug.net/redmatch/resource-packs/files/kill_icon.html" style="color: #ADDA78">kill_icon</a></li>
 <li id="navbar-file-locked_shield_foreground"><a href="https://rugbug.net/redmatch/resource-packs/files/locked_shield_foreground.html" style="color: #ADDA78">locked_shield_foreground</a></li>
 <li id="navbar-file-shield_background"><a href="https://rugbug.net/redmatch/resource-packs/files/shield_background.html" style="color: #ADDA78">shield_background</a></li>
 <li id="navbar-file-shield_foreground"><a href="https://rugbug.net/redmatch/resource-packs/files/shield_foreground.html" style="color: #ADDA78">shield_foreground</a></li>
@@ -312,6 +313,31 @@ window.onload = () => {
 </table>
 <h2>Default JSON</h2>
 <pre><code>{
+  "rotation": 0.0,
+  "scale": {
+    "x": 1.0,
+    "y": 1.0
+  },
+  "anchorMin": {
+    "x": 0.5,
+    "y": 0.5
+  },
+  "anchorMax": {
+    "x": 0.5,
+    "y": 0.5
+  },
+  "pivot": {
+    "x": 0.5,
+    "y": 0.5
+  },
+  "anchoredPosition": {
+    "x": 0.0,
+    "y": -150.0
+  },
+  "sizeDelta": {
+    "x": 40.0,
+    "y": 40.0
+  },
   "color": "FF0000FF",
   "type": "Simple",
   "filterMode": "Bilinear",
@@ -327,6 +353,7 @@ window.onload = () => {
 <h2>Associated Categories</h2>
 <ul>
 <li><a href="../Image.html">Image</a></li>
+<li><a href="../UITransformation.html">UITransformation</a></li>
 </ul>
 
 			</div>
