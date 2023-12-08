@@ -64,19 +64,32 @@
 			transform: scale(1.1);
 			box-shadow: 0px 0px 13px white;
 		}
+
+		.flex-row {
+			display: flex;
+			justify-content: center;
+		}
+
+		.flex-row-element {
+			padding-right: 10px;
+		}
 	</style>
 </head>
 
 <body>
-
 	<div id="main-content">
+		<h2>Support me on Patreon!</h2>
+		<br>
+		<img src="images/patreon2.png" onclick="location.href='https://www.patreon.com/rugbug';" class="shadowButton">
+		<br>
+		<br>
 		<h2>Join the Lethal Company Modding Discord server to discuss the Skinwalkers mod!</h2>
-		<img src="images/skinwalkers-channel.png">
-		<br>
-		<br>
-		<button onclick="location.href='https://discord.gg/lcmods';" class="shadowButton">
-			<h2>Join Discord</h2>
-		</button>
+		<div class="flex-row">
+			<img src="images/skinwalkers-channel.png" class="flex-row-element">
+			<button onclick="location.href='https://discord.gg/lcmods';" class="shadowButton" style="height: 70px">
+				<h2>Join Discord</h2>
+			</button>
+		</div>
 	</div>
 
 </body>
