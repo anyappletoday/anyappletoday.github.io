@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>rope_emission_map</title>
+		<title>upgrade_cabinet</title>
 		<link rel="stylesheet" type="text/css" href="../stylesheet.css">
 		<link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
 		<script>
@@ -291,20 +291,38 @@ window.onload = () => {
 </ul>
 <ul style="bottom: 10px"><li><a href="https://rugbug.net/discord" style="color: #7289DA">Discord</a></li><li><a href="https://store.steampowered.com/app/1280770/Redmatch_2/" style="color: #7289DA">Steam Page</a></li></ul>
 </div>
-<h1>File: rope_emission_map</h1>
+<h1>File: upgrade_cabinet</h1>
+<h2>Default Texture</h2>
+<p>Default Dimensions: 1024x1024 pixels (this can be any size you want)</p>
+<table class="invisible-table">
+	<tr class="invisible-table">
+		<th class="invisible-table">
+			<p>Light background</p>
+		</th>
+		<th class="invisible-table">
+			<p>Dark background</p>
+		</th>
+	</tr>
+	<tr class="invisible-table">
+		<th class="invisible-table">
+			<img src="upgrade_cabinet_texture.png" style="width: 100%; max-width: 300px" class="checkered-background">
+		</th>
+		<th class="invisible-table">
+			<img src="upgrade_cabinet_texture.png" style="width: 100%; max-width: 300px" class="dark-checkered-background">
+		</th>
+	</tr>
+</table>
 <h2>Default JSON</h2>
 <pre><code>{
-  "filterMode": "Bilinear",
-  "wrapMode": "Repeat"
+  "metallic": 0.0,
+  "smoothness": 0.0,
+  "tiling": {
+    "x": 1.0,
+    "y": 1.0
+  },
+  "emissionColor": "#000000FF",
+  "emissionIntensity": 0.0
 }</pre></code>
-<p>When you create your JSON file, if you don't include a variable it will just use the default value. You don't need to include every variable! Only include variables you want to change, otherwise it will get messy.</p>
-<p>This JSON file uses enums, which are just variables that have multiple preset options. Here are the options for the included enums:</p>
-<ul>
-<li>filterMode: Point, Bilinear, Trilinear</li>
-<li>wrapMode: Repeat, Clamp, Mirror, MirrorOnce</li>
-</ul>
-<h2>Emission Map</h2>
-<p>This file is an emission map for another file. Read about how to use emission maps <a href='../emission-maps.html'>here</a>.</p>
 <h2>Associated Categories</h2>
 <ul>
 <li><a href="../Material.html">Material</a></li>
