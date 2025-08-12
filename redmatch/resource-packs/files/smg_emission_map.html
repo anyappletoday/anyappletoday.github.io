@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>level_light_metallic_map</title>
+		<title>smg_emission_map</title>
 		<link rel="stylesheet" type="text/css" href="../stylesheet.css">
 		<link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
 		<script>
@@ -296,9 +296,20 @@ window.onload = () => {
 </ul>
 <ul style="bottom: 10px"><li><a href="https://rugbug.net/discord" style="color: #7289DA">Discord</a></li><li><a href="https://store.steampowered.com/app/1280770/Redmatch_2/" style="color: #7289DA">Steam Page</a></li></ul>
 </div>
-<h1>File: level_light_metallic_map</h1>
-<h2>Metallic Map</h2>
-<p>This file is a metallic map for another file. Read about how to use metallic maps <a href='../metallic-maps.html'>here</a>.</p>
+<h1>File: smg_emission_map</h1>
+<h2>Default JSON</h2>
+<pre><code>{
+  "filterMode": "Bilinear",
+  "wrapMode": "Repeat"
+}</pre></code>
+<p>When you create your JSON file, if you don't include a variable it will just use the default value. You don't need to include every variable! Only include variables you want to change, otherwise it will get messy.</p>
+<p>This JSON file uses enums, which are just variables that have multiple preset options. Here are the options for the included enums:</p>
+<ul>
+<li>filterMode: Point, Bilinear, Trilinear</li>
+<li>wrapMode: Repeat, Clamp, Mirror, MirrorOnce</li>
+</ul>
+<h2>Emission Map</h2>
+<p>This file is an emission map for another file. Read about how to use emission maps <a href='../emission-maps.html'>here</a>.</p>
 <h2>Associated Categories</h2>
 <ul>
 <li><a href="../Material.html">Material</a></li>
